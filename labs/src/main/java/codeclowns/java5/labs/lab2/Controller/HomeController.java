@@ -12,4 +12,9 @@ public class HomeController {
     public String getHome(){
         return "lab2/user/hello";
     }
+
+    @GetMapping("/user")
+    public String getUser(){
+        return "lab2/user/user";
+    }
 }
