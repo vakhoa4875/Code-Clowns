@@ -9,7 +9,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/lab2")
 public class HomeApi {
-    @GetMapping("/getInformation")
+        @GetMapping("/getInformation")
     public ResponseEntity<?> doGetInformation(@RequestParam("ten") String name,
                                               @RequestParam("tuoi") String age) {
         Map<String, String> result = new HashMap<String, String>();
