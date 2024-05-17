@@ -1,0 +1,440 @@
+body,
+main {
+  height: 100%;
+}
+.mask {
+  padding-top: 58px;
+}
+@media (min-width: 992px) {
+  .mask {
+    padding-top: 121.27px;
+  }
+}
+/* nav */
+nav{
+  background-color: rgb(34, 39, 43);
+}
+/* nav */
+.card {
+  min-width: 272px;
+  max-width: 272px;
+  height: auto;
+  background-color: #ebecf0;
+}
+.shadow-2 {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+.sortable-item {
+  cursor: grab;
+  transition: background-color 0.2s ease-in !important;
+}
+.sortable-item:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+/* slide bar */
+.side-navbar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: rgb(26, 26, 38);
+  transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 250px;
+}
+
+#menu-btn {
+  background-color: black;
+  color: #fff;
+  margin-left: -62px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+span{color: rgb(159, 173, 188);}
+/* slide bar */
+
+/*bang.html/
+body,
+main {
+  height: 100%;
+}
+
+
+.mask {
+  padding-top: 58px;
+}
+@media (min-width: 992px) {
+  .mask {
+    padding-top: 121.27px;
+  }
+}
+/* nav */
+nav{
+  background-color: rgb(34, 39, 43);
+}
+/* nav */
+.card {
+  min-width: 272px;
+  max-width: 272px;
+  height: auto;
+  background-color: #ebecf0;
+}
+.shadow-2 {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+.sortable-item {
+  cursor: grab;
+  transition: background-color 0.2s ease-in !important;
+}
+.sortable-item:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+/* slide bar */
+.side-navbar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: rgb(26, 26, 38);
+  transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 250px;
+}
+
+#menu-btn {
+  background-color: black;
+  color: #fff;
+  margin-left: -62px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+span{color: rgb(159, 173, 188);}
+/* slide bar */
+
+.custom-hr {
+  border: none;
+  border-top: 2px solid #000; /* Độ dày và màu sắc của đường kẻ ngang */
+  margin-bottom: 10px; /* Khoảng cách dưới đường kẻ ngang */
+}
+
+.containerss {
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+}
+.hinhChuNhat {
+  height: 200px;
+  width: 300px;
+  border-radius: 5px;
+}
+.dongChu {
+  position: absolute;
+  top: 10px; /* Điều chỉnh vị trí từ trên */
+  left: 10px; /* Điều chỉnh vị trí từ trái */
+  font-size: 16px; /* Điều chỉnh kích thước chữ */
+  font-weight: bold;
+  color: white; /* Điều chỉnh màu chữ */
+}
+
+.dongChuChinhGiua {
+  position: absolute;
+  top: 10px; /* Điều chỉnh vị trí từ trên */
+  left: 45px; /* Điều chỉnh vị trí từ trái */
+  font-size: 20px; /* Điều chỉnh kích thước chữ */
+  font-weight: bold;
+  color: white; /* Điều chỉnh màu chữ */
+}
+/*bang.html/
+ body,
+main {
+  height: 100%;
+}
+
+
+.mask {
+  padding-top: 58px;
+}
+@media (min-width: 992px) {
+  .mask {
+    padding-top: 121.27px;
+  }
+}
+/* nav */
+nav{
+  background-color: rgb(34, 39, 43);
+}
+/* nav */
+.card {
+  min-width: 272px;
+  max-width: 272px;
+  height: auto;
+  background-color: #ebecf0;
+}
+.shadow-2 {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+.sortable-item {
+  cursor: grab;
+  transition: background-color 0.2s ease-in !important;
+}
+.sortable-item:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+/* slide bar */
+.side-navbar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: rgb(26, 26, 38);
+  transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 250px;
+}
+
+#menu-btn {
+  background-color: black;
+  color: #fff;
+  margin-left: -62px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+span{color: rgb(159, 173, 188);}
+/* slide bar */
+
+.custom-hr {
+  border: none;
+  border-top: 2px solid #000; /* Độ dày và màu sắc của đường kẻ ngang */
+  margin-bottom: 10px; /* Khoảng cách dưới đường kẻ ngang */
+}
+
+.containerss {
+  position: relative;
+  display: inline-block;
+  padding: 5px;
+}
+.hinhChuNhat {
+  height: 200px;
+  width: 300px;
+  border-radius: 5px;
+}
+.dongChu {
+  position: absolute;
+  top: 10px; /* Điều chỉnh vị trí từ trên */
+  left: 10px; /* Điều chỉnh vị trí từ trái */
+  font-size: 16px; /* Điều chỉnh kích thước chữ */
+  font-weight: bold;
+  color: white; /* Điều chỉnh màu chữ */
+}
+
+.dongChuChinhGiua {
+  position: absolute;
+  top: 10px; /* Điều chỉnh vị trí từ trên */
+  left: 45px; /* Điều chỉnh vị trí từ trái */
+  font-size: 20px; /* Điều chỉnh kích thước chữ */
+  font-weight: bold;
+  color: white; /* Điều chỉnh màu chữ */
+}
+/*bang.html*/
+
+/*home*/
+body,
+main {
+  height: 100%;
+}
+
+
+.mask {
+  padding-top: 58px;
+}
+@media (min-width: 992px) {
+  .mask {
+    padding-top: 121.27px;
+  }
+}
+/* nav */
+nav{
+  background-color: rgb(34, 39, 43);
+}
+/* nav */
+.card {
+  min-width: 272px;
+  max-width: 272px;
+  height: auto;
+  background-color: #ebecf0;
+}
+.shadow-2 {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+.sortable-item {
+  cursor: grab;
+  transition: background-color 0.2s ease-in !important;
+}
+.sortable-item:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+/* slide bar */
+.side-navbar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: rgb(26, 26, 38);
+  transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 250px;
+}
+
+#menu-btn {
+  background-color: black;
+  color: #fff;
+  margin-left: -62px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+span{color: rgb(159, 173, 188);}
+/* slide bar */
+
+.custom-hr {
+  border: none;
+  border-top: 2px solid #000; /* Độ dày và màu sắc của đường kẻ ngang */
+  margin-bottom: 10px; /* Khoảng cách dưới đường kẻ ngang */
+}
+
+.containerss {
+  position: relative;
+  display: inline-block;
+}
+.hinhChuNhat {
+  height: 200px;
+  width: 300px;
+  background-color: rgb(188, 162, 212);
+  border-radius: 5px;
+}
+
+.hinhChuNhatGiua {
+  height: 150px;
+  width: 400px;
+  background-color: rgb(188, 162, 212);
+  border-radius: 5px 5px 0px 0px ;
+  background-image: url("https://images.unsplash.com/photo-1715604723666-866e18a5d257?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNzE1NzQxNTUzfA&ixlib=rb-4.0.3&q=80&w=400");
+}
+
+.hinhChuNhatGiuaBenCanh {
+  position: absolute;
+  height: 120px;
+  width: 400px;
+  background-color: rgb(203, 173, 233);
+  color: black;
+  border-radius: 0px 0px 5px 5px ;
+
+}
+
+.hinhChuNhatRencently  {
+
+  height: 50px;
+  width: 50px;
+  background-color: rgb(203, 173, 233);
+  border-radius: 5px ;
+  background-image: url("https://images.unsplash.com/photo-1715604723666-866e18a5d257?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNzE1NzQxNTUzfA&ixlib=rb-4.0.3&q=80&w=400");
+
+
+}
+.dongChu {
+  position: absolute;
+  top: 10px; /* Điều chỉnh vị trí từ trên */
+  left: 10px; /* Điều chỉnh vị trí từ trái */
+  font-size: 16px; /* Điều chỉnh kích thước chữ */
+  font-weight: bold;
+  color: black; /* Điều chỉnh màu chữ */
+}
+
+.dongChuChinhGiua {
+  position: absolute;
+  top: 80px; /* Điều chỉnh vị trí từ trên */
+  left: 45px; /* Điều chỉnh vị trí từ trái */
+  font-size: 20px; /* Điều chỉnh kích thước chữ */
+  font-weight: bold;
+  color: black; /* Điều chỉnh màu chữ */
+}
+/*home*/
