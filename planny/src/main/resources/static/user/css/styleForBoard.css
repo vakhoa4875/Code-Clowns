@@ -1,0 +1,120 @@
+body,
+main {
+  height: 100%;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+}
+@media (min-width: 992px) {
+  .mask {
+    padding-top: 67.27px;
+  }
+}
+/* nav */
+nav{
+  background-color: rgb(34, 39, 43);
+}
+/* nav */
+.card {
+  min-width: 272px;
+  max-width: 272px;
+  height: auto;
+  background-color: #ebecf0;
+}
+.shadow-2 {
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.1) !important;
+}
+.sortable-item {
+  cursor: grab;
+  transition: background-color 0.2s ease-in !important;
+}
+.sortable-item:hover {
+  background-color: rgba(0, 0, 0, 0.01) !important;
+}
+/* slide bar */
+.side-navbar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  margin-left: -300px;
+  background-color: rgb(26, 26, 38);
+  transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+  background-color: #ffffff26;
+}
+
+.my-container {
+  transition: 0.4s;
+}
+
+.active-nav {
+  margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+  margin-left: 250px;
+}
+
+#menu-btn {
+  background-color: black;
+  color: #fff;
+  margin-left: -62px;
+}
+
+.my-container input {
+  border-radius: 2rem;
+  padding: 2px 20px;
+}
+span{color: rgb(159, 173, 188);}
+/* slide bar */
+.bg-grey {
+  background-color: #E3E6E3 !important;
+  color: black !important;
+}
+.bg-gray {
+  background-color: rgba(223, 223, 223, 0.4) !important;
+  color: black !important;
+}
+
+.btn-light {
+  background-color: white !important;
+  color: black !important;
+  border: none;
+}
+.nav-link {
+  color: rgb(64, 64, 64) !important;
+}
+.card,
+.card-header,
+.card-body,
+.card-footer {
+  border: 0px !important;
+  background-color: transparent;
+}
+.modal,
+.modal-header,
+.modal-body,
+.modal-footer {
+  border: 0px !important;
+}
+.custom-modal-width {
+  max-width: 50%; /* Điều chỉnh chiều rộng theo ý muốn */
+}
+.btn-grey {
+  background-color: rgb(232, 232, 232);
+  color: black;
+  border: 0px;
+  border-radius: 0px;
+}
+.background {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  background-image: url('your-image-url.jpg');
+  background-size: cover; /* Ensures the image covers the entire div */
+  background-attachment: fixed; /* Makes the background image fixed */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center; /* Centers the image */
+}

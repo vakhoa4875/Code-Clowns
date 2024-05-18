@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LayoutController {
     @GetMapping("/bang")
-    public String doGetBang(){
+    public String doGetBang() {
         return "user/layout/body/managerbang/bang";
     }
 
     @GetMapping("/home")
-    public String doGetHome(){
+    public String doGetHome() {
         return "user/layout/body/home/home";
+    }
+
+    @GetMapping("/board")
+    public String test() {
+        return "user/layout/body/singleBoard/board";
     }
 }
 
