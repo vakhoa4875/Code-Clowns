@@ -20,5 +20,16 @@ public class LayoutController {
     public String test() {
         return "user/layout/body/singleBoard/board";
     }
+
+    @GetMapping("/login")
+    public String doGetLogin() {
+        return "user/layout/body/login/login";
+    }
+
+    @GetMapping("/register")
+    public String doGetRegister() {
+        return "user/layout/body/login/register";
+    }
+
 }
 
