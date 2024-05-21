@@ -21,18 +21,22 @@
     <link rel="stylesheet" th:href="@{/user/css/style.css}">
     <!-- BOX ICONS CSS-->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
-    <title>Workspace</title>
+    <title>Document</title>
+
 </head>
 <body>
-<div th:insert="~{user/common/_header:: header}"></div>
+<div th:insert="user/common/_header:: header"></div>
 <main th:fragment="table" id="intro" class="bg-image mt-5" style="height: 100vh;">
     <div class="mask">
         <!-- Side-Nav -->
+
         <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="row col-md-12  justify-content-center">
                 <div th:replace="user/common/_sidebar::sidebar"></div>
+
                 <div class="col-md-6">
                     <h5><i class="fa fa-users " aria-hidden="true"></i>Team</h5>
+
                     <div class="dropdown mb-2">
                         <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton2"
                                 data-bs-toggle="dropdown"
@@ -43,11 +47,14 @@
                             <li><a class="dropdown-item active" href="#">Public</a></li>
                             <li><a class="dropdown-item" href="#">Private</a></li>
                             <li><a class="dropdown-item" href="#">Workspace</a></li>
+
                         </ul>
                     </div>
+
                     <h6><i class="fa fa-user mt-2 me-2" aria-hidden="true"></i>Đã xem gần đây</h6>
                     <div class="col-12 bg-light">
                         <!-- Content Area -->
+
                         <div class="task_board mt-3 row">
                             <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
                                 <div class="hinhChuNhat"
@@ -71,10 +78,14 @@
                             </div>
                         </div>
                     </div>
+
+
                     <h6 class="d-flex align-items-center mb-0">
                         <i class="fa fa-user mt-2 " aria-hidden="true"></i>
                         CÁC KHÔNG GIAN LÀM VIỆC CỦA BẠN
+
                     </h6>
+
                     <div class="d-flex flex-column flex-lg-row justify-content-between mt-2 mb-3 col-12 col-sm-12">
                         <h5>Du An 1 - Starbucks</h5>
                         <div class="button_group d-flex  justify-content-end mt-2 mt-lg-0">
@@ -85,25 +96,30 @@
                             <button type="button" class="btn btn-info me-2 mt-2">Nâng cấp</button>
                         </div>
                     </div>
+
+
                     <div class="col-12 bg-light">
                         <!-- Content Area -->
+
                         <div class="task_board mt-3 row">
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center"
-                                 onclick="window.location.href='/board'">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px;">reallll</div>
-                            </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x270/efea59b89ada0934c5256715fb180bd9/photo-1463107971871-fbac9ddb920f.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChuChinhGiua" style="font-size: 15px;">Create new board</div>
-                            </div>
                             <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
                                 <div class="hinhChuNhat"
                                      style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
                                 <div class="dongChu" style="font-size: 15px;">Task plan</div>
                             </div>
+
+                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
+                                <div class="hinhChuNhat"
+                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x270/efea59b89ada0934c5256715fb180bd9/photo-1463107971871-fbac9ddb920f.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
+                                <div class="dongChuChinhGiua" style="font-size: 15px;">Create new board</div>
+                            </div>
+
+                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
+                                <div class="hinhChuNhat"
+                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
+                                <div class="dongChu" style="font-size: 15px;">Task plan</div>
+                            </div>
+
                             <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
                                 <div class="hinhChuNhat"
                                      style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x270/efea59b89ada0934c5256715fb180bd9/photo-1463107971871-fbac9ddb920f.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
