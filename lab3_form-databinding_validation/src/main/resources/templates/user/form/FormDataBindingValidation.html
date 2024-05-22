@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>B3 - Form Data Binding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="shortcut icon" th:href="@{/user/icon/java.png}">
+</head>
+
+<body style="margin: 15px 15px 15px 15px">
+    <h1>Form Data Binding - Validation</h1>
+    <div id="bodyPage" class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form id="formBindingData" class="row g-2 needs-validation">
+                <label for="inputMaSach" class="form-label">Mã Sách</label>
+                <input type="text" id="inputMaSach" class="form-control" aria-describedby="" required>
+
+                <label for="inputTenSach" class="form-label">Tên Sách</label>
+                <input type="text" id="inputTenSach" class="form-control" aria-describedby="">
+
+                <label for="inputGia" class="form-label">Giá</label>
+                <input type="number" id="inputGia" class="form-control" aria-describedby="" min="1">
+
+                <label for="inputLoaiSach" class="form-label">Loại Sách</label>
+                <select id="inputLoaiSach" class="form-select" aria-label="Default select example">
+                    <option selected>Loại Sách</option>
+                    <option value="1">Tiểu Thuyết</option>
+                    <option value="2">Ngôn tình</option>
+                    <option value="3">Đầu tư</option>
+                </select>
+            </form>
+            <br>
+            <button type="button" class="btn btn-primary" onclick="btnSave_lick()">Save</button>
+            <button type="button" class="btn btn-info">Verify</button>
+            <button type="button" class="btn btn-warning" onclick="btnClear_lick()">Clear</button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <script>
+        btnSave_lick = () => {
+            verificationForm();
+        }
+
+        btnClear_lick = () => {
+            data = {
+                maSach: '',
+                tenSach: '',
+                gia: '',
+                loaiSach: 'Loại Sách'
+            }
+            btnFillForm(data);
+        }
+
+        verificationForm = () => {
+            let message = "Please Input Value";
+            if ($('#inputMaSach')?.val() == '') {
+                alert(message);
+                $('#inputMaSach').focus();
+            } else if ($('#inputTenSach')?.val() == '') {
+                alert(message);
+                $('#inputTenSach').focus();
+            } else if ($('#inputGia')?.val() == '' || $('#inputGia')?.val() <= 0) {
+                message = $('#inputGia').val() == '' ? "Please Input Value" : "Please enter number >0";
+                alert(message);
+                $('#inputGia').focus();
+            } else if ($('#inputLoaiSach')?.val() == 'Loại Sách') {
+                alert(message);
+                $('#inputLoaiSach').focus();
+            } else {
+                alert("Xác Thực Dữ Liệu Thành Công");
+            }
+        }
+
+        btnFillForm = (data) => {
+            $('#inputMaSach')?.val(data.maSach);
+            $('#inputTenSach')?.val(data.tenSach);
+            $('#inputGia')?.val(data.gia);
+            $('#inputLoaiSach')?.val(data.loaiSach);
+        }
+    </script>
+</body>
+
+</html>
