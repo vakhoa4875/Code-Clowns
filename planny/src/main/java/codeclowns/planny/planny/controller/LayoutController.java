@@ -19,5 +19,10 @@ public class LayoutController {
     public String doGetViewBoard() {
         return "user/layout/body/singleBoard/board";
     }
+
+    @GetMapping("/doimatkhau")
+    public String doGetChangePass() {
+        return "user/layout/body/accountmanager/changepassword";
+    }
 }
 
