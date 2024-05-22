@@ -1,8 +1,8 @@
 package com.example.lab4.student;
 
 public class StudentNotBean {
-    private String name="Nghia";
-    private int age=19;
+    private String name = "Nghia";
+    private int age = 19;
 
     public String getName() {
         return name;
