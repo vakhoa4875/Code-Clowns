@@ -15,7 +15,6 @@ const addDragAndDropEvents = (task) => {
     task.removeAttribute("data-type");
   });
 };
-
 const addDragOverEvent = (zone) => {
   zone.addEventListener("dragover", (e) => {
     e.preventDefault();
