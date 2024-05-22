@@ -2,11 +2,10 @@ package codeclowns.planny.planny.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LayoutController {
-    @GetMapping("/bang")
+    @GetMapping("/workspace")
     public String doGetBang() {
         return "user/layout/body/managerbang/bang";
     }
@@ -17,7 +16,7 @@ public class LayoutController {
     }
 
     @GetMapping("/board")
-    public String test() {
+    public String doGetViewBoard() {
         return "user/layout/body/singleBoard/board";
     }
 }
