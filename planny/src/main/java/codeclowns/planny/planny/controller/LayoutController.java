@@ -31,5 +31,9 @@ public class LayoutController {
         return "user/layout/body/login/register";
     }
 
+    @GetMapping("/doimatkhau")
+    public String doGetChangePass() {
+        return "user/layout/body/accountmanager/changepassword";
+    }
 }
 

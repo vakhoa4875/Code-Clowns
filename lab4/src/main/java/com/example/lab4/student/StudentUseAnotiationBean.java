@@ -10,11 +10,11 @@ public class StudentUseAnotiationBean {
         return new StudentUseAnotiationBean();
     }
 
-@Bean("anotiationBean2")
-public  StudetnUseBean studetnUseBean(){
-    StudetnUseBean studetnUseBean=new StudetnUseBean();
-    studetnUseBean.setName("Hung");
-    studetnUseBean.setAge(19);
-    return studetnUseBean;
-}
+    @Bean("anotiationBean2")
+    public StudentUseBean studentUseBean() {
+        StudentUseBean studentUseBean = new StudentUseBean();
+        studentUseBean.setName("Hung");
+        studentUseBean.setAge(19);
+        return studentUseBean;
+    }
 }
