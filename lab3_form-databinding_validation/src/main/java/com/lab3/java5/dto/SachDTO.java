@@ -7,17 +7,17 @@ import lombok.Data;
 
 @Data
 public class SachDTO {
-    @NotNull(message = "Không được để trống Ma Sach")
+    @NotNull(message = "Không được để trống Mã Sách!")
     private String maSach;
 
-    @NotBlank(message = "Không được để trống Ten Sach")
+    @NotBlank(message = "Không được để Tên Sách rỗng!")
     private String tenSach;
 
-    @NotNull(message = "Không được để trống gpa")
-    @DecimalMin(value = "1", message = "gia phai lon hon 0")
+    @NotNull(message = "Không được để trống Giá sách!")
+    @DecimalMin(value = "0", message = "Giá sách phải lớn hoặc bằng 0!")
     private Double gia;
 
-    @NotBlank(message = "Không được để trống loai sach")
+    @NotBlank(message = "Không được để Loại sách rỗng!")
     private String loaiSach;
 
 }

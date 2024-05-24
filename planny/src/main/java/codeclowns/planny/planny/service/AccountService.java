@@ -1,8 +1,6 @@
 package codeclowns.planny.planny.service;
 
-import codeclowns.planny.planny.data.dto.AccountDto;
 import codeclowns.planny.planny.data.entity.Account;
-import codeclowns.planny.planny.mapper.AccountMapper;
 import codeclowns.planny.planny.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
