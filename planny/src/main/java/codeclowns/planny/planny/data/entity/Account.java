@@ -1,26 +1,39 @@
 package codeclowns.planny.planny.data.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
+@Table(name = "Account", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_account_email_sub", columnNames = {"email", "sub"}),
+        @UniqueConstraint(name = "unique_account_username", columnNames = "username")
+})
 public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long account_id;
+    @Column(name = "account_id")
+    private Integer accountId;
+
+    @Column(name = "username", length = 63, unique = true)
     private String username;
-    private String password;
+
+    @Column(name = "email", length = 63)
     private String email;
+
+    @Column(name = "sub", length = 63)
     private String sub;
-    private Boolean isEnabled;
+
+    @Column(name = "password", length = 127, nullable = false)
+    private String password;
+
+    @Column(name = "is_enabled", nullable = false)
+    private Boolean isEnabled = true;
 }
