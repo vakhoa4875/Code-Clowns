@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
         @UniqueConstraint(name = "unique_account_email_sub", columnNames = {"email", "sub"}),
         @UniqueConstraint(name = "unique_account_username", columnNames = "username")
 })
-public class Account {
+public class AccountE {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
