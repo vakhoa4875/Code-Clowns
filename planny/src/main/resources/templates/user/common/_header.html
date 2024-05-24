@@ -13,7 +13,7 @@
    <!--Main Navigation-->
   <header class="mb-4 fixed-top">
     <!-- Jumbotron -->
-    <div class="p-3 text-center bg-white border-bottom">
+    <div class="p-3 text-center bg-transparent" style="backdrop-filter: blur(50px)">
       <div class="container-fluid">
         <div class="row">
           <!-- Right elements -->
@@ -87,16 +87,16 @@
             </div>
           </div>
           <div class="col-lg-7 d-flex justify-content-center justify-content-md-end align-items-center">
-            <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0 px-3">
-              <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search" />
+            <form class="d-flex input-group w-auto mb-md-0 px-3">
+              <input autocomplete="off" type="search" class="form-control" placeholder="Search" />
               <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
             </form>
-            <i class="fas fa-bell fa-2x px-3"></i>
-            <a class="text-reset mr-3 fa-2x px-3" href="#">
-              <i class="fas fa-info-circle"></i>
+            <i class="fas fa-bell px-3" style="font-size: 24px"></i>
+            <a class="text-reset mr-3 px-3" href="#">
+              <i class="fas fa-info-circle" style="font-size: 24px"></i>
             </a>
-            <a href="/login" class="text-reset fa-2x px-3">
-              <i class="fas fa-user" data-bs-toggle="popover" title="Popover Title"
+            <a href="/login" class="text-reset px-3">
+              <i class="fas fa-user" style="font-size: 24px" data-bs-toggle="popover" title="Popover Title"
                  data-bs-content="This is the content of the popover."></i>
             </a>
           </div>

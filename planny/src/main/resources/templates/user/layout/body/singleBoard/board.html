@@ -21,7 +21,7 @@
     <div th:insert="~{user/common/_header::header}"></div>
 </header>
 <!--Main layout-->
-<main id="intro" class="bg-image" style="">
+<main id="intro">
     <div class="mask">
         <!-- Side-Nav -->
         <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column mt-3 bg-grey"
@@ -49,10 +49,10 @@
         </span>
         </div>
         <!-- Main Wrapper -->
-        <div class="p-1 my-container active-cont" style="background-color: white;">
+        <div class="my-container active-cont bg-transparent" style="background-color: white;">
             <!-- Top Nav -->
             <nav class="navbar top-navbar navbar-light px-5 mt-3 bg-grey">
-                <a class="btn border-0 rounded-4 px-3" id="menu-btn"><i class="fa-solid fa-caret-right"></i></a>
+                <a class="btn border-0 rounded-4 px-3 btn-light" id="menu-btn"><i class="fa-solid fa-caret-right"></i></a>
                 <div class="container-fluid d-flex align-items-center">
                     <input type="text" value="Board name" class="border-0 bg-grey text-center rounded-1" size="10"
                            style="font-size: 18px; font-weight: bold;">
@@ -65,7 +65,7 @@
                     <div class="navbar-expand-md" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <button class="btn btn-dark">
+                                <button class="btn btn-light">
                                     <i class="fa-solid fa-share-nodes"></i> Share
                                 </button>
                             </li>
@@ -73,12 +73,12 @@
                     </div>
                 </div>
             </nav>
-            <section class="d-flex align-items-start h-100" data-perfect-scrollbar="true" style="position: relative "
+            <section class="d-flex align-items-start list-container" data-perfect-scrollbar="true" style="position: relative "
                      data-sortable="sortable">
                 <!-- List -->
-                <div class="card shadow-sm m-3 p-2 pb-0 bg-gray a-list" id="todo-lane">
+                <div class="card  m-3 p-2 pb-0 bg-gray a-list" id="todo-lane">
                     <!-- List name -->
-                    <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0">
+                    <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0 bg-transparent">
                         <p class="mb-0"><strong>To Do</strong></p>
                         <button type="button" class="btn btn-link text-reset m-0 py-0 px-2" data-ripple-color="dark">
                             <i class="fas fa-ellipsis-h"></i>
@@ -95,7 +95,7 @@
                             </div>
                             <h5 class="text-center">hmm..</h5>
                         </div>
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2 d-flex align-items-center mx-0 pe-0 py-2"
+                        <div class="task sortable-item card-body rounded bg-white  mb-2 d-flex align-items-center mx-0 pe-0 py-2"
                              draggable="true">
                             Này là card mẫu oke chưa
                             <button class="btn btn-outline-dark border-0 me-2 ms-auto"
@@ -106,27 +106,27 @@
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task  sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task  sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 2
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 3
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 4
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 5
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 6
                         </div>
                         <!-- Card -->
@@ -142,7 +142,7 @@
                     <!-- List button -->
                 </div>
                 <!-- List -->
-                <div class="card shadow-1-strong m-3 p-2 pb-0" id="doing-lane">
+                <div class="card  m-3 p-2 pb-0" id="doing-lane">
                     <!-- List name -->
                     <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0">
                         <p class="mb-0"><strong>Doing</strong></p>
@@ -160,7 +160,7 @@
                         <!--                            </div>-->
                         <!--                            <h5 class="text-center">what is this?</h5>-->
                         <!--                        </div>-->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2 d-flex align-items-center mx-0 pe-0 py-2"
+                        <div class="task sortable-item card-body rounded bg-white  mb-2 d-flex align-items-center mx-0 pe-0 py-2"
                              draggable="true">
                             Này là card mẫu oke chưa
                             <button class="btn btn-outline-dark border-0 me-2 ms-auto"
@@ -171,27 +171,27 @@
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task  sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task  sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 2
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 3
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 4
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 5
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 6
                         </div>
                         <!-- Card -->
@@ -207,7 +207,7 @@
                     <!-- List button -->
                 </div>
                 <!-- List -->
-                <div class="  card shadow-1-strong m-3 p-2 pb-0" id="done-lane">
+                <div class="  card  m-3 p-2 pb-0" id="done-lane">
                     <!-- List name -->
                     <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0">
                         <p class="mb-0"><strong>Done</strong></p>
@@ -225,7 +225,7 @@
                         <!--                            </div>-->
                         <!--                            <h5 class="text-center">what is this?</h5>-->
                         <!--                        </div>-->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2 d-flex align-items-center mx-0 pe-0 py-2"
+                        <div class="task sortable-item card-body rounded bg-white  mb-2 d-flex align-items-center mx-0 pe-0 py-2"
                              draggable="true">
                             Này là card mẫu oke chưa
                             <button class="btn btn-outline-dark border-0 me-2 ms-auto"
@@ -236,27 +236,27 @@
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task  sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task  sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 2
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 3
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 4
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 5
                         </div>
                         <!-- Card -->
                         <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white shadow-2 mb-2" draggable="true">
+                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
                             Item 6
                         </div>
                         <!-- Card -->
