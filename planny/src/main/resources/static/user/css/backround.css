@@ -1,12 +1,12 @@
 body {
-    background-image: url('../img/wallpaper.png');
-    background-size: cover;
+    background-image: url('../img/5635038.jpg');
+    margin: 0;
+    padding: 0;
+    /*background-image: url('your-image.jpg'); !* Replace with the path to your image *!*/
     background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    z-index: 0;
-    width: 100vw;
-    height: 100vh;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover; /* Ensures the image covers the screen */
 }
 
 
