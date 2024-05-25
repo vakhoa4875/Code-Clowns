@@ -30,4 +30,12 @@ private String slugUrl;
 private String visibility;
     @Column(name="is_enable", nullable = false)
 private Boolean isEnable;
+
+     @ManyToOne ( fetch = FetchType.LAZY,cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH
+    })
+
+    @JoinColumn(name = "workspace_id", nullable = false)
+    private WorkSpaceE workSpace;
 }

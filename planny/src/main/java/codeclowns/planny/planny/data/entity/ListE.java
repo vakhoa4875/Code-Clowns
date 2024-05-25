@@ -31,5 +31,4 @@ public class ListE {
     })
     private List<CardE> cardEList;
 
-
 }

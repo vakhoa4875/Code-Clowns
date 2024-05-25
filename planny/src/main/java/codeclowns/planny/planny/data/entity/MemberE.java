@@ -35,6 +35,13 @@ public class MemberE {
     @Column(name="is_enable", nullable = false)
     private Boolean isEnable;
 
+    @ManyToOne ( fetch = FetchType.LAZY,cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH
+    })
+     @JoinColumn(name = "user_id", nullable = false)
+    private UserE user;
+
     @OneToMany(mappedBy = "memberE", cascade = {
             CascadeType.ALL,
     })
