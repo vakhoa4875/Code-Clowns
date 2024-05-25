@@ -51,4 +51,11 @@ public class WorkSpaceE {
 
     private List<Collaborator> danhSachCollaborators;
 
+    @OneToMany (mappedBy = "Workspace", fetch = FetchType.LAZY,cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH
+    })
+
+    private List<BoardE> danhSachBoard;
+
 }

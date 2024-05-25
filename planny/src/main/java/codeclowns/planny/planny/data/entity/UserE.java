@@ -42,8 +42,7 @@ public class UserE {
     private Byte is_private;
 
     @OneToMany (mappedBy = "User", fetch = FetchType.LAZY,cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH
+            CascadeType.ALL
     })
 
     private List<Collaborator> danhSachCollaborator;
@@ -55,4 +54,15 @@ public class UserE {
     })
 
     private List<WorkSpaceE> danhSachWorkSpace;
+
+      @OneToMany (mappedBy = "User", fetch = FetchType.LAZY,cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH
+    })
+
+    private List<MemberE> danhSachMember;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "user_id")
+    private AccountE account;
 }
