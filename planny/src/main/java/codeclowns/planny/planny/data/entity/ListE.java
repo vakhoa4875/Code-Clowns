@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +25,11 @@ public class ListE {
     private int ordinalNummeral;
     @Column(name="is_enable", nullable = false)
     private Boolean isEnable;
+
+    @OneToMany(mappedBy = "listE", cascade = {
+            CascadeType.ALL,
+    })
+    private List<CardE> cardEList;
+
+
 }

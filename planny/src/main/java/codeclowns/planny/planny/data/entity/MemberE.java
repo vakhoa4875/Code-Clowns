@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,5 +34,10 @@ public class MemberE {
     private String fullName;
     @Column(name="is_enable", nullable = false)
     private Boolean isEnable;
+
+    @OneToMany(mappedBy = "memberE", cascade = {
+            CascadeType.ALL,
+    })
+    private List<CardConductorE> cardConductorEList;
 
 }
