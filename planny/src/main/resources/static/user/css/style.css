@@ -160,8 +160,6 @@ nav {
 }
 
 #menu-btn {
-    background-color: black;
-    color: #fff;
     margin-left: -62px;
 }
 
@@ -183,10 +181,15 @@ span {
 }
 
 .containerss {
-    position: relative;
-    display: inline-block;
-    padding: 5px;
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px; /* Thêm khoảng cách padding để tránh nội dung sát vào cạnh màn hình */
+
+
 }
 
 .hinhChuNhat {
@@ -447,27 +450,38 @@ span {
 
 .hinhChuNhatGiua {
     height: 150px;
-    width: 400px;
+    width: 100%;
+    max-width: 500px;
     background-color: rgb(188, 162, 212);
     border-radius: 5px 5px 0px 0px;
     background-image: url("https://images.unsplash.com/photo-1715604723666-866e18a5d257?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNzE1NzQxNTUzfA&ixlib=rb-4.0.3&q=80&w=400");
+    background-size: cover;
+    background-position: center;
 }
 
 .hinhChuNhatGiuaBenCanh {
-    position: absolute;
+    width: 100%;
     height: 120px;
-    width: 400px;
-    background-color: rgb(203, 173, 233);
+    max-width: 500px;
+    background-color: #CDE8E5;
     color: black;
     border-radius: 0px 0px 5px 5px;
+    padding: 10px; /* Thêm padding để tạo khoảng cách bên trong */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước phần tử */
+    text-align: center; /* Căn giữa nội dung */
+}
 
+@media (max-width: 576px) {
+    .hinhChuNhatGiua, .hinhChuNhatGiuaBenCanh {
+        max-width: 100%; /* Đảm bảo không vượt quá kích thước màn hình nhỏ */
+    }
 }
 
 .hinhChuNhatRencently {
 
     height: 50px;
     width: 50px;
-    background-color: rgb(203, 173, 233);
+    color:#CDE8E5;
     border-radius: 5px;
     background-image: url("https://images.unsplash.com/photo-1715604723666-866e18a5d257?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNzE1NzQxNTUzfA&ixlib=rb-4.0.3&q=80&w=400");
 
@@ -492,4 +506,4 @@ span {
     color: black; /* Điều chỉnh màu chữ */
 }
 
-/*home*/
+/*side bar*/
