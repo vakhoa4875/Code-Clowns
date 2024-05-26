@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -55,4 +56,10 @@ public class CardE {
     })
     @JoinColumn(name = "list_id")
     private ListE listE;
+
+    @OneToMany(mappedBy = "cardE", cascade = {
+            CascadeType.ALL,
+    })
+    private List<CardConductorE> cardConductorEList;
+
 }
