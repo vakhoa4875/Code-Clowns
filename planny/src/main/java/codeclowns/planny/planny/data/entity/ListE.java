@@ -31,4 +31,7 @@ public class ListE {
     })
     private List<CardE> cardEList;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="board_id", nullable=false)
+    private BoardE board;
 }

@@ -47,4 +47,8 @@ public class MemberE {
     })
     private List<CardConductorE> cardConductorEList;
 
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JoinColumn(name="board_id", nullable=false)
+   private BoardE board;
+
 }

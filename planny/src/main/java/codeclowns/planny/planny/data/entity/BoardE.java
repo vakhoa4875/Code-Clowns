@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,4 +40,11 @@ private Boolean isEnable;
 
     @JoinColumn(name = "workspace_id", nullable = false)
     private WorkSpaceE workSpace;
+
+     @OneToMany(mappedBy = "Board", cascade = CascadeType.ALL)
+    private List<ListE> list;
+     @OneToMany(mappedBy = "Board", cascade = CascadeType.ALL)
+    private List<MemberE> member;
+
+
 }
