@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import java.util.List;
 
@@ -14,12 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="Workspace")
+@Table(name = "Workspace")
 public class WorkSpaceE {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workspace_id")
-    private int workspaceId;
+    private Integer workspaceId;
 
     @Column(name = "workspace_name", nullable = false)
     private String workspaceName;
@@ -36,26 +35,23 @@ public class WorkSpaceE {
     @Column(name = "is_enabled")
     private boolean isEnabled = true;
 
-    @ManyToOne ( fetch = FetchType.LAZY,cascade = {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-
     @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
-    @OneToMany (mappedBy = "Workspace", fetch = FetchType.LAZY,cascade = {
+    @OneToMany(mappedBy = "Workspace", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-
     private List<Collaborator> danhSachCollaborators;
 
-    @OneToMany (mappedBy = "Workspace", fetch = FetchType.LAZY,cascade = {
+    @OneToMany(mappedBy = "Workspace", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-
     private List<BoardE> danhSachBoard;
 
 }
