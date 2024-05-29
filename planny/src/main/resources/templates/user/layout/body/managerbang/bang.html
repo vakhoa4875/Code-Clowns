@@ -13,6 +13,8 @@
             crossorigin="anonymous"></script>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"/>
     <!-- MDB -->
     <link rel="stylesheet" href="css/mdb.min.css"/>
     <!-- Custom styles -->
@@ -22,14 +24,14 @@
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/user/media/phoenix-squadron.svg}" type="image/x-icon">
     <title>Không gian làm việc</title>
-<style>
-    .dongChu {
-        text-align: center; /* Horizontally center the text */
-        line-height: 100px; /* Adjust line-height to vertically center the text */
-        height: 100px; /* Set height to match the height of the parent container */
-        margin-left: 50px;
-    }
-</style>
+    <style>
+        .dongChu {
+            text-align: center; /* Horizontally center the text */
+            line-height: 100px; /* Adjust line-height to vertically center the text */
+            height: 100px; /* Set height to match the height of the parent container */
+            margin-left: 50px;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="~{user/common/_header:: header}"></div>
@@ -45,7 +47,7 @@
                         <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton2"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false" style="opacity: 0.9;font-size: 13px;">
-                            Visuability
+                            Visibility
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                             <li><a class="dropdown-item active" href="#">Public</a></li>
@@ -54,35 +56,42 @@
                         </ul>
                     </div>
                     <h6><i class="fa fa-user mt-2 me-2" aria-hidden="true"></i>Đã xem gần đây</h6>
+
                     <div class="col-12 bg-light">
                         <!-- Content Area -->
                         <div class="task_board mt-3 row">
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Task plan</div>
+                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat"
+                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Task plan</div>
+                                </div>
                             </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Tạo bảng mới</div>
+                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat"
+                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Create</div>
+                                </div>
                             </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Task plan</div>
+                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat"
+                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Task plan</div>
+                                </div>
                             </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Tạo bảng mới</div>
+                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat"
+                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Create</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <h6 class="d-flex align-items-center mb-0">
-                        <i class="fa fa-user mt-2 " aria-hidden="true"></i>
-                        CÁC KHÔNG GIAN LÀM VIỆC CỦA BẠN
-                    </h6>
+
+                    <h6><i class="fa fa-user mt-2 me-2 mb-5" aria-hidden="true"></i>CÁC KHÔNG GIAN LÀM VIỆC CỦA BẠN</h6>
                     <div class="d-flex flex-column flex-lg-row justify-content-between mt-2 mb-3 col-12 col-sm-12">
                         <h5>Du An 1 - Starbucks</h5>
                         <div class="button_group d-flex  justify-content-end mt-2 mt-lg-0">
@@ -96,26 +105,29 @@
                     <div class="col-12 bg-light">
                         <!-- Content Area -->
                         <div class="task_board mt-3 row">
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center"
-                                 onclick="window.location.href='/board'">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">reallll</div>
+                            <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat" style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Task plan</div>
+                                </div>
                             </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x270/efea59b89ada0934c5256715fb180bd9/photo-1463107971871-fbac9ddb920f.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Tạo bảng mới</div>
+                            <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat" style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Create</div>
+                                </div>
                             </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Task plan</div>
+                            <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat" style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Task plan</div>
+                                </div>
                             </div>
-                            <div class="containerss col-12 col-sm-6 col-md-4 col-lg-3 mb-3 d-flex flex-column align-items-center">
-                                <div class="hinhChuNhat"
-                                     style="background-image: url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x270/efea59b89ada0934c5256715fb180bd9/photo-1463107971871-fbac9ddb920f.jpg'); width: 100%; height: 100px; background-size: cover;"></div>
-                                <div class="dongChu" style="font-size: 15px; color: white">Tạo bảng mới</div>
+                            <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center">
+                                <div class="containerss">
+                                    <div class="hinhChuNhat" style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
+                                    <div class="dongChu" style="font-size: 15px;">Create</div>
+                                </div>
                             </div>
                         </div>
                     </div>
