@@ -40,8 +40,8 @@ public class BoardE {
     @JoinColumn(name = "workspace_id", nullable = false)
     private WorkSpaceE workSpace;
 
-    @OneToMany(mappedBy = "Board", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<ListE> list;
-    @OneToMany(mappedBy = "Board", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<MemberE> member;
 }

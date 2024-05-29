@@ -55,9 +55,9 @@ public class CardE {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "list_id")
-    private ListE listE;
+    private ListE list;
 
-    @OneToMany(mappedBy = "cardE", cascade = {
+    @OneToMany(mappedBy = "card", cascade = {
             CascadeType.ALL,
     })
     private List<CardConductorE> cardConductorEList;

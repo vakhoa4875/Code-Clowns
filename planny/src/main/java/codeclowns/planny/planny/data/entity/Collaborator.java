@@ -37,7 +37,6 @@ public class Collaborator {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-
      @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
@@ -47,5 +46,5 @@ public class Collaborator {
     })
 
     @JoinColumn(name = "workspace_id", nullable = false)
-    private WorkSpaceE WorkSpace;
+    private WorkSpaceE workSpace;
 }

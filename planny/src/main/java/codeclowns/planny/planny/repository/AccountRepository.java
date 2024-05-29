@@ -4,7 +4,9 @@ import codeclowns.planny.planny.data.entity.AccountE;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AccountRepository extends JpaRepository<AccountE, Long> {
+import java.util.List;
 
+@Repository
+public interface AccountRepository extends JpaRepository<AccountE, Integer> {
+    AccountE findByEmailOrUsername(String email, String username);
 }
