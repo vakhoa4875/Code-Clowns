@@ -1,6 +1,7 @@
 package codeclowns.planny.planny.constant;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public enum LoginStatus {
@@ -13,6 +14,9 @@ public enum LoginStatus {
     private String stateDescription;
 
     LoginStatus(String stateDescription) {
+        this.stateDescription = stateDescription;
+    }
+    public void setStateDescription(String stateDescription) {
         this.stateDescription = stateDescription;
     }
 }

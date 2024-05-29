@@ -24,7 +24,7 @@ public class HomeController {
             var status = accountService.login(accountDto);
             if (status.equals(LoginStatus.SUCCEED)) {
                 response.setStatus(BasicApiConstant.SUCCEED.getStatus());
-                response.setMessage("Chào mừng trở lại, " + accountDto.getUsername() + "!");
+                response.setMessage(status.getStateDescription());
             } else {
                 response.setStatus(BasicApiConstant.FAILED.getStatus());
                 response.setMessage(status.getStateDescription());
