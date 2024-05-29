@@ -188,8 +188,7 @@ span {
     max-width: 100%;
     box-sizing: border-box;
     padding: 0 10px; /* Thêm khoảng cách padding để tránh nội dung sát vào cạnh màn hình */
-
-
+    cursor: pointer;
 }
 
 .hinhChuNhat {
