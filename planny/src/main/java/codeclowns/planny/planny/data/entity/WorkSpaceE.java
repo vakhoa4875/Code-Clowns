@@ -42,13 +42,13 @@ public class WorkSpaceE {
     @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
-    @OneToMany(mappedBy = "Workspace", fetch = FetchType.LAZY, cascade = {
+    @OneToMany(mappedBy = "workSpace", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
     private List<Collaborator> danhSachCollaborators;
 
-    @OneToMany(mappedBy = "Workspace", fetch = FetchType.LAZY, cascade = {
+    @OneToMany(mappedBy = "workSpace", fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })

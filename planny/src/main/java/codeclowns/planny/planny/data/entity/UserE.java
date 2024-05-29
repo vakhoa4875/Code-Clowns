@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="User")
+@Table(name="[User]")
 public class UserE {
     @Id
     @Column(name = "user_id")
@@ -41,21 +41,19 @@ public class UserE {
     @Column(name="is_private")
     private Byte is_private;
 
-    @OneToMany (mappedBy = "User", fetch = FetchType.LAZY,cascade = {
+    @OneToMany (mappedBy = "user", fetch = FetchType.LAZY,cascade = {
             CascadeType.ALL
     })
-
     private List<Collaborator> danhSachCollaborator;
 
 
-    @OneToMany (mappedBy = "User", fetch = FetchType.LAZY,cascade = {
+    @OneToMany (mappedBy = "user", fetch = FetchType.LAZY,cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-
     private List<WorkSpaceE> danhSachWorkSpace;
 
-      @OneToMany (mappedBy = "User", fetch = FetchType.LAZY,cascade = {
+      @OneToMany (mappedBy = "user", fetch = FetchType.LAZY,cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
@@ -63,6 +61,6 @@ public class UserE {
     private List<MemberE> danhSachMember;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "account_id")
     private AccountE account;
 }

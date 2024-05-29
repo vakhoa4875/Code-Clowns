@@ -26,7 +26,7 @@ public class ListE {
     @Column(name="is_enable", nullable = false)
     private Boolean isEnable;
 
-    @OneToMany(mappedBy = "listE", cascade = {
+    @OneToMany(mappedBy = "list", cascade = {
             CascadeType.ALL,
     })
     private List<CardE> cardEList;

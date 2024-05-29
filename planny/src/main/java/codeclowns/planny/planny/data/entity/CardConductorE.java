@@ -21,7 +21,7 @@ public class CardConductorE {
     private Integer id;
 
     @Column(name = "assigned_time")
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private Date assignedTime;
 
     @ManyToOne(cascade = {
@@ -31,7 +31,7 @@ public class CardConductorE {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "card_id")
-    private CardE cardE;
+    private CardE card;
 
     @ManyToOne(cascade = {
             CascadeType.DETACH,
@@ -40,5 +40,5 @@ public class CardConductorE {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "member_id")
-    private MemberE memberE;
+    private MemberE member;
 }

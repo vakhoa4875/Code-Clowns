@@ -37,6 +37,6 @@ public class AccountE {
     @Column(name = "is_enabled", nullable = false)
     private Boolean isEnabled = true;
 
-    @OneToOne(mappedBy = "Account")
+    @OneToOne(mappedBy = "account")
     private UserE user;
 }

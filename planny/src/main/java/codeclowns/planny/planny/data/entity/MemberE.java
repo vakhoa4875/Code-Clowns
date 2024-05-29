@@ -42,7 +42,7 @@ public class MemberE {
      @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
-    @OneToMany(mappedBy = "memberE", cascade = {
+    @OneToMany(mappedBy = "member", cascade = {
             CascadeType.ALL,
     })
     private List<CardConductorE> cardConductorEList;
