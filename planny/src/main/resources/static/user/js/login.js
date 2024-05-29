@@ -28,7 +28,7 @@ login = async () => {
         password: password
     }
     await axios
-        .post("/api-public/login", data, {
+        .post("/api-public/account/login", data, {
             header: {
                 'Content-Type': 'application/json'
             }

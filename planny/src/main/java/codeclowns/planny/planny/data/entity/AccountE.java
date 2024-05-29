@@ -1,12 +1,11 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -32,6 +31,7 @@ public class AccountE {
     private String sub;
 
     @Column(name = "password", length = 127, nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "is_enabled", nullable = false)
