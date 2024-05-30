@@ -30,7 +30,7 @@ public class AccountE {
     @Column(name = "sub", length = 63)
     private String sub;
 
-    @Column(name = "password", length = 127, nullable = false)
+    @Column(name = "password", length = 255, nullable = false)
     @JsonIgnore
     private String password;
 

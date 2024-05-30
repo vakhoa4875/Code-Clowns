@@ -1,13 +1,12 @@
 package codeclowns.planny.planny.api;
 
-import codeclowns.planny.planny.constant.BasicApiConstant;
-import codeclowns.planny.planny.constant.LoginStatus;
+import codeclowns.planny.planny.constant.ApiMessage;
 import codeclowns.planny.planny.data.dto.AccountDto;
-import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.AccountService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,25 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api-public/account")
 @RequiredArgsConstructor
+@Slf4j
 public class AccountApi {
-    private final AccountService accountService;
+    @Autowired
+    private AccountService accountService;
 
-    @PostMapping("/login")
-    public ResponseObject<?> doPostLogin(@RequestBody AccountDto accountDto) {
-        var response = new ResponseObject<>();
+    @PostMapping("/register")
+    public ResponseObject<?> doPostRegisterAccount(@RequestBody AccountDto accountDto) {
+        var resultApi = new ResponseObject<>();
         try {
-            var status = accountService.login(accountDto);
-            if (status.equals(LoginStatus.SUCCEED)) {
-                response.setStatus(BasicApiConstant.SUCCEED.getStatus());
-                response.setMessage(status.getStateDescription());
+            ResponseObject<?> result = (ResponseObject<?>) accountService.register(accountDto);
+            if (result.isSuccess()) {
+                resultApi.setSuccess(true);
+                resultApi.setMessage(result.getMessage());
+                resultApi.setData(result.getData());
             } else {
-                response.setStatus(BasicApiConstant.FAILED.getStatus());
-                response.setMessage(status.getStateDescription());
+                resultApi.setSuccess(false);
+                resultApi.setMessage(result.getMessage());
             }
         } catch (Exception e) {
-            response.setStatus(BasicApiConstant.ERROR.getStatus());
-            response.setMessage(LoginStatus.ERROR.getStateDescription());
+            resultApi.setSuccess(false);
+            resultApi.setMessage(ApiMessage.BasicMessageApi.FAIL.getBasicMessageApi());
+            log.error("Fail When Call API /api-public/account/register: ", e);
         }
-        return response;
+        return resultApi;
     }
 }
