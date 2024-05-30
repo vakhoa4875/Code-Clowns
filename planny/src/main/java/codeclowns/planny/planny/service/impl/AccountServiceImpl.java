@@ -15,7 +15,6 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
     private final HttpSession session;
-
     @Override
     public LoginStatus login(AccountDto accountDto) {
         var account = accountRepository.findByEmailOrUsername(accountDto.getEmail(), accountDto.getUsername());

@@ -1,5 +1,6 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "Workspace")
+@JsonIgnoreProperties({"user", "danhSachCollaborators", "danhSachBoard"})
 public class WorkSpaceE {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +55,4 @@ public class WorkSpaceE {
             CascadeType.DETACH, CascadeType.REFRESH
     })
     private List<BoardE> danhSachBoard;
-
 }
