@@ -126,6 +126,8 @@ begin
     select i.account_id, i.username, i.email
     from inserted i
 end
+go
+drop trigger if exists newAccountAsNewUser;
 ----- /CREATE OTHER DBO -----
 
 ----- ALTER LOGIN CREDENTIAL -----
