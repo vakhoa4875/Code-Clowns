@@ -1,4 +1,4 @@
-package com.lab3.java5.api;
+package codeclowns.planny.planny.api;
 
 public class WorkSpaceApi {
 
