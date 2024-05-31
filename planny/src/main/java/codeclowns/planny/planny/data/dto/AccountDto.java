@@ -15,4 +15,5 @@ public class AccountDto {
     private String email;
     private String sub;
     private Boolean isEnabled;
+    private String fullName;
 }
