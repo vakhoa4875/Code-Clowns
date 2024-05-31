@@ -9,6 +9,7 @@ import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.AccountService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api-public/account")
 @RequiredArgsConstructor
+@Slf4j
 public class AccountApi {
     private final AccountService accountService;
 
@@ -35,6 +37,7 @@ public class AccountApi {
         } catch (Exception e) {
             response.setStatus(BasicApiConstant.ERROR.getStatus());
             response.setMessage(LoginStatus.ERROR.getStateDescription());
+            log.error(e.getMessage(), e);
         }
         return response;
     }
