@@ -1,17 +1,18 @@
 package codeclowns.planny.planny.service.impl;
 
-import codeclowns.planny.planny.constant.BasicApiConstant;
 import codeclowns.planny.planny.constant.LoginStatus;
 import codeclowns.planny.planny.constant.RegisterStatus;
 import codeclowns.planny.planny.data.dto.AccountDto;
 import codeclowns.planny.planny.data.entity.AccountE;
-import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.service.AccountService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +50,10 @@ public class AccountServiceImpl implements AccountService {
         } catch (Exception e) {
             return RegisterStatus.FAILED;
         }
+    }
+
+    @Override
+    public List<Object[]> getAllActiveAccounts() throws SQLException {
+        return accountRepository.findAllAccounts();
     }
 }

@@ -4,16 +4,11 @@ import codeclowns.planny.planny.constant.BasicApiConstant;
 import codeclowns.planny.planny.constant.LoginStatus;
 import codeclowns.planny.planny.constant.RegisterStatus;
 import codeclowns.planny.planny.data.dto.AccountDto;
-import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.AccountService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api-public/account")
@@ -57,6 +52,20 @@ public class AccountApi {
         } catch (Exception e) {
             response.setStatus(BasicApiConstant.ERROR.getStatus());
             response.setMessage(RegisterStatus.ERROR.getStateDescription());
+        }
+        return response;
+    }
+
+    @GetMapping("/getAllActiveAccounts")
+    public ResponseObject<?> doGetAllActiveAccounts() {
+        var response = new ResponseObject<>();
+        try {
+            var list = accountService.getAllActiveAccounts();
+            response.setStatus(BasicApiConstant.SUCCEED.getStatus());
+            response.setData(list);
+        } catch (Exception e) {
+            response.setStatus(BasicApiConstant.ERROR.getStatus());
+            log.error(e.getMessage(), e);
         }
         return response;
     }
