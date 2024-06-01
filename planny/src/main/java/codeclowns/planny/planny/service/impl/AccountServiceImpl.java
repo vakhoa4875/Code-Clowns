@@ -1,7 +1,11 @@
 package codeclowns.planny.planny.service.impl;
 
+import codeclowns.planny.planny.constant.BasicApiConstant;
 import codeclowns.planny.planny.constant.LoginStatus;
+import codeclowns.planny.planny.constant.RegisterStatus;
 import codeclowns.planny.planny.data.dto.AccountDto;
+import codeclowns.planny.planny.data.entity.AccountE;
+import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.service.AccountService;
 import jakarta.servlet.http.HttpSession;
@@ -26,5 +30,24 @@ public class AccountServiceImpl implements AccountService {
             return LoginStatus.SUCCEED;
         }
         return LoginStatus.FAILED_PASSWORD;
+    }
+
+    @Override
+    public RegisterStatus register(AccountDto accountDto) {
+        if (accountRepository.findByEmailOrUsername(accountDto.getEmail(), accountDto.getUsername()) != null) {
+            return RegisterStatus.ACCOUNT_EXISTED;
+        }
+        try {
+            accountRepository.insertAccountAndUser(
+                    accountDto.getUsername(),
+                    passwordEncoder.encode(accountDto.getPassword()),
+                    accountDto.getEmail(),
+                    accountDto.getSub(),
+                    accountDto.getIsEnabled(),
+                    accountDto.getFullName());
+            return RegisterStatus.SUCCEED;
+        } catch (Exception e) {
+            return RegisterStatus.FAILED;
+        }
     }
 }
