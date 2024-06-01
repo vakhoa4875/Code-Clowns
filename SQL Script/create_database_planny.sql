@@ -128,6 +128,26 @@ begin
 end
 go
 drop trigger if exists newAccountAsNewUser;
+CREATE OR ALTER PROCEDURE InsertAccountAndUser
+    @username NVARCHAR(63),
+    @password NVARCHAR(127),
+    @email NVARCHAR(63),
+    @sub NVARCHAR(63),
+    @isEnabled BIT,
+    @fullName NVARCHAR(63)
+AS
+BEGIN
+    -- thêm dlieu vao account
+    INSERT INTO [Account] (username, password, email, sub, is_enabled)
+    VALUES (@username, @password, @email, @sub, @isEnabled);
+    -- gan id vua them vao @accountId
+    DECLARE @accountId INT;
+    SET @accountId = SCOPE_IDENTITY()
+    -- Chèn dữ liệu vào bảng User với accountId vừa thêm
+    INSERT INTO [User] (user_id, username, email, fullname)
+    VALUES (@accountId, @username, @email, @fullName);
+END;
+GO
 ----- /CREATE OTHER DBO -----
 
 ----- ALTER LOGIN CREDENTIAL -----

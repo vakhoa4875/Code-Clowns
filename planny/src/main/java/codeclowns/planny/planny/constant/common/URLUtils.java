@@ -29,10 +29,10 @@ public class URLUtils {
         return encodedString + "-" + uuid;
     }
 
-    public static void main(String[] args) {
-        String originalString = "Team </>";
-        String uniqueIdentifier = createUniqueIdentifier(originalString);
-        System.out.println("Original: " + originalString);
-        System.out.println("Unique Identifier: " + uniqueIdentifier);
-    }
+//    public static void main(String[] args) {
+//        String originalString = "Team </>";
+//        String uniqueIdentifier = createUniqueIdentifier(originalString);
+//        System.out.println("Original: " + originalString);
+//        System.out.println("Unique Identifier: " + uniqueIdentifier);
+//    }
 }
