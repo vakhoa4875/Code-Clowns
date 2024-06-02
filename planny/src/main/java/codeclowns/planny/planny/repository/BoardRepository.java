@@ -10,5 +10,7 @@ import java.util.List;
 
 @Repository
 public interface BoardRepository extends JpaRepository<BoardE,Integer> {
-    List<BoardE> findAllByWorkSpaceIsEnabledTrue();
+//    List<BoardE> findAllByWorkSpaceIsEnabledTrue();
+@Query("SELECT b FROM BoardE b JOIN b.workSpace w WHERE w.isEnabled = true AND b.isEnabled = true")
+List<BoardE> findAllByWorkSpaceIsEnabledTrueAndBoardIsEnabledTrue();
 }

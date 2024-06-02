@@ -20,7 +20,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public List<BoardE> getAllEnabledBoard(BoardDto boardDto) throws Exception {
-        return boardRepository.findAllByWorkSpaceIsEnabledTrue();
+        return boardRepository.findAllByWorkSpaceIsEnabledTrueAndBoardIsEnabledTrue();
     }
     @Override
     @Transactional
