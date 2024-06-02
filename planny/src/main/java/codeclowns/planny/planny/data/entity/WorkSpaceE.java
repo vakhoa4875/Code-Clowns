@@ -55,4 +55,5 @@ public class WorkSpaceE {
             CascadeType.DETACH, CascadeType.REFRESH
     })
     private List<BoardE> danhSachBoard;
+
 }

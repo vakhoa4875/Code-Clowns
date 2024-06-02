@@ -21,10 +21,10 @@ public class ListE {
     private Integer listId;
     @Column(name="title", length=63, nullable=false)
     private String title;
-    @Column(name="ordinal_nummeral", length=63, nullable=false)
+    @Column(name="ordinal_numeral", nullable=false) //nghia fix tu ordinal_nummeral
     private int ordinalNummeral;
-    @Column(name="is_enable", nullable = false)
-    private Boolean isEnable;
+    @Column(name="is_enabled") // nghia từ fix is_enable
+    private boolean isEnabled=true;
 
     @OneToMany(mappedBy = "list", cascade = {
             CascadeType.ALL,

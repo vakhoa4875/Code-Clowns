@@ -32,8 +32,8 @@ public class MemberE {
     private String avatar;
     @Column(name="fullname", length = 63)
     private String fullName;
-    @Column(name="is_enable", nullable = false)
-    private Boolean isEnable;
+    @Column(name="is_enabled")
+    private boolean isEnabled; // Nghia fix isEnable
 
     @ManyToOne ( fetch = FetchType.LAZY,cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,

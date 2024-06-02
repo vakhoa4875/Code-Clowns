@@ -21,12 +21,17 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
     private final HttpServletRequest request;
 
     @Override
+    public List<WorkSpaceE> getAllEnableWorkspaces(WorkspacesDto workspacesDto) throws Exception {
+        return workSpacesRepository.findAllByIsEnabledTrue();
+    }
+
+    @Override
     public List<WorkSpaceE> getAllWorkspaces(WorkspacesDto workspacesDto) {
         return workSpacesRepository.findAll();
     }
 
     @Override
-    public WorkSpaceE SaveWorkspace(WorkspacesDto workspacesDto) throws Exception {
+    public WorkSpaceE saveWorkspace(WorkspacesDto workspacesDto) throws Exception {
         HttpSession session = request.getSession();
         AccountE currentAccount = (AccountE) session.getAttribute("currentAccount");
         if (currentAccount == null) {
@@ -53,10 +58,8 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
         }
     }
 
-
-
     @Override
-    public Object DeleteWorkspace(WorkspacesDto workspacesDto) throws Exception {
+    public Object deleteWorkspace(WorkspacesDto workspacesDto) throws Exception {
         HttpSession session = request.getSession();
         AccountE currentAccount = (AccountE) session.getAttribute("currentAccount");
         if (currentAccount == null) {

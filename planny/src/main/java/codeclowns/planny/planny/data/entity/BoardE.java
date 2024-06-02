@@ -1,15 +1,13 @@
 package codeclowns.planny.planny.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 @Getter
 @Setter
@@ -30,10 +28,10 @@ public class BoardE {
     private String slugUrl;
     @Column(name = "visibility", length = 63)
     private String visibility;
-    @Column(name = "is_enable", nullable = false)
-    private Boolean isEnable;
+    @Column(name = "is_enabled")
+    private boolean isEnabled = true;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
@@ -44,4 +42,6 @@ public class BoardE {
     private List<ListE> list;
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<MemberE> member;
+
+
 }
