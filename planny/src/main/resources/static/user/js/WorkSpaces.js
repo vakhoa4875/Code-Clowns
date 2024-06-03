@@ -39,10 +39,10 @@ async function displayWorkSpaces() {
             backgroundDiv.style.backgroundSize = 'cover';
 
             const shortNameDiv = document.createElement('div');
-            shortNameDiv.className = 'dongChu';
-            shortNameDiv.style.fontSize = '15px';
+            shortNameDiv.className = 'dongChu obvious-text';
+            shortNameDiv.style.fontSize = '18px';
             shortNameDiv.style.color = 'white';
-            shortNameDiv.textContent = `${workspace.shortName}`;
+            shortNameDiv.textContent = `${workspace.workspaceName}`;
 
             // Tạo nút 3 chấm
             const moreOptionsButton = document.createElement('div');
@@ -108,18 +108,18 @@ async function fetchBoards() {
         let index = 0;
         groupedBoards.forEach((boards, workspaceName) => {
             const workspaceNameElement = document.createElement('div');
-            workspaceNameElement.className = 'd-flex flex-column flex-lg-row justify-content-between mt-2 mb-3 col-12 col-sm-12';
-            workspaceNameElement.innerHTML = `<h5>${workspaceName}</h5>`;
+            workspaceNameElement.className = 'd-flex flex-column flex-lg-row justify-content-between mt-2 col-12 col-sm-12';
+            workspaceNameElement.innerHTML = `<h5 class="ms-1">${workspaceName}</h5>`;
             boardContainer.appendChild(workspaceNameElement);
             boards.forEach(board => {
                 const boardElement = document.createElement('div');
                 boardElement.className = 'col-12 col-md-6 mb-3 d-flex flex-column align-items-center';
                 const randomBackground = backgrounds[index % backgrounds.length];
                 boardElement.innerHTML = `
-                    <div class="containerss" style="background-image: ${randomBackground};">
+                    <div class="containerss" style="background-image: ${randomBackground}; border-radius: 8px;">
                         <div class="hinhChuNhat" style="width: 100%; height: 100px; background-size: cover;"></div>
-                        <div class="dongChu" style="font-size: 15px;">ShortName: ${board.shortName}</div>
-                        <div class="workspaceName" style="color: white">${board.workSpace.shortName}</div>
+                        <div class="dongChu obvious-text" style="font-size: 18px;">Bảng: ${board.boardName}</div>
+                        <div class="workspaceName mx-2 obvious-text" style="color: white">${board.workSpace.shortName}</div>
                     </div>
                 `;
                 boardContainer.appendChild(boardElement);
