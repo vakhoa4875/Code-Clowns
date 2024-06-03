@@ -30,7 +30,6 @@ async function displayWorkSpaces() {
             });
             const containerDiv = document.createElement('div');
             containerDiv.className = 'containerss';
-
             const backgroundIndex = index % backgrounds.length;
             const backgroundDiv = document.createElement('div');
             backgroundDiv.className = 'hinhChuNhat';
@@ -88,7 +87,6 @@ async function fetchBoards() {
         if (!Array.isArray(boards)) {
             throw new Error("Dữ liệu trả về không phải là mảng");
         }
-
         const boardContainer = document.getElementById('board-container');
         const backgrounds = [
             'url(/user/img/BackG1.jpg)',
@@ -98,7 +96,6 @@ async function fetchBoards() {
             'url(/user/img/BackG5.jpg)',
             'url(/user/img/BackG6.jpg)',
         ];
-
         const groupedBoards = new Map();
         boards.forEach(board => {
             const workspaceName = board.workSpace.workspaceName;
@@ -114,12 +111,10 @@ async function fetchBoards() {
             workspaceNameElement.className = 'd-flex flex-column flex-lg-row justify-content-between mt-2 mb-3 col-12 col-sm-12';
             workspaceNameElement.innerHTML = `<h5>${workspaceName}</h5>`;
             boardContainer.appendChild(workspaceNameElement);
-
             boards.forEach(board => {
                 const boardElement = document.createElement('div');
                 boardElement.className = 'col-12 col-md-6 mb-3 d-flex flex-column align-items-center';
                 const randomBackground = backgrounds[index % backgrounds.length];
-
                 boardElement.innerHTML = `
                     <div class="containerss" style="background-image: ${randomBackground};">
                         <div class="hinhChuNhat" style="width: 100%; height: 100px; background-size: cover;"></div>
@@ -146,7 +141,6 @@ async function fetchWorkspaceIds() {
         throw error;
     }
 }
-
 fetchWorkspaceIds()
     .then(response => {
         const workspaceIds = response.data; // Lấy mảng workspaceIds từ trường 'data' của response
@@ -182,10 +176,46 @@ async function saveBoard(workspaceId) {
             visibility: visibility
         });
         $('#staticBackdrop').modal('hide');
-        window.location.reload();
+        Swal.fire({
+            position: 'between',
+            icon: 'success',
+            title: 'Lưu thành công',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
     } catch (error) {
+        verificationForm();
         console.error('Error saving board:', error);
         throw error;
+    }
+}
+const showErrorAlert = (message) => {
+    Swal.fire({
+        icon: "error",
+        title: "Lỗi",
+        text: message,
+    });
+}
+
+const verificationForm = () => {
+    const boardName = document.getElementById('boardName').value;
+    const shortNameBoard = document.getElementById('shortNameBoard').value;
+    const slugUrl = document.getElementById('slugUrl').value;
+    if (boardName === '') {
+        showErrorAlert("Vui lòng nhập board name!");
+        document.getElementById('boardName').focus();
+        return false; // Prevent form submission
+    } else if (shortNameBoard === '') {
+        showErrorAlert("Vui lòng nhập short name!");
+        document.getElementById('shortNameBoard').focus();
+        return false;
+    } else if (slugUrl === '') {
+        showErrorAlert("Vui lòng nhập slug URL!");
+        document.getElementById('slugUrl').focus();
+        return false;
     }
 }
 document.getElementById('saveButton').addEventListener('click', function() {
