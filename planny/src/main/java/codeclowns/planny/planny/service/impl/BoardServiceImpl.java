@@ -1,15 +1,18 @@
 package codeclowns.planny.planny.service.impl;
 
 import codeclowns.planny.planny.data.dto.BoardDto;
+import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.entity.BoardE;
 import codeclowns.planny.planny.data.entity.WorkSpaceE;
 import codeclowns.planny.planny.repository.BoardRepository;
 import codeclowns.planny.planny.repository.WorkSpacesRepository;
 import codeclowns.planny.planny.service.BoardService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.FileStore;
 import java.util.List;
 
 @Service
@@ -17,10 +20,14 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final WorkSpacesRepository workSpaceRepository;
-
-    @Override
+    private final HttpSession session;
     public List<BoardE> getAllEnabledBoard(BoardDto boardDto) throws Exception {
-        return boardRepository.findAllByWorkSpaceIsEnabledTrueAndBoardIsEnabledTrue();
+        AccountE currentAccount = (AccountE) session.getAttribute("currentAccount");
+        if (currentAccount == null) {
+            throw new IllegalStateException("User not logged in or session expired");
+        }
+        Long userId = Long.valueOf(currentAccount.getAccountId());
+        return boardRepository.findAllByWorkSpaceUserIdAndWorkSpaceIsEnabledTrueAndIsEnabledTrue(userId);
     }
     @Override
     @Transactional

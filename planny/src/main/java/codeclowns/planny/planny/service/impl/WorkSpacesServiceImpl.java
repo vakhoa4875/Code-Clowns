@@ -19,10 +19,13 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
     private final WorkSpacesRepository workSpacesRepository;
     private final AccountRepository accountRepository;
     private final HttpServletRequest request;
-
-    @Override
+    private final HttpSession session;
     public List<WorkSpaceE> getAllEnableWorkspaces(WorkspacesDto workspacesDto) throws Exception {
-        return workSpacesRepository.findAllByIsEnabledTrue();
+        AccountE currentAccount = (AccountE) session.getAttribute("currentAccount");
+        if (currentAccount == null) {
+            throw new IllegalStateException("User not logged in or session expired");
+        }
+        return workSpacesRepository.findAllByIsEnabledTrueAndUserId(Long.valueOf(currentAccount.getAccountId()));
     }
 
     @Override
