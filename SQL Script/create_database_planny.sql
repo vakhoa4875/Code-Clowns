@@ -152,3 +152,13 @@ GO
 
 ----- ALTER LOGIN CREDENTIAL -----
 ALTER LOGIN sa WITH PASSWORD = 'root';
+INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
+VALUES 
+('Admin', 'admin_user', 'admin@example.com', 'Admin User', 'admin_avatar.jpg', 1, 1)
+-- Chèn dữ liệu mẫu vào bảng Collaborator
+INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
+VALUES 
+('Member', 'member_usserr', 'memberad1@example.com', 'Member User 1', 'member1_avatar.jpg', 5, 1),
+('Member', 'member_user2', 'member2@example.com', 'Member User 2', 'member2_avatar.jpg', 3, 1);
+
+select * from Collaborator where workspace_id=1

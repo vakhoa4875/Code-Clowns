@@ -1,5 +1,6 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +34,7 @@ public class Collaborator {
     @Column(name = "avatar", length = 127)
     private String avatar;
 
+     @JsonIgnore
     @ManyToOne ( fetch = FetchType.LAZY,cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
@@ -40,6 +42,7 @@ public class Collaborator {
      @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
+     @JsonIgnore
      @ManyToOne ( fetch = FetchType.LAZY,cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
