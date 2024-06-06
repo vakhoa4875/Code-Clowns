@@ -10,7 +10,7 @@ public class LayoutController {
         return "user/layout/body/managerbang/bang";
     }
 
-    @GetMapping("/home")
+    @GetMapping({"/", "/home"})
     public String doGetHome() {
         return "user/layout/body/home/home";
     }
@@ -33,6 +33,10 @@ public class LayoutController {
     @GetMapping("/doimatkhau")
     public String doGetChangePass() {
         return "user/layout/body/accountmanager/changepassword";
+    }
+    @GetMapping("/login/success")
+    public String doGetLoginSuccess() {
+        return "redirect:/";
     }
 }
 
