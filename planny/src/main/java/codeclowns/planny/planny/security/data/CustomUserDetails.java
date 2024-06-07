@@ -1,4 +1,4 @@
-package codeclowns.planny.planny.security;
+package codeclowns.planny.planny.security.data;
 
 import codeclowns.planny.planny.data.entity.AccountE;
 import lombok.Builder;

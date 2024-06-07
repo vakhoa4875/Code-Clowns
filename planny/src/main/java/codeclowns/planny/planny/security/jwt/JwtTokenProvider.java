@@ -1,6 +1,6 @@
 package codeclowns.planny.planny.security.jwt;
 
-import codeclowns.planny.planny.security.CustomUserDetails;
+import codeclowns.planny.planny.security.data.CustomUserDetails;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;

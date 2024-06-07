@@ -1,8 +1,8 @@
 package codeclowns.planny.planny.security.service;
 
-import codeclowns.planny.planny.security.CustomUserDetails;
+import codeclowns.planny.planny.security.data.CustomUserDetails;
 import codeclowns.planny.planny.security.jwt.JwtTokenProvider;
-import codeclowns.planny.planny.security.jwt.LoginResponse;
+import codeclowns.planny.planny.security.data.dto.LoginResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,13 +15,13 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;;
     private final AuthenticationManager authenticationManager;;
 
-    public LoginResponse authenticate(String username, String password) {
+    public LoginResponseDTO authenticate(String username, String password) {
         var authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         var userDetails = (CustomUserDetails) authentication.getPrincipal();
         var token = jwtTokenProvider.generateToken(userDetails);
-        return LoginResponse.builder()
-                .token(token)
+        return LoginResponseDTO.builder()
+                .accessToken(token)
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package codeclowns.planny.planny.security.service;
 
-import codeclowns.planny.planny.security.CustomUserDetails;
+import codeclowns.planny.planny.security.data.CustomUserDetails;
 import codeclowns.planny.planny.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

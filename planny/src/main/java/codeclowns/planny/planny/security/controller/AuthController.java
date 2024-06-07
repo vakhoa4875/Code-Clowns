@@ -1,12 +1,12 @@
-package codeclowns.planny.planny.controller;
+package codeclowns.planny.planny.security.controller;
 
-import codeclowns.planny.planny.data.dto.AccountDto;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
-import codeclowns.planny.planny.security.CustomUserDetails;
-import codeclowns.planny.planny.security.jwt.LoginResponse;
+import codeclowns.planny.planny.security.data.CustomUserDetails;
+import codeclowns.planny.planny.security.data.dto.LoginRequestDTO;
+import codeclowns.planny.planny.security.data.dto.LoginResponseDTO;
 import codeclowns.planny.planny.security.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,16 +20,15 @@ public class AuthController {
 
     @GetMapping("/secured")
     public ResponseObject<?> secured(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        System.out.println("/secured");
         var responseObject = new ResponseObject<>();
         responseObject.setMessage("If you see this, then you are logged in as user " + customUserDetails.getUsername() + "-password:" + customUserDetails.getPassword());
         return responseObject;
     }
 
     @PostMapping("/auth/login")
-    public LoginResponse login(@RequestBody AccountDto accountDto) {
-        var username = accountDto.getUsername() == null ? accountDto.getEmail() : accountDto.getUsername();
-        var password = accountDto.getPassword();
-        return authService.authenticate(username, password);
+    public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+        return authService.authenticate(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
     }
 
 }

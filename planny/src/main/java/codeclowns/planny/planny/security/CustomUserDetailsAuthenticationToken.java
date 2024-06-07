@@ -1,5 +1,6 @@
 package codeclowns.planny.planny.security;
 
+import codeclowns.planny.planny.security.data.CustomUserDetails;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 public class CustomUserDetailsAuthenticationToken extends AbstractAuthenticationToken {
