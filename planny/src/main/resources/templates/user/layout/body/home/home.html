@@ -16,10 +16,15 @@
     <link rel="stylesheet" href="css/mdb.min.css"/>
     <!-- Custom styles -->
     <link rel="stylesheet" th:href="@{/user/css/style.css}">
-     <link rel="stylesheet" th:href="@{/user/css/backround.css}">
+    <link rel="stylesheet" th:href="@{/user/css/backround.css}">
     <!-- BOX ICONS CSS-->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/user/media/phoenix-squadron.svg}" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:src="@{/user/js/login.js}"></script>
     <title>Trang Chủ</title>
 </head>
 <body>
@@ -63,10 +68,12 @@
                     </div>
                     <button class="btn btn-light mb-3" style="height: 78px">
                         <div class="row d-flex align-items-center justify-content-center">
-                            <div class="col-auto d-flex align-items-center justify-content-center" style="font-size: 20px;">
+                            <div class="col-auto d-flex align-items-center justify-content-center"
+                                 style="font-size: 20px;">
                                 <i class="fa fa-plus-circle" aria-hidden="true" style="font-size: 30px;"></i>
                             </div>
-                            <div class="col-auto d-flex align-items-center justify-content-center" style="font-size: 20px;">
+                            <div class="col-auto d-flex align-items-center justify-content-center"
+                                 style="font-size: 20px;">
                                 <h5 class="mb-0">Create new workspace</h5>
                             </div>
                         </div>
