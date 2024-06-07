@@ -50,4 +50,20 @@ public class CollaboratorApi {
         return resultApi;
     }
 
+      @DeleteMapping("/delete")
+    public ResponseObject<?> deleteCollaboratorFromWorkspace(@RequestParam Integer collaboratorId, @RequestParam Integer workspaceId) {
+        ResponseObject resultApi = new ResponseObject();
+        try {
+            var rowEffect = collaboratorService.deleteCollaboratorFromWorkspace(collaboratorId, workspaceId);
+            resultApi.setData(rowEffect);
+            resultApi.setStatus(rowEffect == 0 ?"false":"success");
+            resultApi.setMessage(rowEffect == 0 ? BasicApiConstant.FAILED.getStatus() : BasicApiConstant.SUCCEED.getStatus());
+        } catch (Exception e) {
+            resultApi.setStatus(BasicApiConstant.FAILED.getStatus());
+            resultApi.setMessage(BasicApiConstant.ERROR.getStatus());
+            log.error("Fail when call api /api-public/collaborators/delete", e);
+        }
+        return resultApi;
+    }
+
 }

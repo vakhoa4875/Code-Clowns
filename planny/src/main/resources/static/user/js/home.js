@@ -236,9 +236,23 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                </ul>
     `; // Clear existing content
 
-    const userList = document.getElementById('userList');
+    async function getBoardByMemberInWorkSpace (workspaceId){
+        try {
+            const response = axios.get(`api-public/board/getBoardsByWorkspace?${workspaceId}`)
+            const result = response.data;
+            if (result.status === "success"){
+
+            } else {
+                alert(`fail to fetch api-public/board/getBoardsByWorkspace?${workspaceId}`);
+            }
+        } catch (e) {
+            console.error('Error:', e);
+            alert('An error occurred while fetching board by member in workspace.');
+        }
+            }
 
     function renderMembers(filteredMembers) {
+        const userList = document.getElementById('userList');
         userList.innerHTML = ''; // Clear existing list
         filteredMembers.forEach(member => {
                 const rowHtml = ` 
@@ -255,16 +269,122 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                 <div class="btn-group">
                 <button class="btn-remove">X Loại bỏ...</button>
                 <div class="dropdown">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="opacity: 0.9;font-size: 10px;">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false" style="opacity: 0.9; ">
                 Thông tin
                 </button>
+                <ul class="dropdown-menu" aria-labelledby="workspaceDropdown">
+                <li class="dropdown-item">
+                <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg" alt="Các Không gian làm việc" width="40" height="40" class="me-2 ro" style="border-radius: 20%">
+                Dự Án 1 - StarBucks
+                <button class="btn btn-danger remove-btn" style="margin-left: 10px;">Gỡ bỏ</button>
+                </li>
+                <li class="dropdown-item">
+                <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg" alt="Các Không gian làm việc" width="40" height="40" class="me-2 ro" style="border-radius: 20%">
+                Dự Án 1 - StarBucks
+                <button class="btn btn-danger remove-btn" style="margin-left: 10px;">Gỡ bỏ</button>
+                </li>
+                <li class="dropdown-item">
+                <img src="https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x320/109110a39fca9ca569ce38c695dbc7b0/photo-1512314889357-e157c22f938d.jpg" alt="Các Không gian làm việc" width="40" height="40" class="me-2 ro" style="border-radius: 20%">
+                Dự Án 1 - StarBucks
+                <button class="btn btn-danger remove-btn" style="margin-left: 10px;">Gỡ bỏ</button>
+                </li>
+                </ul>
+                </div>
                 <div id="boarOfUser"></div>
                 </div>
                 </div>
             `;
             userList.innerHTML += rowHtml;
         });
+
+          // Add event listeners for delete buttons
+        const deleteButtons = document.querySelectorAll('.btn-remove');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const memberId = event.target.getAttribute('data-member-id');
+                const workspaceId = event.target.getAttribute('data-workspace-id');
+                await deleteCollaborator(memberId, workspaceId);
+            });
+        });
+
     }
+
+   async function deleteCollaborator(collaboratorId, workspaceId) {
+    // Customizing SweetAlert2 with Bootstrap buttons
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+    });
+
+    // Show confirmation dialog
+    const result = await swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    });
+
+    if (result.isConfirmed) {
+        try {
+            // Making the delete request
+            const response = await axios.delete(`/api-public/collaborators/delete`, {
+                params: {
+                    collaboratorId: collaboratorId,
+                    workspaceId: workspaceId
+                }
+            });
+
+            const resultData = response.data;
+
+            if (resultData.status === "success") {
+                // Show success message
+                await swalWithBootstrapButtons.fire({
+                    title: "Deleted!",
+                    text: "The collaborator has been deleted successfully.",
+                    icon: "success"
+                });
+                // Refresh the members list
+                await fetchMembers(workspaceId);
+            } else {
+                // Show failure message
+                await swalWithBootstrapButtons.fire({
+                    title: "Failed!",
+                    text: resultData.message || "Failed to delete the collaborator.",
+                    icon: "error"
+                });
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            // Show error message
+            await swalWithBootstrapButtons.fire({
+                title: "Error!",
+                text: "An error occurred while deleting the collaborator.",
+                icon: "error"
+            });
+        }
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Show cancellation message
+        await swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "The collaborator deletion was cancelled.",
+            icon: "error"
+        });
+    }
+}
+
+// Dummy function to simulate fetching members, replace with your actual function
+async function fetchMembers(workspaceId) {
+    // Simulate an API call or other operation to refresh the members list
+    console.log(`Fetching members for workspace ID: ${workspaceId}`);
+    // Implementation goes here...
+}
+
 
     // Initial render
     renderMembers(members);
@@ -278,6 +398,6 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
     });
 }
 
-        document.addEventListener('DOMContentLoaded', function() {
-        fetchRecentlyViewedWorkspaces();
+    document.addEventListener('DOMContentLoaded', function() {
+    fetchRecentlyViewedWorkspaces();
     });

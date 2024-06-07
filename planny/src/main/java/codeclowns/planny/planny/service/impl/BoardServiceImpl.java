@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardE> findBoardWithMembersInWorkspace(Integer workspaceId) throws Exception {
+    public List<Object[]> findBoardWithMembersInWorkspace(Integer workspaceId) throws Exception {
         var listResultEntity=boardRepository.findBoardWithMembersInWorkspace(workspaceId);
         if(Objects.nonNull(listResultEntity)){
             return listResultEntity;

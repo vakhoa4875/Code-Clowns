@@ -23,7 +23,7 @@ public interface BoardRepository extends JpaRepository<BoardE, Integer> {
             "FROM Board b " +
             "INNER JOIN Member m ON b.board_id = m.board_id " +
             "WHERE b.workspace_id = :workspace_id", nativeQuery = true)
-     List<BoardE> findBoardWithMembersInWorkspace(@Param("workspace_id") Integer workspace_id);
+     List<Object[]> findBoardWithMembersInWorkspace(@Param("workspace_id") Integer workspace_id);
 
 
 }
