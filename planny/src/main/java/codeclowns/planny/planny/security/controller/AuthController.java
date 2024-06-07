@@ -15,10 +15,11 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("/secured")
-    public String secured(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public String secured() {
+        var userDetails = authService.getCurrentUser();
         System.out.println("/secured");
         return "If you see this, then you are logged in as user: "
-                + customUserDetails.getUsername();
+                + userDetails.getUsername();
     }
 
     @PostMapping("/auth/login")
