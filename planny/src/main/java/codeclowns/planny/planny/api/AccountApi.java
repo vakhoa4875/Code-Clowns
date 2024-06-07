@@ -22,26 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountApi {
     private final AccountService accountService;
 
-//    @PostMapping("/login")
-//    public ResponseObject<?> doPostLogin(@RequestBody AccountDto accountDto) {
-//        var response = new ResponseObject<>();
-//        try {
-//            var status = accountService.login(accountDto);
-//            if (status.equals(LoginStatus.SUCCEED)) {
-//                response.setStatus(BasicApiConstant.SUCCEED.getStatus());
-//                response.setMessage(status.getStateDescription());
-//            } else {
-//                response.setStatus(BasicApiConstant.FAILED.getStatus());
-//                response.setMessage(status.getStateDescription());
-//            }
-//        } catch (Exception e) {
-//            response.setStatus(BasicApiConstant.ERROR.getStatus());
-//            response.setMessage(LoginStatus.ERROR.getStateDescription());
-//            log.error(e.getMessage(), e);
-//        }
-//        return response;
-//    }
-
     @PostMapping("/register")
     public ResponseObject<?> doPostRegister(@RequestBody AccountDto accountDto) {
         var response = new ResponseObject<>();

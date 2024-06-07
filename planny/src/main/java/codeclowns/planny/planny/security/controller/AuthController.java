@@ -7,10 +7,7 @@ import codeclowns.planny.planny.security.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +24,15 @@ public class AuthController {
     @PostMapping("/auth/login")
     public LoginResponseDTO login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
         return authService.authenticate(loginRequestDTO.getUsername(), loginRequestDTO.getPassword());
+    }
+
+    @DeleteMapping("/deleteMethod")
+    public String doDelete() {
+        return "deleted";
+    }
+    @PostMapping("/post")
+    public Integer doPost() {
+        return 1;
     }
 
 }
