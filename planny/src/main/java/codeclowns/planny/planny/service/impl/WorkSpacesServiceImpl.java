@@ -5,6 +5,7 @@ import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.entity.WorkSpaceE;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.repository.WorkSpacesRepository;
+import codeclowns.planny.planny.security.service.AuthService;
 import codeclowns.planny.planny.service.WorkSpacesService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -19,9 +20,10 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
     private final WorkSpacesRepository workSpacesRepository;
     private final AccountRepository accountRepository;
     private final HttpServletRequest request;
-    private final HttpSession session;
+    private final AuthService authService;
+
     public List<WorkSpaceE> getAllEnableWorkspaces(WorkspacesDto workspacesDto) throws Exception {
-        AccountE currentAccount = (AccountE) session.getAttribute("currentAccount");
+        AccountE currentAccount = authService.getCurrentUser();
         if (currentAccount == null) {
             throw new IllegalStateException("User not logged in or session expired");
         }
@@ -75,7 +77,7 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
             int exists = workSpacesRepository.existsByWorkspaceName(workspacesDto.getWorkspaceName());
             if (exists > 0) {
                 WorkSpaceE existingWorkSpace = workSpacesRepository.findByWorkspaceName(workspacesDto.getWorkspaceName());
-                 workSpacesRepository.delete(existingWorkSpace);
+                workSpacesRepository.delete(existingWorkSpace);
             }
         }
         return null;

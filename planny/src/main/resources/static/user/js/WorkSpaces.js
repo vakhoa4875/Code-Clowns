@@ -198,16 +198,17 @@ const showErrorAlert = (message) => {
         title: "Lỗi",
         text: message,
     });
-}
+};
 
 const verificationForm = () => {
     const boardName = document.getElementById('boardName').value;
     const shortNameBoard = document.getElementById('shortNameBoard').value;
     const slugUrl = document.getElementById('slugUrl').value;
+
     if (boardName === '') {
         showErrorAlert("Vui lòng nhập board name!");
         document.getElementById('boardName').focus();
-        return false; // Prevent form submission
+        return false;
     } else if (shortNameBoard === '') {
         showErrorAlert("Vui lòng nhập short name!");
         document.getElementById('shortNameBoard').focus();
@@ -217,8 +218,48 @@ const verificationForm = () => {
         document.getElementById('slugUrl').focus();
         return false;
     }
-}
-document.getElementById('saveButton').addEventListener('click', function() {
-    const workspaceId = document.getElementById('workSpaceId').value;
-    saveBoard(workspaceId);
+
+    return true;
+};
+
+document.getElementById('saveButton').addEventListener('click', async function() {
+    if (!verificationForm()) {
+        return;
+    }
+    try {
+        const workspaceId = document.getElementById('workSpaceId').value;
+        const boardName = document.getElementById('boardName').value;
+        const shortName = document.getElementById('shortNameBoard').value;
+        const slugUrl = document.getElementById('slugUrl').value;
+        const visibility = document.getElementById('visibility').value;
+
+        if (!workspaceId) {
+            console.error('workSpaceId is null or undefined.');
+            return;
+        }
+        const response = await axios.post('/api-public/board/saveAllBoard', {
+            workSpaceId: parseInt(workspaceId),
+            boardName: boardName,
+            shortName: shortName,
+            slugUrl: slugUrl,
+            visibility: visibility
+        });
+
+        $('#staticBackdrop').modal('hide');
+        Swal.fire({
+            position: 'between',
+            icon: 'success',
+            title: 'Lưu thành công',
+            showConfirmButton: false,
+            timer: 1500
+        });
+
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+    } catch (error) {
+        console.error('Error saving board:', error);
+        showErrorAlert("Có lỗi xảy ra khi lưu board. Vui lòng thử lại.");
+    }
 });
+
