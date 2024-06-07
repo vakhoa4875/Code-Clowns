@@ -1,7 +1,6 @@
 package codeclowns.planny.planny.security.jwt;
 
 import codeclowns.planny.planny.security.CustomUserDetailsAuthenticationToken;
-import codeclowns.planny.planny.security.data.CustomUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,19 +20,14 @@ public class JwtAuthentication extends OncePerRequestFilter {
     private final JwtToUserDetailsConverter jwtToUserDetailsConverter;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         extractToken(request)
                 .map(jwtTokenProvider::decodeToken)
                 .map(jwtToUserDetailsConverter::convert)
                 .map(CustomUserDetailsAuthenticationToken::new)
-//                .stream().toString()::Sytem
-                .ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication));
-        var authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            System.out.println(">>authen: " + authentication);
-            System.out.println(">>authentication: " + authentication.isAuthenticated());
-            System.out.println(">>user: " + ((CustomUserDetails) authentication.getPrincipal()).getUsername());
-        }
+                .ifPresent(authentication -> SecurityContextHolder.getContext().setAuthentication(authentication))
+        ;
         filterChain.doFilter(request, response);
     }
 

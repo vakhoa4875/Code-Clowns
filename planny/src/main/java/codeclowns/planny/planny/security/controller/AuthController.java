@@ -1,6 +1,5 @@
 package codeclowns.planny.planny.security.controller;
 
-import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.security.data.CustomUserDetails;
 import codeclowns.planny.planny.security.data.dto.LoginRequestDTO;
 import codeclowns.planny.planny.security.data.dto.LoginResponseDTO;
@@ -19,11 +18,10 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("/secured")
-    public ResponseObject<?> secured(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public String secured(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         System.out.println("/secured");
-        var responseObject = new ResponseObject<>();
-        responseObject.setMessage("If you see this, then you are logged in as user " + customUserDetails.getUsername() + "-password:" + customUserDetails.getPassword());
-        return responseObject;
+        return "If you see this, then you are logged in as user: "
+                + customUserDetails.getUsername();
     }
 
     @PostMapping("/auth/login")
