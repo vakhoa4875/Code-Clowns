@@ -1,99 +1,113 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- MDB -->
-    <link rel="stylesheet" href="css/mdb.min.css"/>
-    <!-- Custom styles -->
-    <link rel="stylesheet" th:href="@{/user/css/style.css}">
-    <link rel="stylesheet" th:href="@{/user/css/backround.css}">
-    <!-- BOX ICONS CSS-->
-    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
-    <link rel="shortcut icon" th:href="@{/user/media/phoenix-squadron.svg}" type="image/x-icon">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script th:src="@{/user/js/login.js}"></script>
-    <title>Trang Chủ</title>
-</head>
-<body>
-<header class="mb-4 fixed-top">
-    <div th:insert="user/common/_header::header"></div>
-</header>
-<main id="intro" class="bg-image mt-5" style="height: 100vh;">
-    <div class="mask">
-        <!-- Side-Nav -->
-        <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100%;">
-            <div class="row col-md-12  justify-content-center">
-                <div th:replace="user/common/_sidebar::sidebar"></div>
-                <div class="col-md-3 ms-5 ">
-                    <div class="row">
-                        <h6><i class="fa fa-users me-2" aria-hidden="true"></i>Rencently viewed</h6>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <div class="hinhChuNhatRencently"></div>
-                        </div>
-                        <div class="col-10" style="font-size: 20px;">
-                            <h5>
-                                Task Plan <br>
-                                Team
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-2">
-                            <div class="hinhChuNhatRencently"></div>
-                        </div>
-                        <div class="col-10" style="font-size: 20px;">
-                            <h5>
-                                My trello board<br>
-                                Trello Workspace
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="mt-3 mb-3">
-                        <h5>Link</h5>
-                    </div>
-                    <button class="btn btn-light mb-3" style="height: 78px">
-                        <div class="row d-flex align-items-center justify-content-center">
-                            <div class="col-auto d-flex align-items-center justify-content-center"
-                                 style="font-size: 20px;">
-                                <i class="fa fa-plus-circle" aria-hidden="true" style="font-size: 30px;"></i>
-                            </div>
-                            <div class="col-auto d-flex align-items-center justify-content-center"
-                                 style="font-size: 20px;">
-                                <h5 class="mb-0">Create new workspace</h5>
-                            </div>
-                        </div>
-                    </button>
 
-                </div>
-                <div class="col-md-4">
-                    <div class="containerss ">
-                        <div class="hinhChuNhatGiua"></div>
-                        <div class="hinhChuNhatGiuaBenCanh ">
-                            On track and up to date
-                            Invite people to boards and cards, leave comments, add due dates, and we'll show the most
-                            important
-                            activity here.
-                        </div>
-                    </div>
-                </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <!-- MDB -->
+  <link rel="stylesheet" href="css/mdb.min.css" />
+  <!-- Custom styles -->
+  <link rel="stylesheet" th:href="@{/user/css/style.css}">
+  <link rel="stylesheet" th:href="@{/user/css/backround.css}">
+  <!-- BOX ICONS CSS-->
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" th:href="@{/user/media/phoenix-squadron.svg}" type="image/x-icon">
+  <title>Trang Chủ</title>
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <script src="/user/js/home.js" defer></script>
+</head>
+
+<body>
+  <header class="mb-4 fixed-top">
+    <div th:insert="user/common/_header::header"></div>
+  </header>
+  <main id="intro" class="bg-image mt-5" style="height: 100vh;">
+    <div class="mask">
+      <!-- Side-Nav -->
+      <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100%;">
+        <div class="row col-md-12  justify-content-center">
+          <div th:replace="user/common/_sidebar::sidebar"></div>
+          <div class="col-md-3 ms-5 " id="board-container">
+            <div class="row">
+              <h6><i class="fa fa-users me-2" aria-hidden="true"></i>Recently viewed</h6>
             </div>
+            <div id="recentlyViewedContainer"></div> <!-- Placeholder for recently viewed workspaces -->
+            <div class="mt-3 mb-3">
+              <h5>Link</h5>
+            </div>
+            <button class="btn btn-light mb-3" style="height: 78px" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <div class="row d-flex align-items-center justify-content-center">
+                <div class="col-auto d-flex align-items-center justify-content-center" style="font-size: 20px;">
+                  <i class="fa fa-plus-circle" aria-hidden="true" style="font-size: 30px;"></i>
+                </div>
+                <div class="col-auto d-flex align-items-center justify-content-center" style="font-size: 20px;">
+                  <h5 class="mb-0">Create new workspace</h5>
+                </div>
+              </div>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Create Workspace</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="workspaceForm">
+                      <div class="mb-3">
+                        <label for="workspacename" class="form-label">Workspace Name</label>
+                        <input type="text" class="form-control" id="workspacename" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="shortname" class="form-label">Short Name</label>
+                        <input type="text" class="form-control" id="shortname" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="website" class="form-label">Website</label>
+                        <input type="text" class="form-control" id="website">
+                      </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" id="memberTable">
+            <div class="containerss">
+
+              <div class="hinhChuNhatGiua"></div>
+              <div class="hinhChuNhatGiuaBenCanh">
+                On track and up to date
+                Invite people to boards and cards, leave comments, add due dates, and we'll show the most important
+                activity here.
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</main>
+  </main>
 </body>
+
 </html>

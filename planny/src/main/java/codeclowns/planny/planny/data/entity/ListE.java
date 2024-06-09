@@ -23,7 +23,7 @@ public class ListE {
     private String title;
     @Column(name="ordinal_nummeral", length=63, nullable=false)
     private int ordinalNummeral;
-    @Column(name="is_enable", nullable = false)
+    @Column(name="is_enabled", nullable = false)
     private Boolean isEnable;
 
     @OneToMany(mappedBy = "list", cascade = {
