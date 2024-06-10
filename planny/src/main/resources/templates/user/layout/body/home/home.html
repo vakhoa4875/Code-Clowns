@@ -26,7 +26,8 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- Custom Script -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
   <script src="/user/js/home.js" defer></script>
 </head>
@@ -108,6 +109,29 @@
       </div>
     </div>
   </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const logoutLink = document.getElementById('logout');
+
+      logoutLink.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        Swal.fire({
+          title: 'Bạn có chắc chắn muốn đăng xuất không?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Có, đăng xuất!',
+          cancelButtonText: 'Hủy'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '/logout';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
