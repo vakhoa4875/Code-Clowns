@@ -1,5 +1,4 @@
 package codeclowns.planny.planny.service.impl;
-
 import codeclowns.planny.planny.data.dto.WorkspacesDto;
 import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.entity.WorkSpaceE;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -37,30 +35,18 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
 
     @Override
     public WorkSpaceE saveWorkspace(WorkspacesDto workspacesDto) throws Exception {
-        HttpSession session = request.getSession();
-        AccountE currentAccount = (AccountE) session.getAttribute("currentAccount");
+        AccountE currentAccount = authService.getCurrentUser();
         if (currentAccount == null) {
             throw new IllegalStateException("User not logged in or session expired");
-        } else {
-            AccountE managedAccount = accountRepository.findById(currentAccount.getAccountId()).orElse(null);
-            if (managedAccount == null) {
-                throw new IllegalStateException("User account not found in the database");
-            }
-            int exists = workSpacesRepository.existsByWorkspaceName(workspacesDto.getWorkspaceName());
-            if (exists > 0) {
-                WorkSpaceE existingWorkSpace = workSpacesRepository.findByWorkspaceName(workspacesDto.getWorkspaceName());
-                existingWorkSpace.setShortName(workspacesDto.getShortName());
-                existingWorkSpace.setWebsite(workspacesDto.getWebsite());
-                existingWorkSpace.setDescription(workspacesDto.getDescription());
-                existingWorkSpace.setEnabled(workspacesDto.isEnabled());
-                existingWorkSpace.setUser(managedAccount.getUser());
-                return workSpacesRepository.save(existingWorkSpace);
-            } else {
-                WorkSpaceE newWorkSpace = convertToEntity(workspacesDto);
-                newWorkSpace.setUser(managedAccount.getUser());
-                return workSpacesRepository.save(newWorkSpace);
-            }
         }
+        currentAccount = accountRepository.findById(currentAccount.getAccountId())
+                .orElseThrow(() -> new IllegalStateException("User account not found in the database"));
+        System.out.println("User ID: " + currentAccount.getAccountId());
+
+        WorkSpaceE workSpaceE = convertToEntity(workspacesDto);
+
+        workSpaceE.setUser(currentAccount.getUser());
+        return workSpacesRepository.save(workSpaceE);
     }
 
     @Override
@@ -82,7 +68,6 @@ public class WorkSpacesServiceImpl implements WorkSpacesService {
         }
         return null;
     }
-
 
     private WorkSpaceE convertToEntity(WorkspacesDto dto) {
         return WorkSpaceE.builder()

@@ -18,5 +18,5 @@ public class WorkspacesDto {
     private String website;
     private String description;
     private boolean isEnabled=true ;
-    private UserE user;
+//    private UserE user;
 }

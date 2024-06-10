@@ -16,7 +16,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"/>
-    <link rel="stylesheet" href="css/mdb.min.css"/>
+<!--    <link rel="stylesheet" href="css/mdb.min.css"/>-->
     <!-- Custom styles -->
     <link rel="stylesheet" th:href="@{/user/css/style.css}">
     <link rel="stylesheet" th:href="@{/user/css/backround.css}">
@@ -60,9 +60,7 @@
                     <div class="col-12 bg-transparent mt-3">
                         <h6><i class="fa-regular fa-clipboard mt-2 me-2" aria-hidden="true"></i>CÁC BẢNG CỦA BẠN</h6>
                         <div class="task_board mt-3 row" id="board-container">
-                            <!--                            <div class="d-flex flex-column flex-lg-row justify-content-between mt-2 mb-3 col-12 col-sm-12">-->
-                            <!--                                <h5>Du An 1 - Starbucks</h5>-->
-                            <!--                            </div>-->
+
                         </div>
                     </div>
                 </div>
@@ -70,7 +68,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -81,27 +79,25 @@
                     <form class="col-md-6 g-3">
                         <div class="col-md-12 mb-3">
                             <label for="workSpaceName" class="form-label">Workspace name</label>
-                            <input type="text" class="form-control" id="workSpaceName">
+                            <input type="text" class="form-control" id="workSpaceName" required>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="shortName" class="form-label">Short name</label>
-                            <input type="text" class="form-control" id="shortName">
+                            <input type="text" class="form-control" id="shortName" required>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="website" class="form-label"> Website</label>
-                            <input type="text" class="form-control" id="website">
+                            <label for="website" class="form-label">Website</label>
+                            <input type="text" class="form-control" id="website" required>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="description" class="form-label">Workspace description</label>
-                            <input type="text" class="form-control" id="description">
+                            <input type="text" class="form-control" id="description" required>
                         </div>
                     </form>
                     <div class="col-md-6 d-flex align-items-center justify-content-center">
-                        <img src="https://trello.com/assets/d1f066971350650d3346.svg" alt="Workspace Image"
-                             class="img-fluid">
+                        <img src="https://trello.com/assets/d1f066971350650d3346.svg" alt="Workspace Image" class="img-fluid">
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                     <button type="button" class="btn btn-primary">Lưu</button>
@@ -109,6 +105,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -162,6 +159,7 @@
     </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script th:src="@{/user/js/WorkSpaces.js}"></script>
 </body>
 </html>
