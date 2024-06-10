@@ -36,6 +36,16 @@
        $('#website').val(data.website);
        $('#description').val(data.description);
     }
+
+      document.addEventListener('DOMContentLoaded', function() {
+            // Select the form element
+            const submitCreateWorkspace = document.getElementById("workspaceForm");
+
+            // Attach submit event listener to the form
+            submitCreateWorkspace.addEventListener('submit', async (event) => {
+                submitForm(event);
+            });
+        });
 async function submitForm(event) {
     event.preventDefault();
       if (!verificationForm()) {
@@ -51,15 +61,16 @@ async function submitForm(event) {
     try {
         const response = await axios.post('/api-public/workspace/PostSaveWorkSpace', formData);
         const result = response.data;
-
         if (result.status === 'success') {
-            swal("Workspace created successfully!");
+            Swal.fire("Workspace created successfully!");
+            console.log("Workspace created successfully!")
         } else {
-            swal("Failed to create workspace", result.message);
+            Swal.fire("Failed to create workspace", result.message);
+            console.log("Failed to create workspace")
         }
     } catch (error) {
         console.error('Error:', error);
-        swal('An error occurred while creating the workspace.');
+        Swal.fire('An error occurred while creating the workspace.');
     }
 }
     async function fetchRecentlyViewedWorkspaces() {
@@ -200,7 +211,7 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                 const result = response.data;
                     console.log(result)
                 if (result.status === 'success') {
-                    updateMemberTable(result.data);
+                    updateMemberTable(result.data,workspaceId);
                 } else {
                     alert('Failed to fetch members: ' + result.message);
                 }
@@ -226,7 +237,7 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                 }
         }
 
-        function updateMemberTable(members) {
+        function updateMemberTable(members,workspaceId) {
     const tableBody = document.getElementById('memberTable');
     tableBody.innerHTML = `
                 <div class="search-bar">
@@ -267,7 +278,7 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                 </div>
                 <span class="user-last-active">Lần hoạt động gần nhất</span>
                 <div class="btn-group">
-                <button class="btn-remove">X Loại bỏ...</button>
+                <button class="btn-remove" data-member-id="${member.collaboratorId}" data-workspace-id="${workspaceId}">X Loại bỏ...</button>
                 <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false" style="opacity: 0.9; ">
                 Thông tin
@@ -303,6 +314,8 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
             button.addEventListener('click', async (event) => {
                 const memberId = event.target.getAttribute('data-member-id');
                 const workspaceId = event.target.getAttribute('data-workspace-id');
+                console.log(memberId);
+                console.log(workspaceId);
                 await deleteCollaborator(memberId, workspaceId);
             });
         });
@@ -350,7 +363,7 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                     icon: "success"
                 });
                 // Refresh the members list
-                await fetchMembers(workspaceId);
+               fetchMembers(workspaceId);
             } else {
                 // Show failure message
                 await swalWithBootstrapButtons.fire({
@@ -380,9 +393,19 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
 
 // Dummy function to simulate fetching members, replace with your actual function
 async function fetchMembers(workspaceId) {
-    // Simulate an API call or other operation to refresh the members list
-    console.log(`Fetching members for workspace ID: ${workspaceId}`);
-    // Implementation goes here...
+     try {
+        const response = await axios.get(`/api-public/collaborators/getInformation?workspaceId=${workspaceId}`);
+        const result = response.data;
+
+        if (result.status === 'success') {
+            updateMemberTable(result.data, workspaceId);
+        } else {
+            alert('Failed to fetch members: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching member information.');
+    }
 }
 
 
@@ -396,6 +419,7 @@ async function fetchMembers(workspaceId) {
         const filteredMembers = members.filter(member => member.fullname.toLowerCase().includes(searchTerm));
         renderMembers(filteredMembers);
     });
+
 }
 
     document.addEventListener('DOMContentLoaded', function() {
