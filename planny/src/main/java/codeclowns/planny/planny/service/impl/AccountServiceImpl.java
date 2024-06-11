@@ -38,7 +38,6 @@ public class AccountServiceImpl implements AccountService {
         }
         return LoginStatus.FAILED_PASSWORD;
     }
-
     @Override
     public RegisterStatus register(AccountDto accountDto) {
         if (accountRepository.findByEmailOrUsername(accountDto.getEmail(), accountDto.getUsername()) != null) {
@@ -47,18 +46,15 @@ public class AccountServiceImpl implements AccountService {
         savePendingAccount(accountDto);
         return RegisterStatus.PENDING;
     }
-
     @Override
     public Optional<AccountE> findAccountByUsername(String username) {
         var account = accountRepository.findAccountByUsernameOrEmailAndIsEnabledTrue(username, username);
         return Optional.of(account);
     }
-
     @Override
     public void savePendingAccount(AccountDto accountDto) {
           session.setAttribute("PENDING_ACCOUNT_" + accountDto.getEmail(), accountDto);
     }
-
     @Override
     public RegisterStatus confirmAccount(String email) {
         AccountDto accountDto = (AccountDto) session.getAttribute("PENDING_ACCOUNT_" + email);
@@ -79,14 +75,13 @@ public class AccountServiceImpl implements AccountService {
             return RegisterStatus.FAILED;
         }
     }
-
     @Override
     public void sendVerificationEmail(String to, String link) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setTo(to);
-        helper.setSubject("Verify your email address");
-        helper.setText("<p>Please click the link below to verify your email address:</p>" +
+        helper.setSubject("Xác Nhận Tài Khoản");
+        helper.setText("<p>Vui lòng click vào link xác nhận  :</p>" +
                 "<a href=\"" + link + "\">Verify</a>", true);
         mailSender.send(message);
     }

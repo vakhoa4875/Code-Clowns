@@ -41,6 +41,7 @@ const validateForm = () => {
     }
     return true;
 }
+
 const btnRegister = async () => {
     if (!validateForm()) {
         return;
@@ -54,20 +55,22 @@ const btnRegister = async () => {
     }
     try {
         let { data : response } = await axios.post('/api-public/account/register', dataApiRegister);
-        if (response.status === 'Thành công') {
+        if (response.status === 'PENDING') {
             Swal.fire({
-                title: 'Chào mừng bạn đến với Planny!',
+                title: 'Thành công!',
                 text: response.message,
                 icon: 'success'
-            }).then(result => {
-                if (result.isConfirmed) {
-                    window.location.href = '/login';
-                }
             });
-        } else {
+        } else if (response.status === 'FAILED') {
             Swal.fire({
                 title: 'Đăng ký thất bại',
                 text: response.message,
+                icon: 'error'
+            });
+        } else {
+            Swal.fire({
+                title: 'Lỗi',
+                text: 'Đã xảy ra lỗi khi thực hiện đăng ký',
                 icon: 'error'
             });
         }

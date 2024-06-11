@@ -30,7 +30,7 @@ public class AccountApi {
                 response.setMessage(status.getStateDescription());
             } else if (status.equals(RegisterStatus.PENDING)) {
                 // Gửi email xác nhận
-                String link = "http://localhost:8080/api-public/account/verify?email=" + accountDto.getEmail();
+                String link = "http://localhost:6868/verify" + accountDto.getEmail();
                 accountService.sendVerificationEmail(accountDto.getEmail(), link);
                 response.setStatus(RegisterStatus.PENDING.getStateDescription());
                 response.setMessage("Verification email sent to " + accountDto.getEmail());
@@ -44,7 +44,6 @@ public class AccountApi {
         }
         return response;
     }
-
     @GetMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestParam("email") String email) {
         RegisterStatus status = accountService.confirmAccount(email);
@@ -54,6 +53,5 @@ public class AccountApi {
             return ResponseEntity.badRequest().body("Verification failed.");
         }
     }
-
 }
 

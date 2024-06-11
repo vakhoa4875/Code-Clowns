@@ -31,7 +31,7 @@ public class WebSecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final JwtAuthentication jwtAuthentication;
-    private final String[] nonAuthenticatedUrls = {"/register", "/auth/login", "/api-public/**"};
+    private final String[] nonAuthenticatedUrls = {"/register", "/auth/login", "/api-public/**","/verify"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
