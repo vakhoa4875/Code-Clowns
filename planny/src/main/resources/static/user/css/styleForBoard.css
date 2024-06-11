@@ -130,3 +130,20 @@ span {
 .custom-modal-width {
     max-width: 50%; /* Adjust as needed */
 }
+
+.btn-outline-dark {
+    --bs-btn-color: #212529;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-color: #212529;
+    --bs-btn-hover-bg: rgba(0, 0, 0, 0.2);
+    --bs-btn-hover-border-color: none;
+    --bs-btn-focus-shadow-rgb: 33, 37, 41;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #212529;
+    --bs-btn-active-border-color: #212529;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #212529;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #212529;
+    --bs-gradient: none;
+}

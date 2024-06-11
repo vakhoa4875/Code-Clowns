@@ -25,5 +25,7 @@ public interface BoardRepository extends JpaRepository<BoardE, Integer> {
             "WHERE b.workspace_id = :workspace_id", nativeQuery = true)
      List<Object[]> findBoardWithMembersInWorkspace(@Param("workspace_id") Integer workspace_id);
 
+     BoardE findBySlugUrl(String slugUrl);
 
+     Boolean existsBySlugUrl(String slugUrl);
 }

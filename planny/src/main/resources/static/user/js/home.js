@@ -1,44 +1,44 @@
-
-    verificationForm = () => {
-    let message="Please Input Value";
-    if ($('#workspacename').val()===''){
+verificationForm = () => {
+    let message = "Please Input Value";
+    if ($('#workspacename').val() === '') {
         alert(message);
         $('#workspacename').focus();
         return false;
-    } else if ($('#shortname').val()===''){
+    } else if ($('#shortname').val() === '') {
         alert(message);
         $('#shortname').focus();
-          return false;
-    } else if ($('website').val()===''){
+        return false;
+    } else if ($('website').val() === '') {
         alert(message);
         $('#website').focus();
-          return false;
-    } else if ($('#description').val()===''){
+        return false;
+    } else if ($('#description').val() === '') {
         alert(message);
         $('#description').focus()
-          return false;
+        return false;
     }
     return true;
 }
-    btnClear_Click = () => {
+btnClear_Click = () => {
     data = {
-       workSpaceName: '' ,
-        shortName: '' ,
+        workSpaceName: '',
+        shortName: '',
         website: '',
         description: ''
     };
     fillForm(data)
 
 }
-    fillForm = (data) => {
-       $('#workspacename').val(data.workSpaceName) ;
-       $('#shortname').val(data.shortName);
-       $('#website').val(data.website);
-       $('#description').val(data.description);
-    }
+fillForm = (data) => {
+    $('#workspacename').val(data.workSpaceName);
+    $('#shortname').val(data.shortName);
+    $('#website').val(data.website);
+    $('#description').val(data.description);
+}
+
 async function submitForm(event) {
     event.preventDefault();
-      if (!verificationForm()) {
+    if (!verificationForm()) {
         return;
     }
     const formData = {
@@ -62,7 +62,8 @@ async function submitForm(event) {
         swal('An error occurred while creating the workspace.');
     }
 }
-    async function fetchRecentlyViewedWorkspaces() {
+
+async function fetchRecentlyViewedWorkspaces() {
     try {
         const response = await axios.get('/api-public/workspace/recently-viewed');
         const result = response.data;
@@ -73,7 +74,7 @@ async function submitForm(event) {
         } else {
             alert('error', 'Failed to fetch recently viewed workspaces', result.message);
         }
-    } catch ( error ) {
+    } catch (error) {
         console.error('Error:', error);
         alert('error', 'An error occurred', 'An error occurred while fetching recently viewed workspaces.');
     }
@@ -92,39 +93,43 @@ function updateRecentlyViewedWorkspaces(workspaces) {
         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
         <div class="dongChu" style="font-size: 15px;">   ${workspace.workspaceName}</div>
         </div>
-        </div>
-                                                     
+        </div>                                                     
         `;
         container.innerHTML += workspaceHtml;
     });
 }
-// Function get all board from workspace
-    async function fetchAllBoardFromWorkSpace(workspaceId){
-        const response = await axios.get(`/api-public/board/getInformationBoard?workspaceId=${workspaceId}`);
-        const result = response.data;
-        if (result.status === 'success'){
-            updateAllBoardFromWorkSpace(result.data);
-        } else {
-            alert("fail to fetch when call api /api-public/board/getInformationBoard")
-        }
-    }
-  function updateAllBoardFromWorkSpace(boards) {
-  const container = document.getElementById('board-container');
-  let boardHtml = '';
 
-  boards.forEach((board, index) => {
+// Function get all board from workspace
+async function fetchAllBoardFromWorkSpace(workspaceId) {
+    const response = await axios.get(`/api-public/board/getInformationBoard?workspaceId=${workspaceId}`);
+    const result = response.data;
+    if (result.status === 'success') {
+        updateAllBoardFromWorkSpace(result.data);
+    } else {
+        alert("fail to fetch when call api /api-public/board/getInformationBoard")
+    }
+}
+
+function updateAllBoardFromWorkSpace(boards) {
+    const container = document.getElementById('board-container');
+    let boardHtml = '';
+
+    boards.forEach((board, index) => {
+        let url = '/b/' + board.slugUrl + '/' + board.shortName;
+        console.log(url);
         boardHtml += `
-            <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
+            <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='${url}'">
             <div class="containerss">
             <div class="hinhChuNhat" style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
             <div class="dongChu" style="font-size: 15px;">${board.boardName}</div>
             </div>
             </div> 
     `;
-  });
+    });
 
-  container.innerHTML = `<div class="task_board mt-3 row d-flex col-sm-12">${boardHtml}</div>`;
+    container.innerHTML = `<div class="task_board mt-3 row d-flex col-sm-12">${boardHtml}</div>`;
 }
+
 function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
     const container = document.getElementById('accordionFlushExample');
     container.innerHTML = ''; // Clear existing content
@@ -179,54 +184,55 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
     });
     // Add event listener for member links
 
-    container.addEventListener('click', function(event) {
+    container.addEventListener('click', function (event) {
         if (event.target && event.target.classList.contains('member-link')) {
-        event.preventDefault();
-        const workspaceId = event.target.getAttribute('id');
-        fetchMembers(workspaceId);
-        console.log("thanh cpmg")
-    } else if (event.target && event.target.classList.contains('board-link')){
-        event.preventDefault();
-        const workspaceId = event.target.getAttribute('id');
-        fetchAllBoardFromWorkSpace(workspaceId);
-        console.log("thanh cpmg")
+            event.preventDefault();
+            const workspaceId = event.target.getAttribute('id');
+            fetchMembers(workspaceId);
+            console.log("thanh cpmg")
+        } else if (event.target && event.target.classList.contains('board-link')) {
+            event.preventDefault();
+            const workspaceId = event.target.getAttribute('id');
+            fetchAllBoardFromWorkSpace(workspaceId);
+            console.log("thanh cpmg")
         }
-});
+    });
 
 }
-    async function fetchMembers(workspaceId) {
-            try {
-                const response = await axios.get(`/api-public/collaborators/getInformation?workspaceId=${workspaceId}`);
-                const result = response.data;
-                    console.log(result)
-                if (result.status === 'success') {
-                    updateMemberTable(result.data);
-                } else {
-                    alert('Failed to fetch members: ' + result.message);
-                }
-                } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while fetching member information.');
-                }
-        }
 
-     async function fetchMembersByWorkSpaceInBoard(workspaceId) {
-            try {
-                const response = await axios.get(`/api-public/member/getByworkspace?workspaceId=${workspaceId}`);
-                const result = response.data;
-                    console.log(result)
-                if (result.status === 'success') {
-                    updateMemberTable(result.data);
-                } else {
-                    alert('Failed to fetch members: ' + result.message);
-                }
-                } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while fetching member information.');
-                }
+async function fetchMembers(workspaceId) {
+    try {
+        const response = await axios.get(`/api-public/collaborators/getInformation?workspaceId=${workspaceId}`);
+        const result = response.data;
+        console.log(result)
+        if (result.status === 'success') {
+            updateMemberTable(result.data);
+        } else {
+            alert('Failed to fetch members: ' + result.message);
         }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching member information.');
+    }
+}
 
-        function updateMemberTable(members) {
+async function fetchMembersByWorkSpaceInBoard(workspaceId) {
+    try {
+        const response = await axios.get(`/api-public/member/getByworkspace?workspaceId=${workspaceId}`);
+        const result = response.data;
+        console.log(result)
+        if (result.status === 'success') {
+            updateMemberTable(result.data);
+        } else {
+            alert('Failed to fetch members: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching member information.');
+    }
+}
+
+function updateMemberTable(members) {
     const tableBody = document.getElementById('memberTable');
     tableBody.innerHTML = `
                 <div class="search-bar">
@@ -236,11 +242,11 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                </ul>
     `; // Clear existing content
 
-    async function getBoardByMemberInWorkSpace (workspaceId){
+    async function getBoardByMemberInWorkSpace(workspaceId) {
         try {
             const response = axios.get(`api-public/board/getBoardsByWorkspace?${workspaceId}`)
             const result = response.data;
-            if (result.status === "success"){
+            if (result.status === "success") {
 
             } else {
                 alert(`fail to fetch api-public/board/getBoardsByWorkspace?${workspaceId}`);
@@ -249,13 +255,13 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
             console.error('Error:', e);
             alert('An error occurred while fetching board by member in workspace.');
         }
-            }
+    }
 
     function renderMembers(filteredMembers) {
         const userList = document.getElementById('userList');
         userList.innerHTML = ''; // Clear existing list
         filteredMembers.forEach(member => {
-                const rowHtml = ` 
+            const rowHtml = ` 
                 <hr>   
                 <div class="user-info">
                 <img src="https://trello-logos.s3.amazonaws.com/5637d7c208cebebdb7a2d9670a583dfb/170.png" alt="${member.fullname}" class="user-avatar">
@@ -297,7 +303,7 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
             userList.innerHTML += rowHtml;
         });
 
-          // Add event listeners for delete buttons
+        // Add event listeners for delete buttons
         const deleteButtons = document.querySelectorAll('.btn-remove');
         deleteButtons.forEach(button => {
             button.addEventListener('click', async (event) => {
@@ -309,81 +315,81 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
 
     }
 
-   async function deleteCollaborator(collaboratorId, workspaceId) {
-    // Customizing SweetAlert2 with Bootstrap buttons
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-            confirmButton: "btn btn-success",
-            cancelButton: "btn btn-danger"
-        },
-        buttonsStyling: false
-    });
+    async function deleteCollaborator(collaboratorId, workspaceId) {
+        // Customizing SweetAlert2 with Bootstrap buttons
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
 
-    // Show confirmation dialog
-    const result = await swalWithBootstrapButtons.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
-        reverseButtons: true
-    });
+        // Show confirmation dialog
+        const result = await swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true
+        });
 
-    if (result.isConfirmed) {
-        try {
-            // Making the delete request
-            const response = await axios.delete(`/api-public/collaborators/delete`, {
-                params: {
-                    collaboratorId: collaboratorId,
-                    workspaceId: workspaceId
-                }
-            });
-
-            const resultData = response.data;
-
-            if (resultData.status === "success") {
-                // Show success message
-                await swalWithBootstrapButtons.fire({
-                    title: "Deleted!",
-                    text: "The collaborator has been deleted successfully.",
-                    icon: "success"
+        if (result.isConfirmed) {
+            try {
+                // Making the delete request
+                const response = await axios.delete(`/api-public/collaborators/delete`, {
+                    params: {
+                        collaboratorId: collaboratorId,
+                        workspaceId: workspaceId
+                    }
                 });
-                // Refresh the members list
-                await fetchMembers(workspaceId);
-            } else {
-                // Show failure message
+
+                const resultData = response.data;
+
+                if (resultData.status === "success") {
+                    // Show success message
+                    await swalWithBootstrapButtons.fire({
+                        title: "Deleted!",
+                        text: "The collaborator has been deleted successfully.",
+                        icon: "success"
+                    });
+                    // Refresh the members list
+                    await fetchMembers(workspaceId);
+                } else {
+                    // Show failure message
+                    await swalWithBootstrapButtons.fire({
+                        title: "Failed!",
+                        text: resultData.message || "Failed to delete the collaborator.",
+                        icon: "error"
+                    });
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Show error message
                 await swalWithBootstrapButtons.fire({
-                    title: "Failed!",
-                    text: resultData.message || "Failed to delete the collaborator.",
+                    title: "Error!",
+                    text: "An error occurred while deleting the collaborator.",
                     icon: "error"
                 });
             }
-        } catch (error) {
-            console.error('Error:', error);
-            // Show error message
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            // Show cancellation message
             await swalWithBootstrapButtons.fire({
-                title: "Error!",
-                text: "An error occurred while deleting the collaborator.",
+                title: "Cancelled",
+                text: "The collaborator deletion was cancelled.",
                 icon: "error"
             });
         }
-    } else if (result.dismiss === Swal.DismissReason.cancel) {
-        // Show cancellation message
-        await swalWithBootstrapButtons.fire({
-            title: "Cancelled",
-            text: "The collaborator deletion was cancelled.",
-            icon: "error"
-        });
     }
-}
 
 // Dummy function to simulate fetching members, replace with your actual function
-async function fetchMembers(workspaceId) {
-    // Simulate an API call or other operation to refresh the members list
-    console.log(`Fetching members for workspace ID: ${workspaceId}`);
-    // Implementation goes here...
-}
+    async function fetchMembers(workspaceId) {
+        // Simulate an API call or other operation to refresh the members list
+        console.log(`Fetching members for workspace ID: ${workspaceId}`);
+        // Implementation goes here...
+    }
 
 
     // Initial render
@@ -398,6 +404,6 @@ async function fetchMembers(workspaceId) {
     });
 }
 
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     fetchRecentlyViewedWorkspaces();
-    });
+});
