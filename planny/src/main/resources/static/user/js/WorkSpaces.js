@@ -145,7 +145,6 @@ async function fetchWorkspaceIds() {
         throw error;
     }
 }
-
 fetchWorkspaceIds()
     .then(response => {
         const workspaceIds = response.data; // Lấy mảng workspaceIds từ trường 'data' của response
@@ -163,54 +162,10 @@ fetchWorkspaceIds()
     })
     .catch(error => console.error('Error fetching and updating workspaceId:', error));
 
-async function saveBoard(workspaceId) {
-    try {
-        const boardName = document.getElementById('boardName').value;
-        const shortName = document.getElementById('shortNameBoard').value;
-        const slugUrl = document.getElementById('slugUrl').value;
-        const visibility = document.getElementById('visibility').value;
-        if (!workspaceId) {
-            console.error('workSpaceId is null or undefined.');
-            return;
-        }
-        const response = await axios.post('/api-public/board/saveAllBoard', {
-            workSpaceId: parseInt(workspaceId),
-            boardName: boardName,
-            shortName: shortName,
-            slugUrl: slugUrl,
-            visibility: visibility
-        });
-        $('#staticBackdrop').modal('hide');
-        Swal.fire({
-            position: 'between',
-            icon: 'success',
-            title: 'Lưu thành công',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        setTimeout(() => {
-            window.location.reload();
-        }, 1500);
-    } catch (error) {
-        verificationForm();
-        console.error('Error saving board:', error);
-        throw error;
-    }
-}
-
-const showErrorAlert = (message) => {
-    Swal.fire({
-        icon: "error",
-        title: "Lỗi",
-        text: message,
-    });
-};
-
 const verificationForm = () => {
     const boardName = document.getElementById('boardName').value;
     const shortNameBoard = document.getElementById('shortNameBoard').value;
-    const slugUrl = document.getElementById('slugUrl').value;
-
+    let slugUrl = document.getElementById('slugUrl').value;
     if (boardName === '') {
         showErrorAlert("Vui lòng nhập board name!");
         document.getElementById('boardName').focus();
@@ -219,12 +174,12 @@ const verificationForm = () => {
         showErrorAlert("Vui lòng nhập short name!");
         document.getElementById('shortNameBoard').focus();
         return false;
-    } else if (slugUrl === '') {
-        showErrorAlert("Vui lòng nhập slug URL!");
-        document.getElementById('slugUrl').focus();
-        return false;
     }
-
+    else if (slugUrl === '') {
+        // Tạo slugUrl từ shortName nếu slugUrl không được nhập
+        slugUrl = shortNameBoard.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+        document.getElementById('slugUrl').value = slugUrl;
+    }
     return true;
 };
 
