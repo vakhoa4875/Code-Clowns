@@ -10,10 +10,9 @@ import codeclowns.planny.planny.service.AccountService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api-public/account")
@@ -21,8 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AccountApi {
     private final AccountService accountService;
-
-    @PostMapping("/register")
+@PostMapping("/register")
     public ResponseObject<?> doPostRegister(@RequestBody AccountDto accountDto) {
         var response = new ResponseObject<>();
         try {
@@ -30,6 +28,12 @@ public class AccountApi {
             if (status.equals(RegisterStatus.SUCCEED)) {
                 response.setStatus(BasicApiConstant.SUCCEED.getStatus());
                 response.setMessage(status.getStateDescription());
+            } else if (status.equals(RegisterStatus.PENDING)) {
+                // Gửi email xác nhận
+                String link = "http://localhost:8080/api-public/account/verify?email=" + accountDto.getEmail();
+                accountService.sendVerificationEmail(accountDto.getEmail(), link);
+                response.setStatus(RegisterStatus.PENDING.getStateDescription());
+                response.setMessage("Verification email sent to " + accountDto.getEmail());
             } else {
                 response.setStatus(BasicApiConstant.FAILED.getStatus());
                 response.setMessage(status.getStateDescription());
@@ -40,4 +44,16 @@ public class AccountApi {
         }
         return response;
     }
+
+    @GetMapping("/verify")
+    public ResponseEntity<?> verifyUser(@RequestParam("email") String email) {
+        RegisterStatus status = accountService.confirmAccount(email);
+        if (status == RegisterStatus.SUCCEED) {
+            return ResponseEntity.ok("User verified successfully.");
+        } else {
+            return ResponseEntity.badRequest().body("Verification failed.");
+        }
+    }
+
 }
+

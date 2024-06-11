@@ -8,8 +8,12 @@ import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.service.AccountService;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
     private final HttpSession session;
+     private final JavaMailSender mailSender;
 
     @Override
     public LoginStatus login(AccountDto accountDto) {
@@ -39,6 +44,27 @@ public class AccountServiceImpl implements AccountService {
         if (accountRepository.findByEmailOrUsername(accountDto.getEmail(), accountDto.getUsername()) != null) {
             return RegisterStatus.ACCOUNT_EXISTED;
         }
+        savePendingAccount(accountDto);
+        return RegisterStatus.PENDING;
+    }
+
+    @Override
+    public Optional<AccountE> findAccountByUsername(String username) {
+        var account = accountRepository.findAccountByUsernameOrEmailAndIsEnabledTrue(username, username);
+        return Optional.of(account);
+    }
+
+    @Override
+    public void savePendingAccount(AccountDto accountDto) {
+          session.setAttribute("PENDING_ACCOUNT_" + accountDto.getEmail(), accountDto);
+    }
+
+    @Override
+    public RegisterStatus confirmAccount(String email) {
+        AccountDto accountDto = (AccountDto) session.getAttribute("PENDING_ACCOUNT_" + email);
+        if (accountDto == null) {
+            return RegisterStatus.FAILED;
+        }
         try {
             accountRepository.insertAccountAndUser(
                     accountDto.getUsername(),
@@ -47,6 +73,7 @@ public class AccountServiceImpl implements AccountService {
                     accountDto.getSub(),
                     accountDto.getIsEnabled(),
                     accountDto.getFullName());
+            session.removeAttribute("PENDING_ACCOUNT_" + email);
             return RegisterStatus.SUCCEED;
         } catch (Exception e) {
             return RegisterStatus.FAILED;
@@ -54,8 +81,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Optional<AccountE> findAccountByUsername(String username) {
-        var account = accountRepository.findAccountByUsernameOrEmailAndIsEnabledTrue(username, username);
-        return Optional.of(account);
+    public void sendVerificationEmail(String to, String link) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+        helper.setTo(to);
+        helper.setSubject("Verify your email address");
+        helper.setText("<p>Please click the link below to verify your email address:</p>" +
+                "<a href=\"" + link + "\">Verify</a>", true);
+        mailSender.send(message);
     }
 }
