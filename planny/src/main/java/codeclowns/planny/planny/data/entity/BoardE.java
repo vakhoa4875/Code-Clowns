@@ -42,7 +42,7 @@ public class BoardE {
     @JoinColumn(name = "workspace_id", nullable = false)
     private WorkSpaceE workSpace;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<ListE> list;
 

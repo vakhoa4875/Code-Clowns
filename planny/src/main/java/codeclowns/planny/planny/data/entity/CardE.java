@@ -1,5 +1,6 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,6 +56,7 @@ public class CardE {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "list_id")
+    @JsonIgnore
     private ListE list;
 
     @OneToMany(mappedBy = "card", cascade = {
