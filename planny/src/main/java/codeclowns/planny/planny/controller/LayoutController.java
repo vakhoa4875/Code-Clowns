@@ -38,7 +38,7 @@ public class LayoutController {
     public String doGetLoginSuccess() {
         return "redirect:/";
     }
-     @GetMapping("/verify")
+     @GetMapping("/verify/**")
     public String doGetVery() {
         return "user/layout/body/login/verify";
     }

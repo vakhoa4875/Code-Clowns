@@ -55,6 +55,7 @@ const btnRegister = async () => {
     }
     try {
         let { data : response } = await axios.post('/api-public/account/register', dataApiRegister);
+        console.dir(response);
         if (response.status === 'PENDING') {
             Swal.fire({
                 title: 'Thành công!',
