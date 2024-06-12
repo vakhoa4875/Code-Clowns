@@ -41,7 +41,7 @@ public class MemberE {
             CascadeType.DETACH, CascadeType.REFRESH
     })
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private UserE user;
 
     @OneToMany(mappedBy = "member", cascade = {

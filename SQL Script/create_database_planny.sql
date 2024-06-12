@@ -66,20 +66,54 @@ create table [List]
     board_id        int foreign key references [Board] (board_id)
 );
 
-create table [Card]
+create table Card
 (
-    card_id      int identity primary key,
-    title        nvarchar(128) not null,
-    description  nvarchar(255),
-    cover        varchar(128),
-    start_date   datetime,
-    due_date     datetime,
-    is_completed bit default 0,
-    short_name   varchar(63) unique,
-    slug_url     varchar(63) unique,
-    is_enabled   bit default 1,
-    list_id      int foreign key references [List] (list_id)
-);
+    card_id        int identity
+        primary key,
+    title          nvarchar(128) not null,
+    description    nvarchar(255),
+    cover          varchar(128),
+    start_date     datetime,
+    due_date       datetime,
+    is_completed   bit default 0,
+    short_name     varchar(63)
+        unique,
+    slug_url       varchar(63)
+        unique,
+    is_enabled     bit default 1,
+    list_id        int
+        references List,
+    ordinal_number int
+)
+go
+
+create   trigger afterDisableCard
+    on Card
+    after update
+    as
+begin
+    --         declare @isEnabled bit = 1 , @cardId int;
+--         select @isEnabled = 0, @cardId = i.card_id
+--         from inserted i
+--         join deleted d on d.card_id = i.card_id
+--         where d.is_enabled <> i.is_enabled
+--         and i.is_enabled = 0;
+--         if (@isEnabled = 0)
+--         begin
+--             update Card
+--             set ordinal_number = -1
+--             where card_id = @cardId;
+--         end
+    UPDATE c
+    SET c.ordinal_number = -1
+    FROM Card c
+             INNER JOIN inserted i ON c.card_id = i.card_id
+             INNER JOIN deleted d ON c.card_id = d.card_id
+    WHERE d.is_enabled = 1
+      AND i.is_enabled = 0;
+end
+go
+
 
 create table [Collaborator]
 (
@@ -128,6 +162,7 @@ go
 -- end
 -- go
 drop trigger if exists newAccountAsNewUser;
+go
 CREATE OR ALTER PROCEDURE InsertAccountAndUser
     @username NVARCHAR(63),
     @password NVARCHAR(127),

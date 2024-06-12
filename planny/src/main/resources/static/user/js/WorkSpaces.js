@@ -84,9 +84,14 @@ displayWorkSpaces();
 
 async function fetchBoards() {
     try {
-        const response = await axios.get('/api-public/board/getEnableAllBoard');
+        const response = await axios.get('/api-public/board/getEnableAllBoard')
+        console.dir(response);
+            // .then(resp => {
+            //     console.dir(resp.data);
+            // });
         // console.log(response.data);  // Kiểm tra dữ liệu trả về từ API
         const boards = response.data.data; // Điều chỉnh theo cấu trúc dữ liệu thực tế
+        console.dir(boards);
         if (!Array.isArray(boards)) {
             throw new Error("Dữ liệu trả về không phải là mảng");
         }
