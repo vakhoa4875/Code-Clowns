@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts Roboto -->
@@ -18,74 +19,40 @@
     <!-- Custom styles -->
     <link rel="stylesheet" th:href="@{/user/css/style.css}">
     <link rel="stylesheet" th:href="@{/user/css/backround.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- BOX ICONS CSS-->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="shortcut icon" th:href="@{/user/media/phoenix-squadron.svg}" type="image/x-icon">
     <title>Không gian làm việc</title>
-    <style>
-        .dongChu {
-            text-align: center; /* Horizontally center the text */
-            line-height: 100px; /* Adjust line-height to vertically center the text */
-            height: 100px; /* Set height to match the height of the parent container */
-            margin-left: 50px;
-        }
-    </style>
 </head>
 <body>
 <div th:insert="~{user/common/_header:: header}"></div>
-<main th:fragment="table" id="intro" class="bg-image mt-4" style="height: 100vh;">
+<main th:fragment="table" id="intro" class="bg-image" style="height: 100vh;">
     <div class="mask">
         <!-- Side-Nav -->
         <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100%;">
             <div class="row col-md-12  justify-content-center">
                 <div th:replace="~{user/common/_sidebar::sidebar}"></div>
                 <div class="col-md-7">
-                    <h5><i class="fa fa-users " aria-hidden="true"></i>Team</h5>
-                    <div class="dropdown mb-2">
-                        <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton2"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false" style="opacity: 0.9;font-size: 13px;">
-                            Visibility
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><a class="dropdown-item active" href="#">Public</a></li>
-                            <li><a class="dropdown-item" href="#">Private</a></li>
-                            <li><a class="dropdown-item" href="#">Workspace</a></li>
-                        </ul>
-                    </div>
-                    <h6><i class="fa fa-user mt-2 me-2" aria-hidden="true"></i>Đã xem gần đây</h6>
-
-                    <div class="col-12 bg-light">
+<!--                    <h5><i class="fa fa-users " aria-hidden="true"></i>Team</h5>-->
+<!--                    <div class="dropdown mb-2">-->
+<!--                        <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton2"-->
+<!--                                data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false" style="opacity: 0.9;font-size: 13px;">-->
+<!--                            Visibility-->
+<!--                        </button>-->
+<!--                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">-->
+<!--                            <li><a class="dropdown-item active" href="#">Public</a></li>-->
+<!--                            <li><a class="dropdown-item" href="#">Private</a></li>-->
+<!--                            <li><a class="dropdown-item" href="#">Workspace</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                    <div class="col-12 bg-transparent">
+                        <h6><i class="fa-solid fa-house-laptop mt-2 me-2" aria-hidden="true"></i>CÁC KHÔNG GIAN LÀM VIỆC CỦA BẠN</h6>
                         <!-- Content Area -->
-                        <div class="task_board mt-3 row">
-                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
-                                <div class="containerss">
-                                    <div class="hinhChuNhat"
-                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
-                                    <div class="dongChu" style="font-size: 15px;">Task plan</div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
-                                <div class="containerss">
-                                    <div class="hinhChuNhat"
-                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
-                                    <div class="dongChu" style="font-size: 15px;">Create</div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
-                                <div class="containerss">
-                                    <div class="hinhChuNhat"
-                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
-                                    <div class="dongChu" style="font-size: 15px;">Task plan</div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='/board'">
-                                <div class="containerss">
-                                    <div class="hinhChuNhat"
-                                         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/320x480/842930275c7de22dfabb6bb21b3cb8cd/photo-1590978553854-f1c0fe76ca70.jpg?favicon); width: 100%; height: 100px; background-size: cover;"></div>
-                                    <div class="dongChu" style="font-size: 15px;">Create</div>
-                                </div>
-                            </div>
+                        <div class="task_board mt-3 row" id="workspacesContainer">
                         </div>
                     </div>
 
@@ -170,7 +137,7 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="slugUrl" class="form-label">Slug Url</label>
-                                <input type="text" class="form-control" id="slugUrl" required>
+                                <input type="text" class="form-control" id="slugUrl" readonly>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="visibility" class="form-label">Visibility</label>

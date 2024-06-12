@@ -48,7 +48,7 @@ public class CardE {
     private Integer ordinalNumber;
 
     @Column(name = "is_enabled")
-    private boolean isEnabled ;
+    private Boolean isEnabled ;
 
     @ManyToOne(cascade = {
             CascadeType.DETACH,
