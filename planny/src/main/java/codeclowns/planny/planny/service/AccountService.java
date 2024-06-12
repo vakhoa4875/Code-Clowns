@@ -13,5 +13,5 @@ public interface AccountService {
     Optional<AccountE> findAccountByUsername(String username);
     void savePendingAccount(AccountDto accountDto);
     RegisterStatus confirmAccount(String email);
-    void sendVerificationEmail(String to, String link)throws MessagingException;
+    void sendVerificationEmail(String to, String email)throws MessagingException;
 }

@@ -77,12 +77,12 @@ public class AccountServiceImpl implements AccountService {
     }
     @Override
     public void sendVerificationEmail(String to, String link) throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setTo(to);
-        helper.setSubject("Xác Nhận Tài Khoản");
-        helper.setText("<p>Vui lòng click vào link xác nhận  :</p>" +
-                "<a href=\"" + link + "\">Verify</a>", true);
-        mailSender.send(message);
+       MimeMessage message = mailSender.createMimeMessage();
+    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+    helper.setTo(to);
+    helper.setSubject("Xác Nhận Tài Khoản");
+    helper.setText("<p>Vui lòng click vào link xác nhận:</p>" +
+            "<a href=\"" + link + "\">Verify</a>", true);
+    mailSender.send(message);
     }
 }

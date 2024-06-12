@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api-public/account")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:6868/verify")
 public class AccountApi {
     private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
-
     @PostMapping("/register")
     public ResponseObject<?> doPostRegister(@RequestBody AccountDto accountDto) {
         var response = new ResponseObject<>();
@@ -28,12 +28,10 @@ public class AccountApi {
                 response.setStatus(BasicApiConstant.SUCCEED.getStatus());
                 response.setMessage(status.getStateDescription());
             } else if (status.equals(RegisterStatus.PENDING)) {
-                // Gửi email xác nhận
-                String link = "http://localhost:6868/verify/"
-                        + passwordEncoder.encode(accountDto.getEmail()).substring(7);
-                accountService.sendVerificationEmail(accountDto.getEmail(), link);
-                response.setStatus(RegisterStatus.PENDING.toString());
-                response.setMessage("Verification email sent to " + accountDto.getEmail());
+               String link = "http://localhost:6868/verify";
+            accountService.sendVerificationEmail(accountDto.getEmail(), link);
+            response.setStatus(RegisterStatus.PENDING.toString());
+            response.setMessage("Verification email sent to " + accountDto.getEmail());
             } else {
                 response.setStatus(BasicApiConstant.FAILED.toString());
                 response.setMessage(status.getStateDescription());
