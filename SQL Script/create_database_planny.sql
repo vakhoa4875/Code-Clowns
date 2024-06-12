@@ -128,13 +128,12 @@ go
 -- end
 -- go
 drop trigger if exists newAccountAsNewUser;
-CREATE OR ALTER PROCEDURE InsertAccountAndUser
-    @username NVARCHAR(63),
-    @password NVARCHAR(127),
-    @email NVARCHAR(63),
-    @sub NVARCHAR(63),
-    @isEnabled BIT,
-    @fullName NVARCHAR(63)
+CREATE OR ALTER PROCEDURE InsertAccountAndUser @username NVARCHAR(63),
+                                               @password NVARCHAR(127),
+                                               @email NVARCHAR(63),
+                                               @sub NVARCHAR(63),
+                                               @isEnabled BIT,
+                                               @fullName NVARCHAR(63)
 AS
 BEGIN
     -- thêm dlieu vao account
@@ -149,16 +148,43 @@ BEGIN
 END;
 GO
 ----- /CREATE OTHER DBO -----
-
+alter table Card
+    add ordinal_number int
+go
+create or alter trigger afterDisableCard
+    on Card
+    after update
+    as
+begin
+    --         declare @isEnabled bit = 1 , @cardId int;
+--         select @isEnabled = 0, @cardId = i.card_id
+--         from inserted i
+--         join deleted d on d.card_id = i.card_id
+--         where d.is_enabled <> i.is_enabled
+--         and i.is_enabled = 0;
+--         if (@isEnabled = 0)
+--         begin
+--             update Card
+--             set ordinal_number = -1
+--             where card_id = @cardId;
+--         end
+    UPDATE c
+    SET c.ordinal_number = -1
+    FROM Card c
+        INNER JOIN inserted i ON c.card_id = i.card_id
+        INNER JOIN deleted d ON c.card_id = d.card_id
+    WHERE d.is_enabled = 1
+      AND i.is_enabled = 0;
+end
 ----- ALTER LOGIN CREDENTIAL -----
-ALTER LOGIN sa WITH PASSWORD = 'root';
-INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
-VALUES 
-('Admin', 'admin_user', 'admin@example.com', 'Admin User', 'admin_avatar.jpg', 1, 1)
+    ALTER LOGIN sa WITH PASSWORD = 'root';
+    INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
+    VALUES ('Admin', 'admin_user', 'admin@example.com', 'Admin User', 'admin_avatar.jpg', 1, 1)
 -- Chèn dữ liệu mẫu vào bảng Collaborator
-INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
-VALUES 
-('Member', 'member_usserr', 'memberad1@example.com', 'Member User 1', 'member1_avatar.jpg', 5, 1),
-('Member', 'member_user2', 'member2@example.com', 'Member User 2', 'member2_avatar.jpg', 3, 1);
+    INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
+    VALUES ('Member', 'member_usserr', 'memberad1@example.com', 'Member User 1', 'member1_avatar.jpg', 5, 1),
+           ('Member', 'member_user2', 'member2@example.com', 'Member User 2', 'member2_avatar.jpg', 3, 1);
 
-select * from Collaborator where workspace_id=1
+    select *
+    from Collaborator
+    where workspace_id = 1

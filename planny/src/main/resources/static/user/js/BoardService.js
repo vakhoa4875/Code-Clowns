@@ -73,7 +73,7 @@ class BoardService {
                 <div class=" border-0 mb-2 d-flex justify-content-center">
                     <div>
                         <button type="button" class="btn btn-outline-dark border-0 me-2 add"
-                                data-ripple-color="dark">
+                                data-ripple-color="dark" onclick="boardService.createCard(${list.listId})">
                             <i class="fa-solid fa-plus"></i> Add another card
                         </button>
                     </div>
@@ -83,6 +83,7 @@ class BoardService {
             listContainer.append(listHtml);
         })
     }
+
     handleClassChange = (mutationsList) => {
         for (let mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -96,9 +97,13 @@ class BoardService {
                     this.sortableStatus--;
                 }
                 if (this.sortableStatus === 0) {
-                    this.updateOrdinalNumbers().then(() => {
-                        this.sortableStatus = -1;
-                    });
+                    if (target.classList.contains('a-list')) {
+                        this.updateOrdinalNumbers().then(() => {
+                            this.sortableStatus = -1;
+                        });
+                    } else if (target.classList.contains('task')) {
+
+                    }
                 }
             }
         }
@@ -129,6 +134,32 @@ class BoardService {
                 console.error(error);
             })
     }
+
+    // updateCardOrdinalNumbers = () => {
+    //     let listIdNodes = document.querySelectorAll('.list-id');
+    //     let listNodes = document.querySelectorAll('.a-list');
+    //     let listIds = Array.from(listIdNodes).map(node => node.innerHTML);
+    //     let listOrdinalNumbers = Array.from(listNodes).map((node, index) => index + 1);
+    //     let requestBody = [];
+    //     if (listIds.length === listOrdinalNumbers.length) {
+    //         for (let i = 0; i < listIds.length; i++) {
+    //             requestBody.push({
+    //                 listId: listIds[i],
+    //                 ordinalNumeral: listOrdinalNumbers[i]
+    //             })
+    //         }
+    //     }
+    //     axios
+    //         .patch('/api-user/list/arrange', requestBody)
+    //         .then(response => {
+    //             let data = response.data;
+    //             console.dir(data);
+    //             // Swal.fire('success', data.message, 'success');
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         })
+    // }
 
     addEventHandler = () => {
         $('#btnCreateList').on('click', () => {
@@ -174,8 +205,14 @@ class BoardService {
         });
         const observer = new MutationObserver(this.handleClassChange);
         const config = {attributes: true};
-        const targetNodes = document.querySelectorAll('.a-list');
-        targetNodes.forEach(node => observer.observe(node, config));
+        const listNodes = document.querySelectorAll('.a-list');
+        listNodes.forEach(node => observer.observe(node, config));
+        const cardNodes = document.querySelectorAll('.task');
+        cardNodes.forEach(node => observer.observe(node, config));
+
+        window.addEventListener('beforeunload', (event) => {
+            alert('xxx');
+        })
     }
 
     updateListInfo = async (node, listId) => {
@@ -222,5 +259,43 @@ class BoardService {
                     });
             }
         })
+    }
+
+    createCard = (listId) => {
+        let requestBody = {
+
+        }
+        Swal.fire({
+            title: 'Tạo thẻ mới',
+            html: `<input type="text" id="title" class="swal2-input" placeholder="Tiêu đề">`,
+            confirmButtonText: 'Tạo',
+            focusConfirm: false,
+            preConfirm: () => {
+                const title = $('#title').val();
+                if (!title) {
+                    Swal.showValidationMessage(`Vui lòng nhập tiêu đề của thẻ mới!`);
+                }
+                return {title: title};
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.dir(result);
+                axios
+                    .post('/api-user/card/save', {
+                        title: result.value.title,
+                        listId: listId
+                    })
+                    .then(response => {
+                        console.dir(response.data);
+                        this.init();
+                        // Swal.fire('Success', 'Data has been submitted!', 'success');
+                    })
+                    .catch(error => {
+                        Swal.fire('Error', 'There was an error submitting your data', 'error');
+                    });
+            }
+        });
+        // axios
+        //     .post('api-user/card/save')
     }
 }

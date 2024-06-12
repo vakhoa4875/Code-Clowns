@@ -1,11 +1,13 @@
 package codeclowns.planny.planny.service.impl;
 
 import codeclowns.planny.planny.data.entity.BoardE;
+import codeclowns.planny.planny.data.entity.ListE;
 import codeclowns.planny.planny.exception.CustomCause;
 import codeclowns.planny.planny.exception.CustomException;
 import codeclowns.planny.planny.repository.BoardRepository;
 import codeclowns.planny.planny.repository.ListRepository;
 import codeclowns.planny.planny.service.BoardService;
+import codeclowns.planny.planny.service.CardService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class BoardServiceImpl implements BoardService {
 
     final BoardRepository boardRepository;
     final ListRepository listRepository;
+    final CardService cardService;
 
     @Override
     public List<BoardE> doGetBoardByWorkSpace(Integer workSpace_Id) throws Exception {
@@ -44,6 +47,10 @@ public class BoardServiceImpl implements BoardService {
         var board = boardRepository.findBySlugUrl(slugUrl);
         if (board == null) throw new CustomException(CustomCause.BOARD404);
         board.setList(listRepository.findByBoard(slugUrl));
+        var list = board.getList();
+        for (ListE listE : list) {
+            listE.setCardEList(cardService.getAllCardsInList(listE.getListId()));
+        }
         return board;
     }
 }
