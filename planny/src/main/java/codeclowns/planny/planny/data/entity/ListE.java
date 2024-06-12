@@ -23,8 +23,8 @@ public class ListE {
     private String title;
     @Column(name="ordinal_numeral", nullable=false) //nghia fix tu ordinal_nummeral
     private int ordinalNummeral;
-    @Column(name="is_enabled") // nghia từ fix is_enable
-    private boolean isEnabled=true;
+    @Column(name="is_enabled", nullable = false)
+    private Boolean isEnable;
 
     @OneToMany(mappedBy = "list", cascade = {
             CascadeType.ALL,

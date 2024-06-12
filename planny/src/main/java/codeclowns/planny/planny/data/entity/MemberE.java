@@ -1,5 +1,6 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,9 +33,10 @@ public class MemberE {
     private String avatar;
     @Column(name="fullname", length = 63)
     private String fullName;
-    @Column(name="is_enabled")
-    private boolean isEnabled; // Nghia fix isEnable
+    @Column(name="is_enabled", nullable = false)
+    private Boolean isEnable=true;
 
+    @JsonIgnore
     @ManyToOne ( fetch = FetchType.LAZY,cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
@@ -42,11 +44,13 @@ public class MemberE {
      @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = {
             CascadeType.ALL,
     })
     private List<CardConductorE> cardConductorEList;
 
+    @JsonIgnore
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @JoinColumn(name="board_id", nullable=false)
    private BoardE board;

@@ -126,7 +126,39 @@ begin
     select i.account_id, i.username, i.email
     from inserted i
 end
+go
+drop trigger if exists newAccountAsNewUser;
+CREATE OR ALTER PROCEDURE InsertAccountAndUser
+    @username NVARCHAR(63),
+    @password NVARCHAR(127),
+    @email NVARCHAR(63),
+    @sub NVARCHAR(63),
+    @isEnabled BIT,
+    @fullName NVARCHAR(63)
+AS
+BEGIN
+    -- thêm dlieu vao account
+    INSERT INTO [Account] (username, password, email, sub, is_enabled)
+    VALUES (@username, @password, @email, @sub, @isEnabled);
+    -- gan id vua them vao @accountId
+    DECLARE @accountId INT;
+    SET @accountId = SCOPE_IDENTITY()
+    -- Chèn dữ liệu vào bảng User với accountId vừa thêm
+    INSERT INTO [User] (user_id, username, email, fullname)
+    VALUES (@accountId, @username, @email, @fullName);
+END;
+GO
 ----- /CREATE OTHER DBO -----
 
 ----- ALTER LOGIN CREDENTIAL -----
 ALTER LOGIN sa WITH PASSWORD = 'root';
+INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
+VALUES 
+('Admin', 'admin_user', 'admin@example.com', 'Admin User', 'admin_avatar.jpg', 1, 1)
+-- Chèn dữ liệu mẫu vào bảng Collaborator
+INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
+VALUES 
+('Member', 'member_usserr', 'memberad1@example.com', 'Member User 1', 'member1_avatar.jpg', 5, 1),
+('Member', 'member_user2', 'member2@example.com', 'Member User 2', 'member2_avatar.jpg', 3, 1);
+
+select * from Collaborator where workspace_id=1

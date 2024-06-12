@@ -11,12 +11,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/api-public/board")
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping("/api-public/board")
 public class BoardApi {
+
     private final BoardService boardService;
 
     @GetMapping("/getEnableAllBoard")
@@ -47,5 +54,37 @@ public class BoardApi {
             log.error("Failed when calling API: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resultApi);
         }
+    }
+
+    @GetMapping("/getInformationBoard")
+    public ResponseObject<?> getInformationWorkSpaceByBoard(@RequestParam Integer workspaceId){
+        ResponseObject resultApi=new ResponseObject();
+        try {
+            resultApi.setData(boardService.doGetBoardByWorkSpace(workspaceId));
+            resultApi.setStatus("success");
+            resultApi.setMessage("success");
+        } catch (Exception e){
+            resultApi.setStatus(BasicApiConstant.FAILED.getStatus());
+            resultApi.setMessage(BasicApiConstant.ERROR.getStatus());
+            log.error("Fail when call api /api-public/board/getInformationBoard",e);
+        }
+      return resultApi;
+    }
+
+     @GetMapping("/getBoardsByWorkspace")
+    public ResponseObject<?> getBoardsByWorkspace(@RequestParam Integer workspaceId){
+        ResponseObject resultApi = new ResponseObject();
+        try {
+            // Gọi phương thức service để lấy danh sách các bảng trong workspace
+            resultApi.setData(boardService.findBoardWithMembersInWorkspace(workspaceId));
+            resultApi.setStatus("success");
+            resultApi.setMessage("Successfully retrieved boards for workspace with id: " + workspaceId);
+        } catch (Exception e){
+            // Xử lý nếu có lỗi xảy ra
+            resultApi.setStatus(BasicApiConstant.FAILED.getStatus());
+            resultApi.setMessage("Failed to retrieve boards for workspace with id: " + workspaceId);
+            log.error("Failed when calling API /api-public/board/getBoardsByWorkspace", e);
+        }
+        return resultApi;
     }
 }

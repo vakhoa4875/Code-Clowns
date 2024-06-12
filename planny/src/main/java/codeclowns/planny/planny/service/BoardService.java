@@ -9,4 +9,6 @@ import java.util.List;
 public interface BoardService {
     public List<BoardE> getAllEnabledBoard(BoardDto boardDto) throws Exception;
     public BoardE saveBoard(BoardDto boardDto ) throws Exception;
+    List<BoardE> doGetBoardByWorkSpace(Integer workSpace_Id) throws Exception;
+    List<Object[]> findBoardWithMembersInWorkspace(Integer workspaceId) throws Exception;
 }
