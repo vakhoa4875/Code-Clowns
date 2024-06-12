@@ -18,13 +18,19 @@ class ChangePassword {
             newPassword: newPassword,
             confirmNewPassword: confirmNewPassword
         })
-        if(response.data) {
+        if(response.status === 'Thành công') {
             Swal.fire({
                 icon: 'success',
                 title: 'Thành công',
                 text: response.message,
             }).then(() => {
                 window.location.href = '/home'
+            })
+        } else if(response.status === 'Thất bại') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: response.message,
             })
         } else {
             Swal.fire({
