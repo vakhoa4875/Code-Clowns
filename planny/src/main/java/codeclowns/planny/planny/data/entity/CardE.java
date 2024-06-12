@@ -38,7 +38,7 @@ public class CardE {
     private Date dueDate;
 
     @Column(name = "is_completed")
-    private boolean isCompleted;
+    private Boolean isCompleted;
 
     @Column(name = "short_name", length = 63, unique = true)
     private String shortName;
@@ -47,7 +47,7 @@ public class CardE {
     private String slugUrl;
 
     @Column(name = "is_enabled")
-    private boolean isEnabled ;
+    private Boolean isEnabled ;
 
     @ManyToOne(cascade = {
             CascadeType.DETACH,

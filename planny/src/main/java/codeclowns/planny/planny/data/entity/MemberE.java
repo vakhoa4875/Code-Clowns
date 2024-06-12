@@ -34,7 +34,7 @@ public class MemberE {
     @Column(name="fullname", length = 63)
     private String fullName;
     @Column(name = "is_enabled")
-    private boolean isEnabled; // Nghia fix isEnable
+    private Boolean isEnabled; // Nghia fix isEnable
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,

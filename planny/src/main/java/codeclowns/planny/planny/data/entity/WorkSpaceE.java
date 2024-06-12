@@ -35,7 +35,7 @@ public class WorkSpaceE {
     private String description;
 
     @Column(name = "is_enabled")
-    private boolean isEnabled = true;
+    private Boolean isEnabled = true;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,

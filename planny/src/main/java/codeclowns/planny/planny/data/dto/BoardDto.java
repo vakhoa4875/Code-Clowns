@@ -16,7 +16,7 @@ public class BoardDto {
     private String shortName;
     private String slugUrl;
     private String visibility;
-    private boolean isEnabled = true;
+    private Boolean isEnabled = true;
     private Integer workSpaceId;
 
     public BoardDto convertToDto(BoardE boardE) {
@@ -26,7 +26,7 @@ public class BoardDto {
         boardDto.setShortName(boardE.getShortName());
         boardDto.setSlugUrl(boardE.getSlugUrl());
         boardDto.setVisibility(boardE.getVisibility());
-        boardDto.setEnabled(boardE.getIsEnabled());
+        boardDto.setIsEnabled(boardE.getIsEnabled());
         return boardDto;
     }
 }

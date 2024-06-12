@@ -58,7 +58,7 @@ public class BoardServiceImpl implements BoardService {
                 .shortName(dto.getShortName())
                 .slugUrl(dto.getSlugUrl())
                 .visibility(dto.getVisibility())
-                .isEnabled(dto.isEnabled())
+                .isEnabled(dto.getIsEnabled())
                 .workSpace(workSpace)
                 .build();
     }
