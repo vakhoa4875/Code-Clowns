@@ -28,31 +28,39 @@
                 <div class="row">
                     <!-- Right elements -->
                     <div class="col-md-5 d-flex justify-content-center justify-content-md-start align-items-center d-none d-lg-flex">
-                        <h3><a href="/home" class="text-reset text-decoration-none d-flex flex-row gap-2"><i class="fa-brands fa-phoenix-squadron"></i>Planny</a></h3>
+                        <h3><a href="/home" class="text-reset text-decoration-none d-flex flex-row gap-2"><i
+                                class="fa-brands fa-phoenix-squadron"></i>Planny</a></h3>
                         <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="padding-top: 10px; padding-bottom: 10px;">
+                            <button class="btn dropdown-toggle ms-3" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    style="padding-top: 10px; padding-bottom: 10px;">
                                 Các không gian làm việc
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="workspaceDropdown" id="workspaceDropdownMenu">
                             </ul>
                         </div>
-
                         <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-expanded="false" style="opacity: 0.9; font-size: 17px;">
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton6"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    style="opacity: 0.9; font-size: 17px;">
                                 Tạo mới
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="workspaceDropdown">
                                 <li>
-                                    <button class="btn addTaoMoi dropdown-item" type="button" id="dropdownMenuButton8">Tạo list</button>
-                                </li>
-                                <li>
-                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Tạo Workspaces
+                                    <button class="btn addTaoMoi dropdown-item" type="button" id="btnCreateList">
+                                        Tạo danh sách
                                     </button>
                                 </li>
                                 <li>
-                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        Tạo Board
+                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                        Tạo không gian làm việc
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop">
+                                        Tạo bảng
                                     </button>
                                 </li>
                             </ul>
@@ -63,14 +71,16 @@
                     <div class="col-lg-7 d-flex justify-content-center justify-content-md-end align-items-center">
                         <form class="d-flex input-group w-auto mb-md-0 px-3">
                             <input autocomplete="off" type="search" class="form-control" placeholder="Search"/>
-                            <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
+                            <span class="input-group-text border-0 d-none d-lg-flex"><i
+                                    class="fas fa-search"></i></span>
                         </form>
                         <i class="fas fa-bell px-3" style="font-size: 24px"></i>
                         <a class="text-reset mr-3 px-3" href="#">
                             <i class="fas fa-info-circle" style="font-size: 24px"></i>
                         </a>
                         <a href="/login" class="text-reset px-3">
-                            <i class="fas fa-user" style="font-size: 24px" data-bs-toggle="popover" title="Popover Title" data-bs-content="This is the content of the popover."></i>
+                            <i class="fas fa-user" style="font-size: 24px" data-bs-toggle="popover"
+                               title="Popover Title" data-bs-content="This is the content of the popover."></i>
                         </a>
                     </div>
                 </div>

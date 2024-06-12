@@ -33,26 +33,25 @@ public class MemberE {
     private String avatar;
     @Column(name="fullname", length = 63)
     private String fullName;
-    @Column(name="is_enabled", nullable = false)
-    private Boolean isEnabled=true;
+    @Column(name = "is_enabled")
+    private boolean isEnabled; // Nghia fix isEnable
 
-    @JsonIgnore
-    @ManyToOne ( fetch = FetchType.LAZY,cascade = {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-     @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private UserE user;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = {
             CascadeType.ALL,
     })
     private List<CardConductorE> cardConductorEList;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "board_id", nullable = false)
     @JsonIgnore
-   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   @JoinColumn(name="board_id", nullable=false)
-   private BoardE board;
+    private BoardE board;
 
 }

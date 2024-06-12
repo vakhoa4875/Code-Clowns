@@ -15,6 +15,18 @@
     <link rel="stylesheet" th:href="@{/user/css/backround.css}">
     <!-- BOX ICONS CSS-->
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let boardService = {};
+    </script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            boardService = new BoardService();
+            boardService.init();
+        })
+    </script>
 </head>
 <body>
 <header class="mb-4 fixed-top">
@@ -32,7 +44,8 @@
                             th:src="@{/user/media/sony-playstation.svg}"
                             alt="Logo" width="48" height="48"
                             class="d-inline-block align-text-top object-fit-cover rounded-1 me-2">
-                    <span class="ms-1 text-black" style="font-size: 18px; font-weight: 500;">Planny</span>
+                    <span class="ms-1 text-black" id="boardTitle"
+                          style="font-size: 18px; font-weight: 500;"></span>
                 </a>
                 <a href="#" class="nav-link">
                     <i class="fa-brands fa-flipboard"></i> Bảng
@@ -52,10 +65,11 @@
         <div class="my-container active-cont bg-transparent" style="background-color: white;">
             <!-- Top Nav -->
             <nav class="navbar top-navbar navbar-light px-5 mt-3 bg-grey">
-                <a class="btn border-0 rounded-4 px-3 btn-light" id="menu-btn"><i class="fa-solid fa-caret-right"></i></a>
+                <a class="btn border-0 rounded-4 px-3 btn-light" id="menu-btn"><i
+                        class="fa-solid fa-caret-right"></i></a>
                 <div class="container-fluid d-flex align-items-center">
-                    <input type="text" value="Board name" class="border-0 bg-grey text-center rounded-1" size="10"
-                           style="font-size: 18px; font-weight: bold;">
+                    <input type="text" id="boardName" class="border-0 bg-grey text-center rounded-1"
+                           size="10" style="font-size: 18px; font-weight: bold;">
                     <!-- <span style="font-size: 18px; font-weight: bold;">Board</span>
                     <input type="text" value="xxxx"> -->
                     <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -73,204 +87,9 @@
                     </div>
                 </div>
             </nav>
-            <section class="d-flex align-items-start list-container" data-perfect-scrollbar="true" style="position: relative "
+            <section class="d-flex align-items-start list-container" data-perfect-scrollbar="true"
+                     style="position: relative;" id="listContainer"
                      data-sortable="sortable">
-                <!-- List -->
-                <div class="card  m-3 p-2 pb-0 bg-gray a-list" id="todo-lane">
-                    <!-- List name -->
-                    <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0 bg-transparent">
-                        <p class="mb-0"><strong>To Do</strong></p>
-                        <button type="button" class="btn btn-link text-reset m-0 py-0 px-2" data-ripple-color="dark">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                    <!-- List name -->
-                    <!-- Sortable items -->
-                    <div class="swim-lane" data-sortable="sortable">
-                        <!-- Card -->
-                        <div class="image_list">
-                            <div class="W21VDtqqicaQTk" data-testid="card-front-cover"
-                                 data-card-front-section="cover"
-                                 style="border-radius: 20px; height: 176.667px; max-height: 260px; background-color: rgb(190, 187, 182); background-image: url(&quot;https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x640/a76d7d4550345a1be70bb7b95cce6ed7/photo-1446511437394-36cdff3ae1b3.jpg&quot;); background-size: cover;">
-                            </div>
-                            <h5 class="text-center">hmm..</h5>
-                        </div>
-                        <div class="task sortable-item card-body rounded bg-white  mb-2 d-flex align-items-center mx-0 pe-0 py-2"
-                             draggable="true">
-                            Này là card mẫu oke chưa
-                            <button class="btn btn-outline-dark border-0 me-2 ms-auto"
-                                    data-bs-target="#exampleModalToggle"
-                                    data-bs-toggle="modal">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </button>
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task  sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 2
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 3
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 4
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 5
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 6
-                        </div>
-                        <!-- Card -->
-                    </div>
-                    <div class=" border-0 mb-2 d-flex justify-content-center">
-                        <div>
-                            <button type="button" class="btn btn-outline-dark border-0 me-2 add"
-                                    data-ripple-color="dark">
-                                <i class="fa-solid fa-plus"></i> Add another card
-                            </button>
-                        </div>
-                    </div>
-                    <!-- List button -->
-                </div>
-                <!-- List -->
-                <div class="card  m-3 p-2 pb-0" id="doing-lane">
-                    <!-- List name -->
-                    <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0">
-                        <p class="mb-0"><strong>Doing</strong></p>
-                        <button type="button" class="btn btn-link text-reset m-0 py-0 px-2" data-ripple-color="dark">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                    <!-- List name -->
-                    <!-- Sortable items -->
-                    <div class="swim-lane" data-sortable="sortable">
-                        <!-- Card -->
-                        <!--                        <div class="image_list">-->
-                        <!--                            <div class="W21VDtqqicaQTk" data-testid="card-front-cover" data-card-front-section="cover"-->
-                        <!--                                 style="border-radius: 20px; height: 176.667px; max-height: 260px; background-color: rgb(190, 187, 182); background-image: url(&quot;https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x640/a76d7d4550345a1be70bb7b95cce6ed7/photo-1446511437394-36cdff3ae1b3.jpg&quot;); background-size: cover;">-->
-                        <!--                            </div>-->
-                        <!--                            <h5 class="text-center">what is this?</h5>-->
-                        <!--                        </div>-->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2 d-flex align-items-center mx-0 pe-0 py-2"
-                             draggable="true">
-                            Này là card mẫu oke chưa
-                            <button class="btn btn-outline-dark border-0 me-2 ms-auto"
-                                    data-bs-target="#exampleModalToggle"
-                                    data-bs-toggle="modal">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </button>
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task  sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 2
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 3
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 4
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 5
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 6
-                        </div>
-                        <!-- Card -->
-                    </div>
-                    <div class=" border-0 mb-2 d-flex justify-content-center">
-                        <div>
-                            <button type="button" class="btn btn-outline-dark border-0 me-2 add"
-                                    data-ripple-color="dark">
-                                <i class="fa-solid fa-plus"></i> Add another card
-                            </button>
-                        </div>
-                    </div>
-                    <!-- List button -->
-                </div>
-                <!-- List -->
-                <div class="  card  m-3 p-2 pb-0" id="done-lane">
-                    <!-- List name -->
-                    <div class="card-header d-flex justify-content-between pl-1 pr-0 pb-3 border-0">
-                        <p class="mb-0"><strong>Done</strong></p>
-                        <button type="button" class="btn btn-link text-reset m-0 py-0 px-2" data-ripple-color="dark">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                    </div>
-                    <!-- List name -->
-                    <!-- Sortable items -->
-                    <div class="swim-lane" data-sortable="sortable">
-                        <!-- Card -->
-                        <!--                        <div class="image_list">-->
-                        <!--                            <div class="W21VDtqqicaQTk" data-testid="card-front-cover" data-card-front-section="cover"-->
-                        <!--                                 style="border-radius: 20px; height: 176.667px; max-height: 260px; background-color: rgb(190, 187, 182); background-image: url(&quot;https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x640/a76d7d4550345a1be70bb7b95cce6ed7/photo-1446511437394-36cdff3ae1b3.jpg&quot;); background-size: cover;">-->
-                        <!--                            </div>-->
-                        <!--                            <h5 class="text-center">what is this?</h5>-->
-                        <!--                        </div>-->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2 d-flex align-items-center mx-0 pe-0 py-2"
-                             draggable="true">
-                            Này là card mẫu oke chưa
-                            <button class="btn btn-outline-dark border-0 me-2 ms-auto"
-                                    data-bs-target="#exampleModalToggle"
-                                    data-bs-toggle="modal">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </button>
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task  sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 2
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 3
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 4
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 5
-                        </div>
-                        <!-- Card -->
-                        <!-- Card -->
-                        <div class="task sortable-item card-body rounded bg-white  mb-2" draggable="true">
-                            Item 6
-                        </div>
-                        <!-- Card -->
-                    </div>
-                    <div class=" border-0 mb-2 d-flex justify-content-center">
-                        <div>
-                            <button type="button" class="btn btn-outline-dark border-0 me-2 add"
-                                    data-ripple-color="dark">
-                                <i class="fa-solid fa-plus"></i> Add another card
-                            </button>
-                        </div>
-                    </div>
-                    <!-- List button -->
-                </div>
             </section>
         </div>
     </div>
@@ -381,18 +200,12 @@
     </div>
 </div>
 <!--Main layout-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- Custom scripts -->
 <script type="text/javascript" th:src="@{/user/js/dragForBoard.js}"></script>
 <script type="text/javascript" th:src="@{/user/js/nav.js}"></script>
-<script>
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)
-    })
-</script>
+<script type="text/javascript" th:src="@{/user/js/BoardService.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </body>
 </html>

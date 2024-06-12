@@ -5,6 +5,7 @@ import codeclowns.planny.planny.constant.LoginStatus;
 import codeclowns.planny.planny.data.dto.BoardDto;
 import codeclowns.planny.planny.data.entity.BoardE;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
+import codeclowns.planny.planny.exception.CustomException;
 import codeclowns.planny.planny.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,6 +86,16 @@ public class BoardApi {
             resultApi.setMessage("Failed to retrieve boards for workspace with id: " + workspaceId);
             log.error("Failed when calling API /api-public/board/getBoardsByWorkspace", e);
         }
+        return resultApi;
+    }
+
+    @GetMapping("/getBoardBySLugUrl")
+    public ResponseObject<?> doGetBoardBySlugUrl(@RequestParam String slugUrl) {
+        var resultApi = new ResponseObject<>();
+        var board = boardService.getBoardBySlugUrl(slugUrl);
+        resultApi.setData(board);
+        resultApi.setStatus("success");
+        resultApi.setMessage("Get board successfully");
         return resultApi;
     }
 }

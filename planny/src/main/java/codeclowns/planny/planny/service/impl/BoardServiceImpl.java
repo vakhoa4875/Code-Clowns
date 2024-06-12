@@ -7,9 +7,15 @@ import codeclowns.planny.planny.data.entity.WorkSpaceE;
 import codeclowns.planny.planny.repository.BoardRepository;
 import codeclowns.planny.planny.repository.WorkSpacesRepository;
 import codeclowns.planny.planny.security.service.AuthService;
+import codeclowns.planny.planny.data.entity.BoardE;
+import codeclowns.planny.planny.exception.CustomCause;
+import codeclowns.planny.planny.exception.CustomException;
+import codeclowns.planny.planny.repository.BoardRepository;
+import codeclowns.planny.planny.repository.ListRepository;
 import codeclowns.planny.planny.service.BoardService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +27,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final WorkSpacesRepository workSpaceRepository;
     private final AuthService authService;
+    private final ListRepository listRepository;
 
     public List<BoardE> getAllEnabledBoard(BoardDto boardDto) throws Exception {
         AccountE currentAccount = authService.getCurrentUser();
@@ -72,5 +79,14 @@ public class BoardServiceImpl implements BoardService {
             return listResultEntity;
         }
         return null;
+    }
+
+    @SneakyThrows
+    @Override
+    public BoardE getBoardBySlugUrl(String slugUrl) {
+        var board = boardRepository.findBySlugUrl(slugUrl);
+        if (board == null) throw new CustomException(CustomCause.BOARD404);
+        board.setList(listRepository.findByBoard(slugUrl));
+        return board;
     }
 }

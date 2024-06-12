@@ -106,7 +106,7 @@ create table [Member]
     board_id   int foreign key references [Board] (board_id)
 );
 
-create table [CardConductor]
+create table [Card_Conductor]
 (
     id            int identity primary key,
     assigned_time datetime,
@@ -117,16 +117,16 @@ go
 ----- /CREATE TABLE PHASE -----
 
 ----- CREATE OTHER DBO -----
-create or alter trigger newAccountAsNewUser
-    on [Account]
-    after insert
-    as
-begin
-    insert into [User] (user_id, username, email)
-    select i.account_id, i.username, i.email
-    from inserted i
-end
-go
+-- create or alter trigger newAccountAsNewUser
+--     on [Account]
+--     after insert
+--     as
+-- begin
+--     insert into [User] (user_id, username, email)
+--     select i.account_id, i.username, i.email
+--     from inserted i
+-- end
+-- go
 drop trigger if exists newAccountAsNewUser;
 CREATE OR ALTER PROCEDURE InsertAccountAndUser
     @username NVARCHAR(63),
