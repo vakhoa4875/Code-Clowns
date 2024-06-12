@@ -13,8 +13,6 @@
     crossorigin="anonymous"></script>
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  <!-- MDB -->
-  <link rel="stylesheet" href="css/mdb.min.css" />
   <!-- Custom styles -->
   <link rel="stylesheet" th:href="@{/user/css/style.css}">
   <link rel="stylesheet" th:href="@{/user/css/backround.css}">
@@ -22,15 +20,11 @@
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
   <link rel="shortcut icon" th:href="@{/user/media/phoenix-squadron.svg}" type="image/x-icon">
   <title>Trang Chủ</title>
-  <!-- Axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <!-- Custom Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
-
   <script src="/user/js/home.js" defer></script>
+  <script src="/user/js/login.js"></script>
 </head>
 
 <body>
@@ -42,7 +36,7 @@
       <!-- Side-Nav -->
       <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100%;">
         <div class="row col-md-12  justify-content-center">
-          <div th:replace="user/common/_sidebar::sidebar"></div>
+          <div th:replace="~{user/common/_sidebar::sidebar}"></div>
           <div class="col-md-3 ms-5 " id="board-container">
             <div class="row">
               <h6><i class="fa fa-users me-2" aria-hidden="true"></i>Recently viewed</h6>

@@ -2,6 +2,7 @@ package codeclowns.planny.planny.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class LayoutController {
@@ -15,7 +16,7 @@ public class LayoutController {
         return "user/layout/body/home/home";
     }
 
-    @GetMapping("/board")
+    @GetMapping("/b/**")
     public String doGetViewBoard() {
         return "user/layout/body/singleBoard/board";
     }
@@ -38,6 +39,13 @@ public class LayoutController {
     public String doGetLoginSuccess() {
         return "redirect:/";
     }
+
+//    @GetMapping("/b/{slugUrl}/{shortName}")
+//    public String doGetBoardBySLugUrl(@PathVariable String slugUrl, @PathVariable String shortName) {
+//
+//        return "user/layout/body/singleBoard/board";
+//    }
+
      @GetMapping("/verify")
     public String doGetVery() {
         return "user/layout/body/login/verify";
