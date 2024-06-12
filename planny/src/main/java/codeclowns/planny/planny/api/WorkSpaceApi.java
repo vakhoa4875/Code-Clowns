@@ -23,7 +23,7 @@ public class WorkSpaceApi {
         ResponseObject resultApi = new ResponseObject();
         try {
             resultApi.setData(workSpaceService.saveWorkSpace(workSpaceDto));
-            resultApi.setStatus(BasicApiConstant.SUCCEED.getStatus());
+            resultApi.setStatus("success");
         } catch (Exception e) {
             resultApi.setStatus(BasicApiConstant.FAILED.getStatus());
             resultApi.setMessage(BasicApiConstant.ERROR.getStatus());
