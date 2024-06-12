@@ -26,7 +26,7 @@ public class WorkSpaceDto {
         dto.setShortName(workSpaceE.getShortName());
         dto.setWebsite(workSpaceE.getWebsite());
         dto.setDescription(workSpaceE.getDescription());
-        dto.setIsEnabled(workSpaceE.isEnabled());
+        dto.setIsEnabled(workSpaceE.getIsEnabled());
         return dto;
     }
 }

@@ -46,7 +46,7 @@ class BoardService {
             list.cardEList.forEach(card => {
                 cardHtml += `            
                     <div class="task card-body rounded bg-white mb-2 d-flex align-items-center mx-0 pe-0 py-2"
-                         draggable="true">${card.title}
+                         draggable="true">${card.title}<span class="d-none card-id">${card.cardId}</span>
                         <button class="btn btn-outline-dark border-0 me-2 ms-auto"
                                 data-bs-target="#exampleModalToggle"
                                 data-bs-toggle="modal"><i class="fa-solid fa-ellipsis"></i>
@@ -73,7 +73,7 @@ class BoardService {
                 <div class=" border-0 mb-2 d-flex justify-content-center">
                     <div>
                         <button type="button" class="btn btn-outline-dark border-0 me-2 add"
-                                data-ripple-color="dark">
+                                data-ripple-color="dark" onclick="boardService.createCard(${list.listId})">
                             <i class="fa-solid fa-plus"></i> Add another card
                         </button>
                     </div>
@@ -83,6 +83,7 @@ class BoardService {
             listContainer.append(listHtml);
         })
     }
+
     handleClassChange = (mutationsList) => {
         for (let mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -96,9 +97,13 @@ class BoardService {
                     this.sortableStatus--;
                 }
                 if (this.sortableStatus === 0) {
-                    this.updateOrdinalNumbers().then(() => {
-                        this.sortableStatus = -1;
-                    });
+                    if (target.classList.contains('a-list')) {
+                        this.updateOrdinalNumbers().then(() => {
+                            this.sortableStatus = -1;
+                        });
+                    } else if (target.classList.contains('task')) {
+                        this.updateCardOrdinalNumbers();
+                    }
                 }
             }
         }
@@ -128,6 +133,49 @@ class BoardService {
             .catch(error => {
                 console.error(error);
             })
+    }
+
+    updateCardOrdinalNumbers = () => {
+        let listIdNodes = document.querySelectorAll('.list-id');
+        let listNodes = document.querySelectorAll('.a-list');
+        let listIds = Array.from(listIdNodes).map(node => node.innerHTML);
+        let listCardDTO = [];
+        listNodes.forEach((node, index) => {
+            let taskNodes = node.querySelectorAll('.task');
+            // listCardDTO.push(Array.from(taskNodes).map((node2, index2) => {
+            //     let cardId = node2.querySelector('.card-id').innerHTML;
+            //     return {
+            //         ordinalNumber: index2 + 1,
+            //         cardId: cardId,
+            //         listId: listIds[index]
+            //     }
+            // }));
+            Array.from(taskNodes).map((node2, index2) => {
+                let cardId = node2.querySelector('.card-id').innerHTML;
+                listCardDTO.push({
+                    ordinalNumber: index2 + 1,
+                    cardId: cardId,
+                    listId: listIds[index]
+                });
+            });
+        });
+        console.log(JSON.stringify(listCardDTO));
+        axios.patch('/api-user/card/arrange', listCardDTO)
+            .then(response => {
+                console.dir(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        if (listIds.length === listCardDTO.length) {
+            console.dir({
+                card: listCardDTO,
+                list: listIds
+            });
+        }
+        // let cardNodes = listNodes.map(node => {
+        //     node.querySelectorAll('.task');
+        // })
     }
 
     addEventHandler = () => {
@@ -174,8 +222,19 @@ class BoardService {
         });
         const observer = new MutationObserver(this.handleClassChange);
         const config = {attributes: true};
-        const targetNodes = document.querySelectorAll('.a-list');
-        targetNodes.forEach(node => observer.observe(node, config));
+        const listNodes = document.querySelectorAll('.a-list');
+        listNodes.forEach(node => observer.observe(node, config));
+        const cardNodes = document.querySelectorAll('.task');
+        cardNodes.forEach(node => observer.observe(node, config));
+
+        // window.addEventListener('beforeunload', function(event) {
+        //     console.log('User is about to leave the page');
+        //     event.preventDefault();
+        //     this.updateOrdinalNumbers().then(() => {
+        //         event.returnValue = ''
+        //     });
+        // });
+
     }
 
     updateListInfo = async (node, listId) => {
@@ -222,5 +281,41 @@ class BoardService {
                     });
             }
         })
+    }
+
+    createCard = (listId) => {
+        let requestBody = {}
+        Swal.fire({
+            title: 'Tạo thẻ mới',
+            html: `<input type="text" id="title" class="swal2-input" placeholder="Tiêu đề">`,
+            confirmButtonText: 'Tạo',
+            focusConfirm: false,
+            preConfirm: () => {
+                const title = $('#title').val();
+                if (!title) {
+                    Swal.showValidationMessage(`Vui lòng nhập tiêu đề của thẻ mới!`);
+                }
+                return {title: title};
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.dir(result);
+                axios
+                    .post('/api-user/card/save', {
+                        title: result.value.title,
+                        listId: listId
+                    })
+                    .then(response => {
+                        console.dir(response.data);
+                        this.init();
+                        // Swal.fire('Success', 'Data has been submitted!', 'success');
+                    })
+                    .catch(error => {
+                        Swal.fire('Error', 'There was an error submitting your data', 'error');
+                    });
+            }
+        });
+        // axios
+        //     .post('api-user/card/save')
     }
 }
