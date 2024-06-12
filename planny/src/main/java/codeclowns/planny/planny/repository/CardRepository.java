@@ -30,8 +30,8 @@ public interface CardRepository extends JpaRepository<CardE, Integer> {
     @Transactional
     @Query(value = "update Card " +
             "set ordinal_number = :ordinalNumber " +
-            ", list_id = :listId" +
-            "where cardId = :cardId", nativeQuery = true)
+            ", list_id = :listId " +
+            "where card_id = :cardId", nativeQuery = true)
     Integer updateCardOrdinalNumber(@Param("ordinalNumber") Integer ordinalNumber
             , @Param("listId") Integer listId
             , @Param("cardId") Integer cardId);

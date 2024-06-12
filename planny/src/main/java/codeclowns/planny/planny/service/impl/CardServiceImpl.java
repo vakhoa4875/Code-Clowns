@@ -43,7 +43,7 @@ public class CardServiceImpl implements CardService {
                             , cardDTO.getListId()
                             , cardDTO.getCardId()
                     );
-            System.out.println(this.getClass().getSimpleName()+ " >> " + result);
+            System.out.println(this.getClass().getSimpleName() + " >> " + result);
         }
     }
 }

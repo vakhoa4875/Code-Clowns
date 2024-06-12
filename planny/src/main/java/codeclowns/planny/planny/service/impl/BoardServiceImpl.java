@@ -3,16 +3,14 @@ package codeclowns.planny.planny.service.impl;
 import codeclowns.planny.planny.data.dto.BoardDto;
 import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.entity.BoardE;
-import codeclowns.planny.planny.data.entity.WorkSpaceE;
-import codeclowns.planny.planny.repository.BoardRepository;
-import codeclowns.planny.planny.repository.WorkSpacesRepository;
-import codeclowns.planny.planny.security.service.AuthService;
-import codeclowns.planny.planny.data.entity.BoardE;
 import codeclowns.planny.planny.data.entity.ListE;
+import codeclowns.planny.planny.data.entity.WorkSpaceE;
 import codeclowns.planny.planny.exception.CustomCause;
 import codeclowns.planny.planny.exception.CustomException;
 import codeclowns.planny.planny.repository.BoardRepository;
 import codeclowns.planny.planny.repository.ListRepository;
+import codeclowns.planny.planny.repository.WorkSpacesRepository;
+import codeclowns.planny.planny.security.service.AuthService;
 import codeclowns.planny.planny.service.BoardService;
 import codeclowns.planny.planny.service.CardService;
 import jakarta.transaction.Transactional;
@@ -31,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
     private final AuthService authService;
     private final ListRepository listRepository;
     final CardService cardService;
-    
+
     public List<BoardE> getAllEnabledBoard(BoardDto boardDto) throws Exception {
         AccountE currentAccount = authService.getCurrentUser();
         if (currentAccount == null) {

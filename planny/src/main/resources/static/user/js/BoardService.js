@@ -46,7 +46,7 @@ class BoardService {
             list.cardEList.forEach(card => {
                 cardHtml += `            
                     <div class="task card-body rounded bg-white mb-2 d-flex align-items-center mx-0 pe-0 py-2"
-                         draggable="true">${card.title}
+                         draggable="true">${card.title}<span class="d-none card-id">${card.cardId}</span>
                         <button class="btn btn-outline-dark border-0 me-2 ms-auto"
                                 data-bs-target="#exampleModalToggle"
                                 data-bs-toggle="modal"><i class="fa-solid fa-ellipsis"></i>
@@ -102,7 +102,7 @@ class BoardService {
                             this.sortableStatus = -1;
                         });
                     } else if (target.classList.contains('task')) {
-
+                        this.updateCardOrdinalNumbers();
                     }
                 }
             }
@@ -135,31 +135,48 @@ class BoardService {
             })
     }
 
-    // updateCardOrdinalNumbers = () => {
-    //     let listIdNodes = document.querySelectorAll('.list-id');
-    //     let listNodes = document.querySelectorAll('.a-list');
-    //     let listIds = Array.from(listIdNodes).map(node => node.innerHTML);
-    //     let listOrdinalNumbers = Array.from(listNodes).map((node, index) => index + 1);
-    //     let requestBody = [];
-    //     if (listIds.length === listOrdinalNumbers.length) {
-    //         for (let i = 0; i < listIds.length; i++) {
-    //             requestBody.push({
-    //                 listId: listIds[i],
-    //                 ordinalNumeral: listOrdinalNumbers[i]
-    //             })
-    //         }
-    //     }
-    //     axios
-    //         .patch('/api-user/list/arrange', requestBody)
-    //         .then(response => {
-    //             let data = response.data;
-    //             console.dir(data);
-    //             // Swal.fire('success', data.message, 'success');
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         })
-    // }
+    updateCardOrdinalNumbers = () => {
+        let listIdNodes = document.querySelectorAll('.list-id');
+        let listNodes = document.querySelectorAll('.a-list');
+        let listIds = Array.from(listIdNodes).map(node => node.innerHTML);
+        let listCardDTO = [];
+        listNodes.forEach((node, index) => {
+            let taskNodes = node.querySelectorAll('.task');
+            // listCardDTO.push(Array.from(taskNodes).map((node2, index2) => {
+            //     let cardId = node2.querySelector('.card-id').innerHTML;
+            //     return {
+            //         ordinalNumber: index2 + 1,
+            //         cardId: cardId,
+            //         listId: listIds[index]
+            //     }
+            // }));
+            Array.from(taskNodes).map((node2, index2) => {
+                let cardId = node2.querySelector('.card-id').innerHTML;
+                listCardDTO.push({
+                    ordinalNumber: index2 + 1,
+                    cardId: cardId,
+                    listId: listIds[index]
+                });
+            });
+        });
+        console.log(JSON.stringify(listCardDTO));
+        axios.patch('/api-user/card/arrange', listCardDTO)
+            .then(response => {
+                console.dir(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+        if (listIds.length === listCardDTO.length) {
+            console.dir({
+                card: listCardDTO,
+                list: listIds
+            });
+        }
+        // let cardNodes = listNodes.map(node => {
+        //     node.querySelectorAll('.task');
+        // })
+    }
 
     addEventHandler = () => {
         $('#btnCreateList').on('click', () => {
@@ -210,9 +227,14 @@ class BoardService {
         const cardNodes = document.querySelectorAll('.task');
         cardNodes.forEach(node => observer.observe(node, config));
 
-        window.addEventListener('beforeunload', (event) => {
-            alert('xxx');
-        })
+        // window.addEventListener('beforeunload', function(event) {
+        //     console.log('User is about to leave the page');
+        //     event.preventDefault();
+        //     this.updateOrdinalNumbers().then(() => {
+        //         event.returnValue = ''
+        //     });
+        // });
+
     }
 
     updateListInfo = async (node, listId) => {
@@ -262,9 +284,7 @@ class BoardService {
     }
 
     createCard = (listId) => {
-        let requestBody = {
-
-        }
+        let requestBody = {}
         Swal.fire({
             title: 'Tạo thẻ mới',
             html: `<input type="text" id="title" class="swal2-input" placeholder="Tiêu đề">`,

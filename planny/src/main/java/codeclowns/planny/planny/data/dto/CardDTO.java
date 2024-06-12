@@ -1,6 +1,5 @@
 package codeclowns.planny.planny.data.dto;
 
-import codeclowns.planny.planny.data.entity.CardConductorE;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
