@@ -46,5 +46,9 @@ public class LayoutController {
 //        return "user/layout/body/singleBoard/board";
 //    }
 
+     @GetMapping("/verify")
+    public String doGetVery() {
+        return "user/layout/body/login/verify";
+    }
 }
 
