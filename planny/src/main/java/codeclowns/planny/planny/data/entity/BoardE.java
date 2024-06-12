@@ -30,7 +30,7 @@ public class BoardE {
     @Column(name = "visibility", length = 63)
     private String visibility;
     @Column(name = "is_enabled", nullable = false)
-    private Boolean isEnable=true;
+    private Boolean isEnabled=true;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {

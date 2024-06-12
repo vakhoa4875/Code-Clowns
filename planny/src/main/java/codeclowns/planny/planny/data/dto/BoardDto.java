@@ -1,6 +1,6 @@
 package codeclowns.planny.planny.data.dto;
 
-import codeclowns.planny.planny.data.entity.WorkSpaceE;
+import codeclowns.planny.planny.data.entity.BoardE;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,14 +19,14 @@ public class BoardDto {
     private boolean isEnabled = true;
     private Integer workSpaceId;
 
-    public BoardDto convertToDto(BoardE boardE){
+    public BoardDto convertToDto(BoardE boardE) {
         BoardDto boardDto = new BoardDto();
         boardDto.setBoardId(boardE.getBoardId());
         boardDto.setBoardName(boardE.getBoardName());
         boardDto.setShortName(boardE.getShortName());
         boardDto.setSlugUrl(boardE.getSlugUrl());
         boardDto.setVisibility(boardE.getVisibility());
-        boardDto.setIsEnable(boardE.getIsEnable());
+        boardDto.setEnabled(boardE.getIsEnabled());
         return boardDto;
     }
 }

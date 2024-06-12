@@ -34,7 +34,7 @@ public class MemberE {
     @Column(name="fullname", length = 63)
     private String fullName;
     @Column(name="is_enabled", nullable = false)
-    private Boolean isEnable=true;
+    private Boolean isEnabled=true;
 
     @JsonIgnore
     @ManyToOne ( fetch = FetchType.LAZY,cascade = {

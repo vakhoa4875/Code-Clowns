@@ -24,7 +24,7 @@ public class ListE {
     @Column(name="ordinal_numeral", nullable=false) //nghia fix tu ordinal_nummeral
     private int ordinalNummeral;
     @Column(name="is_enabled", nullable = false)
-    private Boolean isEnable;
+    private Boolean isEnabled;
 
     @OneToMany(mappedBy = "list", cascade = {
             CascadeType.ALL,
