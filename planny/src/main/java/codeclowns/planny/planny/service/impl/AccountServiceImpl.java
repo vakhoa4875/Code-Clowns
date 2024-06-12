@@ -1,11 +1,9 @@
 package codeclowns.planny.planny.service.impl;
 
-import codeclowns.planny.planny.constant.BasicApiConstant;
 import codeclowns.planny.planny.constant.LoginStatus;
 import codeclowns.planny.planny.constant.RegisterStatus;
 import codeclowns.planny.planny.data.dto.AccountDto;
 import codeclowns.planny.planny.data.entity.AccountE;
-import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.service.AccountService;
 import jakarta.mail.MessagingException;
@@ -25,7 +23,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
     private final HttpSession session;
-     private final JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
 
     @Override
     public LoginStatus login(AccountDto accountDto) {
@@ -38,6 +36,7 @@ public class AccountServiceImpl implements AccountService {
         }
         return LoginStatus.FAILED_PASSWORD;
     }
+
     @Override
     public RegisterStatus register(AccountDto accountDto) {
         if (accountRepository.findByEmailOrUsername(accountDto.getEmail(), accountDto.getUsername()) != null) {
@@ -46,15 +45,18 @@ public class AccountServiceImpl implements AccountService {
         savePendingAccount(accountDto);
         return RegisterStatus.PENDING;
     }
+
     @Override
     public Optional<AccountE> findAccountByUsername(String username) {
         var account = accountRepository.findAccountByUsernameOrEmailAndIsEnabledTrue(username, username);
         return Optional.of(account);
     }
+
     @Override
     public void savePendingAccount(AccountDto accountDto) {
-          session.setAttribute("PENDING_ACCOUNT_" + accountDto.getEmail(), accountDto);
+        session.setAttribute("PENDING_ACCOUNT_" + accountDto.getEmail(), accountDto);
     }
+
     @Override
     public RegisterStatus confirmAccount(String email) {
         AccountDto accountDto = (AccountDto) session.getAttribute("PENDING_ACCOUNT_" + email);
@@ -67,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
                     passwordEncoder.encode(accountDto.getPassword()),
                     accountDto.getEmail(),
                     accountDto.getSub(),
-                    accountDto.getIsEnabled(),
+                    true,
                     accountDto.getFullName());
             session.removeAttribute("PENDING_ACCOUNT_" + email);
             return RegisterStatus.SUCCEED;
@@ -75,14 +77,15 @@ public class AccountServiceImpl implements AccountService {
             return RegisterStatus.FAILED;
         }
     }
+
     @Override
     public void sendVerificationEmail(String to, String link) throws MessagingException {
-       MimeMessage message = mailSender.createMimeMessage();
-    MimeMessageHelper helper = new MimeMessageHelper(message, true);
-    helper.setTo(to);
-    helper.setSubject("Xác Nhận Tài Khoản");
-    helper.setText("<p>Vui lòng click vào link xác nhận:</p>" +
-            "<a href=\"" + link + "\">Verify</a>", true);
-    mailSender.send(message);
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+        helper.setTo(to);
+        helper.setSubject("Xác Nhận Tạo Tài Khoản");
+        helper.setText("<span>Click vào link để xác thực tạo tài khoản trên <strong>Planny</strong> : </span>" +
+                "<a href=\"" + link + "\">Link xác thực</a>", true);
+        mailSender.send(message);
     }
 }
