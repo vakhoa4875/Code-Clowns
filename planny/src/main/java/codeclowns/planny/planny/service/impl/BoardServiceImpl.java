@@ -38,6 +38,7 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.findAllByWorkSpaceUserIdAndWorkSpaceIsEnabledTrueAndIsEnabledTrue(userId);
     }
 
+
     @Override
     @Transactional
     public BoardE saveBoard(BoardDto boardDto) throws Exception {

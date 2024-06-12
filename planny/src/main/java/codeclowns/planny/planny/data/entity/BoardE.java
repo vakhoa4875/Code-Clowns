@@ -32,15 +32,15 @@ public class BoardE {
     @Column(name = "is_enabled", nullable = false)
     private Boolean isEnabled=true;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+//    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
     @JoinColumn(name = "workspace_id", nullable = false)
     private WorkSpaceE workSpace;
 
-//    @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<ListE> list;
 
