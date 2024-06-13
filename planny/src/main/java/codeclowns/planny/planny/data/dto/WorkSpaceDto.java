@@ -29,4 +29,13 @@ public class WorkSpaceDto {
         dto.setIsEnabled(workSpaceE.getIsEnabled());
         return dto;
     }
+    private WorkSpaceE convertToEntity(WorkspacesDto dto) {
+        return WorkSpaceE.builder()
+                .workspaceName(dto.getWorkspaceName())
+                .shortName(dto.getShortName())
+                .website(dto.getWebsite())
+                .description(dto.getDescription())
+                .isEnabled(dto.isEnabled())
+                .build();
+    }
 }

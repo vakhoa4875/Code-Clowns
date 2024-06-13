@@ -1,7 +1,9 @@
 package codeclowns.planny.planny.service.impl;
 
 import codeclowns.planny.planny.data.dto.WorkSpaceDto;
+import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.data.entity.WorkSpaceE;
+import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.repository.WorkSpaceRepository;
 import codeclowns.planny.planny.security.service.AuthService;
 import codeclowns.planny.planny.service.WorkSpaceService;
@@ -17,11 +19,19 @@ import java.util.stream.Collectors;
 public class WorkSpaceServiceImpl implements WorkSpaceService {
      private  final WorkSpaceRepository workSpaceRepository;
      private final AuthService authService;
+     private final AccountRepository accountRepository;
 
     @Override
     public int saveWorkSpace(WorkSpaceDto workSpaceDto) throws Exception {
         int rowEffected = 0;
         try {
+           AccountE currentAccount = authService.getCurrentUser();
+        if (currentAccount == null) {
+            throw new IllegalStateException("User not logged in or session expired");
+        }
+        currentAccount = accountRepository.findById(currentAccount.getAccountId())
+                .orElseThrow(() -> new IllegalStateException("User account not found in the database"));
+        System.out.println("User ID: " + currentAccount.getAccountId());
 
             // Convert DTO to Entity
             WorkSpaceE workSpace = new WorkSpaceE();
@@ -29,6 +39,7 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
             workSpace.setShortName(workSpaceDto.getShortName());
             workSpace.setWebsite(workSpaceDto.getWebsite());
             workSpace.setDescription(workSpaceDto.getDescription());
+            workSpace.setUser(currentAccount.getUser());
             workSpaceRepository.save(workSpace);
             rowEffected = 1;
 

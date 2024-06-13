@@ -158,35 +158,14 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                  data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                 <a href="" class="board-link" id="${workspace.workspaceId}" style="text-decoration: none; color: black;"><i class="fa fa-address-card me-2"
-                aria-hidden="true"></i>Board</a>
-                </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-star me-2"
-                aria-hidden="true"></i>Highlights</a>
-                </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                <a href="/workspace" class="" style="text-decoration: none; color: black;"><i class="fa fa-eye me-2"
-                aria-hidden="true"></i>Views</a>
+                aria-hidden="true"></i>Bảng</a>
                 </div>
                 </div>
                 <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                 <a href="" class="member-link" id="${workspace.workspaceId}"  style="text-decoration: none; color: black;"><i class="fa fa-user me-2"
-                aria-hidden="true"></i>Member</a>
-                </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-cogs me-2"
-                aria-hidden="true"></i>Setting</a>
+                aria-hidden="true"></i>Thành viên</a>
                 </div>
                 </div>
                 </div>
