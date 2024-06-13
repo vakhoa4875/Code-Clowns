@@ -8,13 +8,9 @@ import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountApi {
     private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
+
     @PostMapping("/register")
     public ResponseObject<?> doPostRegister(@RequestBody AccountDto accountDto) {
         var response = new ResponseObject<>();
@@ -35,10 +32,10 @@ public class AccountApi {
                 response.setStatus(BasicApiConstant.SUCCEED.getStatus());
                 response.setMessage(status.getStateDescription());
             } else if (status.equals(RegisterStatus.PENDING)) {
-               String link = "http://localhost:6868/verify";
-            accountService.sendVerificationEmail(accountDto.getEmail(), link);
-            response.setStatus(RegisterStatus.PENDING.toString());
-            response.setMessage("Verification email sent to " + accountDto.getEmail());
+                String link = "http://localhost:6868/verify";
+                accountService.sendVerificationEmail(accountDto.getEmail(), link);
+                response.setStatus(RegisterStatus.PENDING.toString());
+                response.setMessage("Verification email sent to " + accountDto.getEmail());
             } else {
                 response.setStatus(BasicApiConstant.FAILED.toString());
                 response.setMessage(status.getStateDescription());
@@ -68,6 +65,8 @@ public class AccountApi {
         resultApi.setData(accountService.changePassword(username, changePasswordDto));
 
         return resultApi;
+    }
+
     @GetMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestParam("email") String email) {
         RegisterStatus status = accountService.confirmAccount(email);
