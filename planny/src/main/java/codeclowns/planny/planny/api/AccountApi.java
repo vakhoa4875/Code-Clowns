@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api-public/account")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin(origins = "http://localhost:6868/verify")
 public class AccountApi {
     private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
@@ -28,14 +27,11 @@ public class AccountApi {
         var response = new ResponseObject<>();
         try {
             var status = accountService.register(accountDto);
-            if (status.equals(RegisterStatus.SUCCEED)) {
-                response.setStatus(BasicApiConstant.SUCCEED.getStatus());
-                response.setMessage(status.getStateDescription());
-            } else if (status.equals(RegisterStatus.PENDING)) {
-                String link = "http://localhost:6868/verify";
-                accountService.sendVerificationEmail(accountDto.getEmail(), link);
-                response.setStatus(RegisterStatus.PENDING.toString());
-                response.setMessage("Verification email sent to " + accountDto.getEmail());
+            if (status.equals(RegisterStatus.PENDING)) {
+               String link = "http://localhost:6868/verify";
+            accountService.sendVerificationEmail(accountDto.getEmail(), link);
+            response.setStatus(RegisterStatus.PENDING.toString());
+            response.setMessage("Link xác thực đã được gửi đến " + accountDto.getEmail());
             } else {
                 response.setStatus(BasicApiConstant.FAILED.toString());
                 response.setMessage(status.getStateDescription());
@@ -68,13 +64,22 @@ public class AccountApi {
     }
 
     @GetMapping("/verify")
-    public ResponseEntity<?> verifyUser(@RequestParam("email") String email) {
-        RegisterStatus status = accountService.confirmAccount(email);
-        if (status == RegisterStatus.SUCCEED) {
-            return ResponseEntity.ok("User verified successfully.");
-        } else {
-            return ResponseEntity.badRequest().body("Verification failed.");
-        }
+    public ResponseObject<?> verifyUser(@RequestParam("email") String email) {
+        var response = new ResponseObject<>();
+       try {
+           var status = accountService.confirmAccount(email);
+           if(status.equals(RegisterStatus.VERIFY_SUCCESS)) {
+               response.setStatus(BasicApiConstant.SUCCEED.toString());
+               response.setMessage(status.getStateDescription());
+           } else {
+               response.setStatus(BasicApiConstant.FAILED.toString());
+               response.setMessage(status.getStateDescription());
+           }
+         } catch (Exception e) {
+            response.setStatus(BasicApiConstant.ERROR.toString());
+            response.setMessage(RegisterStatus.ERROR.getStateDescription());
+       }
+         return response;
     }
 }
 

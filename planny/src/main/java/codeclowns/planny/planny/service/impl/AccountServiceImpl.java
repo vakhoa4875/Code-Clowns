@@ -90,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
                     true,
                     accountDto.getFullName());
             session.removeAttribute("PENDING_ACCOUNT_" + email);
-            return RegisterStatus.SUCCEED;
+            return RegisterStatus.VERIFY_SUCCESS;
         } catch (Exception e) {
             return RegisterStatus.FAILED;
         }
