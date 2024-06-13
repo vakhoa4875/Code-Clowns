@@ -35,20 +35,20 @@ public class WorkSpaceE {
     @Column(name = "is_enabled")
     private Boolean isEnabled = true;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
     @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
-    @OneToMany(mappedBy = "workSpace", fetch = FetchType.LAZY, cascade = {
+    @OneToMany(mappedBy = "workSpace", fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
     private List<Collaborator> danhSachCollaborators;
 
-    @OneToMany(mappedBy = "workSpace", fetch = FetchType.LAZY, cascade = {
+    @OneToMany(mappedBy = "workSpace", fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })

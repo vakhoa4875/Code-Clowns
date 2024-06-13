@@ -84,14 +84,9 @@ displayWorkSpaces();
 
 async function fetchBoards() {
     try {
-        const response = await axios.get('/api-public/board/getEnableAllBoard')
-        console.dir(response);
-            // .then(resp => {
-            //     console.dir(resp.data);
-            // });
+        const response = await axios.get('/api-public/board/getEnableAllBoard');
         // console.log(response.data);  // Kiểm tra dữ liệu trả về từ API
         const boards = response.data.data; // Điều chỉnh theo cấu trúc dữ liệu thực tế
-        console.dir(boards);
         if (!Array.isArray(boards)) {
             throw new Error("Dữ liệu trả về không phải là mảng");
         }
@@ -127,7 +122,6 @@ async function fetchBoards() {
                     <div class="containerss" style="background-image: ${randomBackground}; border-radius: 8px;">
                         <div class="hinhChuNhat" style="width: 100%; height: 100px; background-size: cover;"></div>
                         <div class="dongChu obvious-text" style="font-size: 18px;">Bảng: ${board.boardName}</div>
-                        <div class="workspaceName mx-2 obvious-text" style="color: white">${board.workSpace.shortName}</div>
                     </div>
                 `;
                 boardContainer.appendChild(boardElement);

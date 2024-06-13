@@ -518,7 +518,7 @@ span {
     border-radius: 4px;
 }
 .obvious-text {
-    text-shadow: white 0px 0px 10px;
+    text-shadow: #000000 0px 0px 10px;
 }
 
 /*side bar*/
