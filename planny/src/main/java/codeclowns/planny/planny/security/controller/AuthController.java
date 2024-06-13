@@ -1,12 +1,10 @@
 package codeclowns.planny.planny.security.controller;
 
-import codeclowns.planny.planny.security.data.CustomUserDetails;
 import codeclowns.planny.planny.security.data.dto.LoginRequestDTO;
 import codeclowns.planny.planny.security.data.dto.LoginResponseDTO;
 import codeclowns.planny.planny.security.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

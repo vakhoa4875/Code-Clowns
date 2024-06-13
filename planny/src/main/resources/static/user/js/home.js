@@ -62,11 +62,13 @@ async function submitForm(event) {
         const response = await axios.post('/api-public/workspace/PostSaveWorkSpace', formData);
         const result = response.data;
         if (result.status === 'success') {
-            Swal.fire("Workspace created successfully!");
-            console.log("Workspace created successfully!")
+            Swal.fire("Workspace created successfully!").then(() => {
+                window.location.href = '/home'
+            })
+            // console.log("Workspace created successfully!")
         } else {
-            Swal.fire("Failed to create workspace", result.message);
-            console.log("Failed to create workspace")
+            Swal.fire("Failed to create workspace", result.message)
+            // console.log("Failed to create workspace")
         }
     } catch (error) {
         console.error('Error:', error);
@@ -179,12 +181,12 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
             event.preventDefault();
             const workspaceId = event.target.getAttribute('id');
             fetchMembers(workspaceId);
-            console.log("thanh cpmg")
+            // console.log("thanh cpmg")
         } else if (event.target && event.target.classList.contains('board-link')) {
             event.preventDefault();
             const workspaceId = event.target.getAttribute('id');
             fetchAllBoardFromWorkSpace(workspaceId);
-            console.log("thanh cpmg")
+            // console.log("thanh cpmg")
         }
     });
 
@@ -194,7 +196,7 @@ async function fetchMembers(workspaceId) {
     try {
         const response = await axios.get(`/api-public/collaborators/getInformation?workspaceId=${workspaceId}`);
         const result = response.data;
-        console.log(result)
+        // console.log(result)
         if (result.status === 'success') {
             updateMemberTable(result.data, workspaceId);
         } else {
@@ -210,7 +212,7 @@ async function fetchMembersByWorkSpaceInBoard(workspaceId) {
     try {
         const response = await axios.get(`/api-public/member/getByworkspace?workspaceId=${workspaceId}`);
         const result = response.data;
-        console.log(result)
+        // console.log(result)
         if (result.status === 'success') {
             updateMemberTable(result.data);
         } else {
@@ -299,8 +301,8 @@ function updateMemberTable(members, workspaceId) {
             button.addEventListener('click', async (event) => {
                 const memberId = event.target.getAttribute('data-member-id');
                 const workspaceId = event.target.getAttribute('data-workspace-id');
-                console.log(memberId);
-                console.log(workspaceId);
+                // console.log(memberId);
+                // console.log(workspaceId);
                 await deleteCollaborator(memberId, workspaceId);
             });
         });

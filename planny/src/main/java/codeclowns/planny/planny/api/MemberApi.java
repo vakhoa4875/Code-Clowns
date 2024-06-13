@@ -1,12 +1,10 @@
 package codeclowns.planny.planny.api;
 
 import codeclowns.planny.planny.constant.BasicApiConstant;
-import codeclowns.planny.planny.data.dto.MemberDto;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +20,7 @@ public class MemberApi {
 
     @GetMapping("/getInformationMember")
     public ResponseObject<?> getInformationmember(@RequestParam Integer boardId ){
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(memberService.doGetChiTietMember(boardId));
              resultApi.setStatus("success");
@@ -37,7 +35,7 @@ public class MemberApi {
 
     @GetMapping("/getByworkspace")
     public ResponseObject<?> getMemberByWorkSpace(@RequestParam Integer workspaceId ){
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(memberService.getMembersByWorkspaceId(workspaceId));
              resultApi.setStatus("success");

@@ -1,8 +1,6 @@
 package codeclowns.planny.planny.service;
 
-import codeclowns.planny.planny.data.dto.MemberDto;
 import codeclowns.planny.planny.data.entity.MemberE;
-
 import java.util.List;
 
 public interface MemberService {

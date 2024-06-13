@@ -23,7 +23,7 @@ class BoardService {
             .then(response => {
                 let result = response.data;
                 this.currentBoard = result.data;
-                console.dir(this.currentBoard);
+                // console.dir(this.currentBoard);
             })
             .catch(error => {
                 console.error(error);
@@ -35,7 +35,7 @@ class BoardService {
         let boardName = $('#boardName');
         let listContainer = $('#listContainer');
         listContainer.html('');
-        console.dir(this.currentBoard);
+        // console.dir(this.currentBoard);
         boardTile.html(this.currentBoard.boardName);
         boardName.val(this.currentBoard.boardName);
 
@@ -88,7 +88,7 @@ class BoardService {
         for (let mutation of mutationsList) {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                 let target = mutation.target;
-                console.log(this.sortableStatus);
+                // console.log(this.sortableStatus);
                 if (target.classList.contains('sortable-chosen')
                     && target.classList.contains('sortable-ghost')) {
                     this.sortableStatus = 1;
@@ -150,7 +150,7 @@ class BoardService {
                 });
             });
         });
-        console.log(JSON.stringify(listCardDTO));
+        // console.log(JSON.stringify(listCardDTO));
         axios.patch('/api-user/card/arrange', listCardDTO)
             .then(response => {
                 console.dir(response.data);

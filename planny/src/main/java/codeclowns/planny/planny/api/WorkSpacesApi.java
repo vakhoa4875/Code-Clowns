@@ -17,56 +17,56 @@ public class WorkSpacesApi {
     private final WorkSpacesService workSpacesService;
     @GetMapping("/getAllWorkSpaces")
     public ResponseObject<?> doGetAllWorkSpaces(WorkspacesDto workspacesDto) {
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(workSpacesService.getAllWorkspaces(workspacesDto));
             resultApi.setStatus(BasicApiConstant.SUCCEED.getStatus());
         } catch (Exception e) {
             resultApi.setStatus(BasicApiConstant.ERROR.getStatus());
             resultApi.setMessage(LoginStatus.ERROR.getStateDescription());
-            log.error("Fail When Call AP: " + e);
+            log.error("Fail When Call AP: ", e);
         }
         return resultApi;
     }
     // Lấy workpaces Enable=true
     @GetMapping("/getEnableAllWorkSpaces")
     public ResponseObject<?> doGetEnableAllWorkSpaces(WorkspacesDto workspacesDto) {
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(workSpacesService.getAllEnableWorkspaces(workspacesDto));
             resultApi.setStatus(BasicApiConstant.SUCCEED.getStatus());
         } catch (Exception e) {
             resultApi.setStatus(BasicApiConstant.ERROR.getStatus());
             resultApi.setMessage(LoginStatus.ERROR.getStateDescription());
-            log.error("Failed when calling API: " + e);
+            log.error("Failed when calling API: ", e);
         }
         return resultApi;
     }
     // update khi name trùng, save khi name khác
     @PostMapping("/saveWorkSpaces")
     public ResponseObject<?> doPostSaveWorksPaces(@RequestBody WorkspacesDto workspacesDto) {
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(workSpacesService.saveWorkspace(workspacesDto));
             resultApi.setStatus(BasicApiConstant.SUCCEED.getStatus());
         } catch (Exception e) {
             resultApi.setStatus(BasicApiConstant.ERROR.getStatus());
             resultApi.setMessage(LoginStatus.ERROR.getStateDescription());
-            log.error("Fail When Call AP: " + e);
+            log.error("Fail When Call AP: ", e);
         }
         return resultApi;
     }
     // xóa theo tên
     @DeleteMapping("/deleteWorkSpaces")
     public ResponseObject<?> doPostDeleteWorksPaces(@RequestBody WorkspacesDto workspacesDto) {
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(workSpacesService.deleteWorkspace(workspacesDto));
             resultApi.setStatus(BasicApiConstant.SUCCEED.getStatus());
         } catch (Exception e) {
             resultApi.setStatus(BasicApiConstant.ERROR.getStatus());
             resultApi.setMessage(LoginStatus.ERROR.getStateDescription());
-            log.error("Fail When Call AP: " + e);
+            log.error("Fail When Call AP: ", e);
         }
         return resultApi;
     }
