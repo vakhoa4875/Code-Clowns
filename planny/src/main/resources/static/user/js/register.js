@@ -41,7 +41,6 @@ const validateForm = () => {
     }
     return true;
 }
-
 const btnRegister = async () => {
     if (!validateForm()) {
         return;
@@ -58,7 +57,6 @@ const btnRegister = async () => {
     btnDangKi.html('<span class="spinner-border" role="status" aria-hidden="true"></span> Đang xử lý...'); // Hiển thị spinner
     try {
         let {data: response} = await axios.post('/api-public/account/register', dataApiRegister);
-        console.dir(response);
         if (response.status === 'PENDING') {
             Swal.fire({
                 title: 'Thành công!',
