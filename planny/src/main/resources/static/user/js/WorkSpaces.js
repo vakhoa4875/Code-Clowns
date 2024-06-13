@@ -22,13 +22,6 @@ async function displayWorkSpaces() {
         data.data.forEach((workspace, index) => {
             const workspaceElement = document.createElement('div');
             workspaceElement.className = 'col-12 col-md-3 mb-3 d-flex flex-column align-items-center';
-            workspaceElement.addEventListener('click', event => {
-                if (event.target.classList.contains('more-options-button')) {
-                    event.stopPropagation();
-                } else {
-                    window.location.href = '/board';
-                }
-            });
             const containerDiv = document.createElement('div');
             containerDiv.className = 'containerss';
             const backgroundIndex = index % backgrounds.length;
@@ -45,32 +38,9 @@ async function displayWorkSpaces() {
             shortNameDiv.style.color = 'white';
             shortNameDiv.textContent = `${workspace.shortName}`;
 
-            // Tạo nút 3 chấm
-            const moreOptionsButton = document.createElement('div');
-            moreOptionsButton.className = 'more-options-button';
-            moreOptionsButton.innerHTML = '&#8942;'; // Mã HTML cho ký tự 3 chấm
 
-            // Tạo menu dropdown
-            const dropdownMenu = document.createElement('ul');
-            dropdownMenu.className = 'dropdown-menu';
-            dropdownMenu.innerHTML = `
-             <li><a class="dropdown-item" href="#">Xóa</a></li>
-`;
-            dropdownMenu.style.position = 'absolute';
-            dropdownMenu.style.top = '30px';
-            dropdownMenu.style.right = '0';
-            dropdownMenu.style.display = 'none';
-            moreOptionsButton.addEventListener('click', () => {
-                if (dropdownMenu.style.display === 'none') {
-                    dropdownMenu.style.display = 'block';
-                } else {
-                    dropdownMenu.style.display = 'none';
-                }
-            });
             containerDiv.appendChild(backgroundDiv);
             containerDiv.appendChild(shortNameDiv);
-            containerDiv.appendChild(moreOptionsButton);
-            containerDiv.appendChild(dropdownMenu);
 
             workspaceElement.appendChild(containerDiv);
             container.appendChild(workspaceElement);
@@ -124,6 +94,9 @@ async function fetchBoards() {
                         <div class="dongChu obvious-text" style="font-size: 18px;">Bảng: ${board.boardName}</div>
                     </div>
                 `;
+                boardElement.addEventListener('click', () => {
+                    window.location.href = `/b/${board.slugUrl}/${board.boardName}`;
+                });
                 boardContainer.appendChild(boardElement);
                 index++;
             });
@@ -132,6 +105,7 @@ async function fetchBoards() {
         console.error('Error fetching boards:', error);
     }
 }
+
 
 window.onload = fetchBoards;
 
@@ -161,6 +135,13 @@ fetchWorkspaceIds()
     })
     .catch(error => console.error('Error fetching and updating workspaceId:', error));
 
+const showErrorAlert = (message) => {
+    Swal.fire({
+        icon: "error",
+        title: "Lỗi",
+        text: message,
+    });
+};
 const verificationForm = () => {
     const boardName = document.getElementById('boardName').value;
     const shortNameBoard = document.getElementById('shortNameBoard').value;
@@ -175,7 +156,6 @@ const verificationForm = () => {
         return false;
     }
     else if (slugUrl === '') {
-        // Tạo slugUrl từ shortName nếu slugUrl không được nhập
         slugUrl = shortNameBoard.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
         document.getElementById('slugUrl').value = slugUrl;
     }
