@@ -94,3 +94,4 @@ VALUES
 (GETDATE(), 4, 4),
 (GETDATE(), 5, 5);
 GO
+select * from Workspace

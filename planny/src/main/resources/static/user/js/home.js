@@ -1,4 +1,4 @@
-verificationForm = () => {
+var verificationForm = () => {
     let message = "Please Input Value";
     if ($('#workspacename').val() === '') {
         alert(message);
@@ -76,7 +76,7 @@ async function submitForm(event) {
 
 async function fetchRecentlyViewedWorkspaces() {
     try {
-        const response = await axios.get('/api-public/workspace/recently-viewed');
+        const response = await axios.get('/api-public/workspace/doGetWorkspaceByUser');
         const result = response.data;
 
         if (result.status === 'success') {
@@ -98,7 +98,7 @@ function updateRecentlyViewedWorkspaces(workspaces) {
 
     workspaces.forEach(workspace => {
         const workspaceHtml = `        
-        <div  class="col-12  d-flex flex-column align-items-center" onclick="window.location.href='/board'">     
+        <div  class="col-12  d-flex flex-column align-items-center" onclick="window.location.href='/workspace'">     
         <div class="containerss">
         <div class="hinhChuNhat"
         style="background-image: url(https://trello-backgrounds.s3.amazonaws.com/575584dacedaafdf0d8660c2/480x272/02a67bbc2d5b879d912dad85eb5f3a05/asset_3.png); width: 100%; height: 100px; background-size: cover;"></div>
@@ -127,6 +127,7 @@ function updateAllBoardFromWorkSpace(boards) {
     let boardHtml = '';
 
     boards.forEach((board, index) => {
+        var boardUrl = `/b/ + ${board.slugUrl} + '/' + ${board.shortName}` ;
         boardHtml += `
             <div class="col-12 col-md-6 mb-3 d-flex flex-column align-items-center" onclick="window.location.href='${`/b/` + board.slugUrl + `/` + board.shortName}'">
             <div class="containerss">
@@ -157,35 +158,14 @@ function updateRecentlyViewedWorkspacesForSideBar(workspaces) {
                  data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                 <a href="" class="board-link" id="${workspace.workspaceId}" style="text-decoration: none; color: black;"><i class="fa fa-address-card me-2"
-                aria-hidden="true"></i>Board</a>
-                </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-star me-2"
-                aria-hidden="true"></i>Highlights</a>
-                </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                <a href="/workspace" class="" style="text-decoration: none; color: black;"><i class="fa fa-eye me-2"
-                aria-hidden="true"></i>Views</a>
+                aria-hidden="true"></i>Bảng</a>
                 </div>
                 </div>
                 <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
                 data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                 <a href="" class="member-link" id="${workspace.workspaceId}"  style="text-decoration: none; color: black;"><i class="fa fa-user me-2"
-                aria-hidden="true"></i>Member</a>
-                </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-cogs me-2"
-                aria-hidden="true"></i>Setting</a>
+                aria-hidden="true"></i>Thành viên</a>
                 </div>
                 </div>
                 </div>
@@ -358,7 +338,7 @@ function updateMemberTable(members, workspaceId) {
                     }
                 });
 
-                const resultData = response.data;
+            const resultData = response.data;
 
                 if (resultData.status === "success") {
                     // Show success message
