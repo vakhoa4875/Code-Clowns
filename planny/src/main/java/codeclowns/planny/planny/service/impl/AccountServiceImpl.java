@@ -3,6 +3,7 @@ package codeclowns.planny.planny.service.impl;
 import codeclowns.planny.planny.constant.LoginStatus;
 import codeclowns.planny.planny.constant.RegisterStatus;
 import codeclowns.planny.planny.data.dto.AccountDto;
+import codeclowns.planny.planny.data.dto.ChangePasswordDto;
 import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.service.AccountService;
@@ -53,6 +54,23 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public boolean changePassword(String username, ChangePasswordDto changePasswordDto) {
+        Optional<AccountE> accountOpt = accountRepository.findByUsername(username);
+        if (accountOpt.isEmpty()) {
+            return false;
+        }
+        AccountE account = accountOpt.get();
+        if (!passwordEncoder.matches(changePasswordDto.getCurrentPassword(), account.getPassword())) {
+            return false;
+        }
+        if (!changePasswordDto.getNewPassword().equals(changePasswordDto.getConfirmNewPassword())) {
+            return false;
+        }
+        account.setPassword(passwordEncoder.encode(changePasswordDto.getNewPassword()));
+        accountRepository.save(account);
+        return true;
+    }
+
     public void savePendingAccount(AccountDto accountDto) {
         session.setAttribute("PENDING_ACCOUNT_" + accountDto.getEmail(), accountDto);
     }
