@@ -1,76 +1,31 @@
 
+    document.addEventListener("DOMContentLoaded", function() {
+        var buttons = document.querySelectorAll(".sidebar-button");
 
-async function fetchRecentlyViewedWorkspaces() {
-    try {
-        const response = await axios.get('/api-public/workspace/recently-viewed');
-        const result = response.data;
+        // Retrieve the id of the clicked button from localStorage
+        var activeButtonId = localStorage.getItem('activeButtonId');
 
-        if (result.status === 'success') {
-            updateRecentlyViewedWorkspaces(result.data);
-        } else {
-            alert('error', 'Failed to fetch recently viewed workspaces', result.message);
+        // If there is an active button id, apply the background color
+        if (activeButtonId) {
+            var activeButton = document.getElementById(activeButtonId);
+            if (activeButton) {
+                activeButton.style.backgroundColor = "#CDE8E5";
+            }
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('error', 'An error occurred', 'An error occurred while fetching recently viewed workspaces.');
-    }
-}
 
-function updateRecentlyViewedWorkspaces(workspaces) {
-    const container = document.getElementById('accordionFlushExample');
-    container.innerHTML = ''; // Clear existing content
+        buttons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                // Reset the background color of all buttons
+                buttons.forEach(function(btn) {
+                    btn.style.backgroundColor = ""; // Reset to original
+                });
 
-    workspaces.forEach((workspace, index) => {
-        const workspaceHtml = `
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne-${index}" aria-expanded="false" aria-controls="flush-collapseOne-${index}"
-                    style="background-color:rgb(133, 184, 255);">
-                    <h6> <i class="fa fa-users me-2" aria-hidden="true"></i>${workspace.workspaceName}</h6>
-                  </button>
-                </h2>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-address-card me-2"
-                        aria-hidden="true"></i>Board</a>
-                  </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-star me-2"
-                        aria-hidden="true"></i>Highlights</a>
-                  </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <a href="/workspace" class="" style="text-decoration: none; color: black;"><i class="fa fa-eye me-2"
-                        aria-hidden="true"></i>Views</a>
-                  </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-user me-2"
-                        aria-hidden="true"></i>Member</a>
-                  </div>
-                </div>
-                <div id="flush-collapseOne-${index}" class="accordion-collapse collapse baseball-link"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                    <a href="" class="" style="text-decoration: none; color: black;"><i class="fa fa-cogs me-2"
-                        aria-hidden="true"></i>Setting</a>
-                  </div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += workspaceHtml;
+                // Change the background color of the clicked button
+                button.style.backgroundColor = "#CDE8E5";
+
+                // Store the id of the clicked button in localStorage
+                localStorage.setItem('activeButtonId', button.id);
+            });
+        });
     });
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetchRecentlyViewedWorkspaces();
-});

@@ -25,6 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="/user/js/home.js" defer></script>
   <script src="/user/js/login.js"></script>
+    <script src="/user/js/_sidebar.js" defer></script>
 </head>
 
 <body>
@@ -39,7 +40,7 @@
           <div th:replace="~{user/common/_sidebar::sidebar}"></div>
           <div class="col-md-3 ms-5 " id="board-container">
             <div class="row">
-              <h6><i class="fa fa-users me-2" aria-hidden="true"></i>Recently viewed</h6>
+              <h6><i class="fa fa-users me-2" aria-hidden="true"></i>Đã xem gần đây</h6>
             </div>
             <div id="recentlyViewedContainer"></div> <!-- Placeholder for recently viewed workspaces -->
             <div class="mt-3 mb-3">
@@ -94,9 +95,9 @@
 
               <div class="hinhChuNhatGiua"></div>
               <div class="hinhChuNhatGiuaBenCanh">
-                On track and up to date
-                Invite people to boards and cards, leave comments, add due dates, and we'll show the most important
-                activity here.
+               Theo dõi và cập nhật mời mọi người đến bảng và thẻ,
+                để lại nhận xét, thêm ngày đáo hạn và chúng tôi sẽ
+                hiển thị hoạt động quan trọng nhất ở đây.
               </div>
             </div>
           </div>
