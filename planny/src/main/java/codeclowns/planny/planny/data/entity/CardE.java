@@ -1,12 +1,10 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -15,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "Card")
+@Builder
 public class CardE {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +36,7 @@ public class CardE {
     private Date dueDate;
 
     @Column(name = "is_completed")
-    private boolean isCompleted;
+    private Boolean isCompleted;
 
     @Column(name = "short_name", length = 63, unique = true)
     private String shortName;
@@ -45,8 +44,11 @@ public class CardE {
     @Column(name = "slug_url", length = 63, unique = true)
     private String slugUrl;
 
+    @Column(name = "ordinal_number")
+    private Integer ordinalNumber;
+
     @Column(name = "is_enabled")
-    private boolean isEnabled ;
+    private Boolean isEnabled ;
 
     @ManyToOne(cascade = {
             CascadeType.DETACH,
@@ -55,6 +57,7 @@ public class CardE {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "list_id")
+    @JsonIgnore
     private ListE list;
 
     @OneToMany(mappedBy = "card", cascade = {

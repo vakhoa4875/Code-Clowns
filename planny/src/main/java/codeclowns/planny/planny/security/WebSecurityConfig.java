@@ -31,14 +31,15 @@ public class WebSecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final JwtAuthentication jwtAuthentication;
+    private final String[] nonAuthenticatedUrls = {"/register", "/auth/login", "/api-public/**","/verify/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-//                .cors(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/register", "/auth/login").permitAll()
+                        .requestMatchers(nonAuthenticatedUrls).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthentication, UsernamePasswordAuthenticationFilter.class)
                 .formLogin(form -> form

@@ -7,8 +7,12 @@ import codeclowns.planny.planny.data.dto.ChangePasswordDto;
 import codeclowns.planny.planny.data.entity.AccountE;
 import codeclowns.planny.planny.repository.AccountRepository;
 import codeclowns.planny.planny.service.AccountService;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,7 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
     private final HttpSession session;
+    private final JavaMailSender mailSender;
 
     @Override
     public LoginStatus login(AccountDto accountDto) {
@@ -38,18 +43,8 @@ public class AccountServiceImpl implements AccountService {
         if (accountRepository.findByEmailOrUsername(accountDto.getEmail(), accountDto.getUsername()) != null) {
             return RegisterStatus.ACCOUNT_EXISTED;
         }
-        try {
-            accountRepository.insertAccountAndUser(
-                    accountDto.getUsername(),
-                    passwordEncoder.encode(accountDto.getPassword()),
-                    accountDto.getEmail(),
-                    accountDto.getSub(),
-                    accountDto.getIsEnabled(),
-                    accountDto.getFullName());
-            return RegisterStatus.SUCCEED;
-        } catch (Exception e) {
-            return RegisterStatus.FAILED;
-        }
+        savePendingAccount(accountDto);
+        return RegisterStatus.PENDING;
     }
 
     @Override
@@ -76,4 +71,39 @@ public class AccountServiceImpl implements AccountService {
         return true;
     }
 
+    public void savePendingAccount(AccountDto accountDto) {
+        session.setAttribute("PENDING_ACCOUNT_" + accountDto.getEmail(), accountDto);
+    }
+
+    @Override
+    public RegisterStatus confirmAccount(String email) {
+        AccountDto accountDto = (AccountDto) session.getAttribute("PENDING_ACCOUNT_" + email);
+        if (accountDto == null) {
+            return RegisterStatus.FAILED;
+        }
+        try {
+            accountRepository.insertAccountAndUser(
+                    accountDto.getUsername(),
+                    passwordEncoder.encode(accountDto.getPassword()),
+                    accountDto.getEmail(),
+                    accountDto.getSub(),
+                    true,
+                    accountDto.getFullName());
+            session.removeAttribute("PENDING_ACCOUNT_" + email);
+            return RegisterStatus.SUCCEED;
+        } catch (Exception e) {
+            return RegisterStatus.FAILED;
+        }
+    }
+
+    @Override
+    public void sendVerificationEmail(String to, String link) throws MessagingException {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+        helper.setTo(to);
+        helper.setSubject("Xác Nhận Tạo Tài Khoản");
+        helper.setText("<span>Click vào link để xác thực tạo tài khoản trên <strong>Planny</strong> : </span>" +
+                "<a href=\"" + link + "\">Link xác thực</a>", true);
+        mailSender.send(message);
+    }
 }

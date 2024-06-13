@@ -2,15 +2,13 @@ package codeclowns.planny.planny.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 @Getter
 @Setter
@@ -32,10 +30,10 @@ public class BoardE {
     @Column(name = "visibility", length = 63)
     private String visibility;
     @Column(name = "is_enabled", nullable = false)
-    private Boolean isEnable=true;
+    private Boolean isEnabled=true;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+//    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
@@ -49,4 +47,6 @@ public class BoardE {
     @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<MemberE> member;
+
+
 }

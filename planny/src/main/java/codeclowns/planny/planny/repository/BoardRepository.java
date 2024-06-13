@@ -1,5 +1,10 @@
 package codeclowns.planny.planny.repository;
 
+import codeclowns.planny.planny.data.entity.BoardE;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import codeclowns.planny.planny.data.entity.WorkSpaceE;
 import codeclowns.planny.planny.data.dto.BoardDto;
 import codeclowns.planny.planny.data.entity.BoardE;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +15,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BoardRepository extends JpaRepository<BoardE, Integer> {
+public interface BoardRepository extends JpaRepository<BoardE,Integer> {
+List<BoardE> findAllByWorkSpaceUserIdAndWorkSpaceIsEnabledTrueAndIsEnabledTrue(Long userId);
+
 
      @Query(value = "SELECT * FROM Board WHERE workspace_id = :workspace_id", nativeQuery = true)
      List<BoardE> findBoardByWorkSpace(@Param("workspace_id") Integer workspace_id);
@@ -25,5 +32,7 @@ public interface BoardRepository extends JpaRepository<BoardE, Integer> {
             "WHERE b.workspace_id = :workspace_id", nativeQuery = true)
      List<Object[]> findBoardWithMembersInWorkspace(@Param("workspace_id") Integer workspace_id);
 
+     BoardE findBySlugUrl(String slugUrl);
 
+     Boolean existsBySlugUrl(String slugUrl);
 }

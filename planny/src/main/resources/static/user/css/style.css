@@ -443,7 +443,6 @@ span {
 .hinhChuNhat {
     height: 200px;
     width: 300px;
-    background-color: rgb(188, 162, 212);
     border-radius: 5px;
 }
 
@@ -493,7 +492,12 @@ span {
     left: 10px; /* Điều chỉnh vị trí từ trái */
     font-size: 16px; /* Điều chỉnh kích thước chữ */
     font-weight: bold;
-    color: black; /* Điều chỉnh màu chữ */
+    color: white; /* Điều chỉnh màu chữ */
+}
+.more-options-button {
+    position: absolute; /* Sử dụng vị trí tuyệt đối */
+    top: 10px; /* Điều chỉnh vị trí từ trên */
+    right: 10px; /* Điều chỉnh vị trí từ phải, đây là khoảng cách giữa nút và dòng chữ */
 }
 
 .dongChuChinhGiua {
@@ -505,6 +509,19 @@ span {
     color: black; /* Điều chỉnh màu chữ */
 }
 
+.bg-transparent {
+    background-color: rgba(255, 255, 255, 0.35)!important;
+    backdrop-filter: blur(16px);
+    /*border-radius: 8px;*/
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+}
+.obvious-text {
+    text-shadow: #000000 0px 0px 10px;
+}
+
+/*side bar*/
 /*table*/
  .user-list {
       list-style: none;

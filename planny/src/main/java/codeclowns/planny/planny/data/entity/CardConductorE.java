@@ -1,5 +1,6 @@
 package codeclowns.planny.planny.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "CardConductor")
+@Table(name = "Card_Conductor")
 public class CardConductorE {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,7 @@ public class CardConductorE {
             CascadeType.REFRESH
     })
     @JoinColumn(name = "card_id")
+    @JsonIgnore
     private CardE card;
 
     @ManyToOne(cascade = {
@@ -39,6 +41,7 @@ public class CardConductorE {
             CascadeType.PERSIST,
             CascadeType.REFRESH
     })
+    @JsonIgnore
     @JoinColumn(name = "member_id")
     private MemberE member;
 }

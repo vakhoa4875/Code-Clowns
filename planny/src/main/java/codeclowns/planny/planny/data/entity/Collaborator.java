@@ -2,17 +2,15 @@ package codeclowns.planny.planny.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="Collaborator")
+@Table(name = "Collaborator")
 public class Collaborator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,20 +32,19 @@ public class Collaborator {
     @Column(name = "avatar", length = 127)
     private String avatar;
 
-     @JsonIgnore
-    @ManyToOne ( fetch = FetchType.LAZY,cascade = {
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-     @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserE user;
 
-     @JsonIgnore
-     @ManyToOne ( fetch = FetchType.LAZY,cascade = {
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH
     })
-
     @JoinColumn(name = "workspace_id", nullable = false)
     private WorkSpaceE workSpace;
 }
