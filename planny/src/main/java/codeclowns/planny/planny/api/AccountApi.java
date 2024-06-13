@@ -31,7 +31,7 @@ public class AccountApi {
                String link = "http://localhost:6868/verify";
             accountService.sendVerificationEmail(accountDto.getEmail(), link);
             response.setStatus(RegisterStatus.PENDING.toString());
-            response.setMessage("Verification email sent to " + accountDto.getEmail());
+            response.setMessage("Link xác thực đã được gửi đến " + accountDto.getEmail());
             } else {
                 response.setStatus(BasicApiConstant.FAILED.toString());
                 response.setMessage(status.getStateDescription());
@@ -42,14 +42,13 @@ public class AccountApi {
         }
         return response;
     }
-
     @GetMapping("/verify")
     public ResponseEntity<?> verifyUser(@RequestParam("email") String email) {
         RegisterStatus status = accountService.confirmAccount(email);
         if (status == RegisterStatus.SUCCEED) {
-            return ResponseEntity.ok("User verified successfully.");
+            return ResponseEntity.ok("Xác thực thành công.");
         } else {
-            return ResponseEntity.badRequest().body("Verification failed.");
+            return ResponseEntity.badRequest().body("Xác thực thất bại.");
         }
     }
 }
