@@ -62,10 +62,11 @@ async function submitForm(event) {
         const response = await axios.post('/api-public/workspace/PostSaveWorkSpace', formData);
         const result = response.data;
         if (result.status === 'success') {
-            Swal.fire("Workspace created successfully!").then(() => {
-                window.location.href = '/home'
-            })
-            // console.log("Workspace created successfully!")
+            Swal.fire("Workspace created successfully!");
+            // nghĩa thêm load
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
         } else {
             Swal.fire("Failed to create workspace", result.message)
             // console.log("Failed to create workspace")
