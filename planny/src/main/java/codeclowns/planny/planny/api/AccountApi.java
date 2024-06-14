@@ -6,6 +6,7 @@ import codeclowns.planny.planny.data.dto.AccountDto;
 import codeclowns.planny.planny.data.dto.ChangePasswordDto;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.AccountService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -20,14 +21,16 @@ import org.springframework.web.bind.annotation.*;
 public class AccountApi {
     private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
+    private final HttpServletRequest request;
 
     @PostMapping("/register")
     public ResponseObject<?> doPostRegister(@RequestBody AccountDto accountDto) {
         var response = new ResponseObject<>();
         try {
             var status = accountService.register(accountDto);
+            var uri = request.getServerName() + ":" + request.getServerPort();
             if (status.equals(RegisterStatus.PENDING)) {
-               String link = "http://localhost:6868/verify";
+               String link = "http://" + uri + "/verify";
             accountService.sendVerificationEmail(accountDto.getEmail(), link);
             response.setStatus(RegisterStatus.PENDING.toString());
             response.setMessage("Link xác thực đã được gửi đến " + accountDto.getEmail());
