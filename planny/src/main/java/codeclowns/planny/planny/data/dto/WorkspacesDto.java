@@ -1,7 +1,5 @@
 package codeclowns.planny.planny.data.dto;
 
-import codeclowns.planny.planny.data.entity.UserE;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

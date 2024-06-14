@@ -3,7 +3,6 @@ package codeclowns.planny.planny.mapper;
 import codeclowns.planny.planny.data.dto.CardDTO;
 import codeclowns.planny.planny.data.entity.CardE;
 import codeclowns.planny.planny.repository.ListRepository;
-import codeclowns.planny.planny.service.ListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

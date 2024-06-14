@@ -1,14 +1,12 @@
 package codeclowns.planny.planny.api;
 
 import codeclowns.planny.planny.constant.BasicApiConstant;
-import codeclowns.planny.planny.data.entity.Collaborator;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.CollaboratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/api-public/collaborators")
@@ -23,7 +21,7 @@ public class CollaboratorApi {
 
     @GetMapping("/getInformation")
     public ResponseObject<?> getCollaboratorsByWorkspaceId(@RequestParam Integer workspaceId) {
-            ResponseObject resultApi=new ResponseObject();
+            var resultApi=new ResponseObject<>();
         try {
              resultApi.setData(collaboratorService.getCollaboratorsByWorkspaceId(workspaceId));
              resultApi.setStatus("success");
@@ -37,7 +35,7 @@ public class CollaboratorApi {
     }
      @GetMapping("/searchByUsername")
     public ResponseObject<?> searchCollaboratorsByUsername(@RequestParam String username) {
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             resultApi.setData(collaboratorService.searchCollaboratorsByUsername(username));
             resultApi.setStatus("success");
@@ -52,7 +50,7 @@ public class CollaboratorApi {
 
       @DeleteMapping("/delete")
     public ResponseObject<?> deleteCollaboratorFromWorkspace(@RequestParam Integer collaboratorId, @RequestParam Integer workspaceId) {
-        ResponseObject resultApi = new ResponseObject();
+        var resultApi = new ResponseObject<>();
         try {
             var rowEffect = collaboratorService.deleteCollaboratorFromWorkspace(collaboratorId, workspaceId);
             resultApi.setData(rowEffect);
@@ -65,5 +63,4 @@ public class CollaboratorApi {
         }
         return resultApi;
     }
-
 }

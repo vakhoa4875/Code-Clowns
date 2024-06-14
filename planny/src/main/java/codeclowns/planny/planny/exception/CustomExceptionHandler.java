@@ -18,7 +18,7 @@ public class CustomExceptionHandler {
         var response = new ResponseObject<>();
         response.setStatus(e.getCustomCause().toString());
         response.setMessage(e.getMessage());
-        log.warn(e.getMessage());
+//        log.warn(e.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
 
@@ -27,7 +27,7 @@ public class CustomExceptionHandler {
         var response = new ResponseObject<>();
         response.setStatus(e.getSQLState());
         response.setMessage(e.getMessage());
-        log.warn(e.getMessage());
+//        log.warn(e.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
 
@@ -36,7 +36,7 @@ public class CustomExceptionHandler {
         var response = new ResponseObject<>();
         response.setStatus(null);
         response.setMessage(e.getMessage());
-        log.warn(e.getMessage());
+//        log.warn(e.getMessage());
         return ResponseEntity.badRequest().body(response);
     }
 }
