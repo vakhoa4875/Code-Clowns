@@ -14,6 +14,6 @@ public interface WorkSpaceRepository extends JpaRepository<WorkSpaceE,Integer> {
 
     @Query(value = "SELECT workspace_id, workspace_name, short_name, " +
                     "website, description, is_enabled, user_id " +
-                   "FROM [Workspace] WHERE user_id = :userId", nativeQuery = true)
+                   "FROM [Workspace] WHERE user_id = :userId and is_enabled = 1", nativeQuery = true)
     List<WorkSpaceE> getAllByUser(@Param("userId") int userId);
 }
