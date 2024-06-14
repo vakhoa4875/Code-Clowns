@@ -10,7 +10,8 @@ public enum RegisterStatus {
     SUCCEED("Đăng ký thành công"),
     FAILED("Đăng ký thất bại"),
     ERROR("Phát sinh lỗi"),
-    PENDING("Đang chờ xác nhận");
+    PENDING("Đang chờ xác nhận"),
+    VERIFY_SUCCESS("Xác thực thành công");
     private String stateDescription;
 
 }

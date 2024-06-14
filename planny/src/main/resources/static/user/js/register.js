@@ -41,7 +41,6 @@ const validateForm = () => {
     }
     return true;
 }
-
 const btnRegister = async () => {
     if (!validateForm()) {
         return;
@@ -53,9 +52,11 @@ const btnRegister = async () => {
         confirmpassword: $('#confirmpassword').val(),
         email: $('#email').val(),
     }
+    const btnDangKi = $('#btnDangKi');
+    btnDangKi.prop('disabled', true); // Vô hiệu hóa nút đăng ký
+    btnDangKi.html('<span class="spinner-border" role="status" aria-hidden="true"></span> Đang xử lý...'); // Hiển thị spinner
     try {
-        let { data : response } = await axios.post('/api-public/account/register', dataApiRegister);
-        console.dir(response);
+        let {data: response} = await axios.post('/api-public/account/register', dataApiRegister);
         if (response.status === 'PENDING') {
             Swal.fire({
                 title: 'Thành công!',

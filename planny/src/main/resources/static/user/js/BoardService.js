@@ -98,18 +98,17 @@ class BoardService {
                 }
                 if (this.sortableStatus === 0) {
                     if (target.classList.contains('a-list')) {
-                        this.updateOrdinalNumbers().then(() => {
-                            this.sortableStatus = -1;
-                        });
+                        this.updateOrdinalNumbers();
                     } else if (target.classList.contains('task')) {
                         this.updateCardOrdinalNumbers();
                     }
+                    this.sortableStatus = -1;
                 }
             }
         }
     }
 
-    updateOrdinalNumbers = async () => {
+    updateOrdinalNumbers = () => {
         let listIdNodes = document.querySelectorAll('.list-id');
         let listNodes = document.querySelectorAll('.a-list');
         let listIds = Array.from(listIdNodes).map(node => node.innerHTML);
@@ -123,7 +122,7 @@ class BoardService {
                 })
             }
         }
-        await axios
+        axios
             .patch('/api-user/list/arrange', requestBody)
             .then(response => {
                 let data = response.data;
@@ -142,14 +141,6 @@ class BoardService {
         let listCardDTO = [];
         listNodes.forEach((node, index) => {
             let taskNodes = node.querySelectorAll('.task');
-            // listCardDTO.push(Array.from(taskNodes).map((node2, index2) => {
-            //     let cardId = node2.querySelector('.card-id').innerHTML;
-            //     return {
-            //         ordinalNumber: index2 + 1,
-            //         cardId: cardId,
-            //         listId: listIds[index]
-            //     }
-            // }));
             Array.from(taskNodes).map((node2, index2) => {
                 let cardId = node2.querySelector('.card-id').innerHTML;
                 listCardDTO.push({
@@ -167,15 +158,6 @@ class BoardService {
             .catch(error => {
                 console.error(error);
             })
-        if (listIds.length === listCardDTO.length) {
-            console.dir({
-                card: listCardDTO,
-                list: listIds
-            });
-        }
-        // let cardNodes = listNodes.map(node => {
-        //     node.querySelectorAll('.task');
-        // })
     }
 
     addEventHandler = () => {
