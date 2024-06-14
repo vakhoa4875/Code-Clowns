@@ -16,5 +16,5 @@ public interface AccountService {
     boolean changePassword(String username, ChangePasswordDto changePasswordDto);
     void savePendingAccount(AccountDto accountDto);
     RegisterStatus confirmAccount(String email);
-    void sendVerificationEmail(String to, String email)throws MessagingException;
+    void sendVerificationEmail(String to, String link)throws MessagingException;
 }

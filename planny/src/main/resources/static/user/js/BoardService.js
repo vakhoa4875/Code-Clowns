@@ -26,7 +26,47 @@ class BoardService {
                 // console.dir(this.currentBoard);
             })
             .catch(error => {
-                console.error(error);
+                let err = error.response.data;
+                if (err.status === 'UNAUTHORIZED_MEMBER') {
+                    Swal.fire({
+                        title: '401',
+                        text: err.message,
+                        icon: 'error',
+                        showCancelButton: true,
+                        confirmButtonText: 'Về không gian làm việc',
+                        cancelButtonText: 'Yêu cầu quyền truy cập',
+                        allowOutsideClick: false,  // Ngăn người dùng click ra ngoài để đóng cảnh báo
+                        allowEscapeKey: false,     // Ngăn người dùng nhấn phím "Escape" để đóng cảnh báo
+                        allowEnterKey: false
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/workspace'
+                        } else if (result.isDismissed) {
+                            let timerInterval;
+                            Swal.fire({
+                                title: 'Đã gửi, vui lòng chờ phản hồi!',
+                                icon: 'success',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                // didOpen: () => {
+                                //     Swal.showLoading();
+                                //     const timer = Swal.getPopup().querySelector("b");
+                                //     timerInterval = setInterval(() => {
+                                //         timer.textContent = `${Swal.getTimerLeft()}`;
+                                //     }, 500);
+                                // },
+                                // willClose: () => {
+                                //     clearInterval(timerInterval);
+                                // }
+                            }).then(result => {
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    window.location.href = '/home';
+                                }
+                            })
+                        }
+                    })
+                }
+                console.dir(err);
             })
     }
 
