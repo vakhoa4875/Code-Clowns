@@ -15,7 +15,7 @@ const validateForm = () => {
         }
         let email = $('#email').val();
         try {
-            let response = await axios.get(`http://localhost:6868/api-public/account/verify?email=${email}`);
+            let response = await axios.get(`/api-public/account/verify?email=${email}`);
             if (response.data.status === "SUCCEED") {
                 Swal
                     .fire({

@@ -2,9 +2,6 @@ use Planny;
 insert into Account (username, email, password) values
 ('khoadz', 'admin@gmail.com', '$2a$10$7NJakCydtyXhhKWgoJp38e3BCgF3jmK7rP5sk2NxK/lsuwBkBKVAG')
 
-USE Planny;
-GO
-
 -- Insert records into Account table
 INSERT INTO [Account] (username, email, sub, password)
 VALUES
@@ -68,22 +65,22 @@ GO
 -- Insert records into Collaborator table
 INSERT INTO [Collaborator] (role, username, email, fullname, avatar, user_id, workspace_id)
 VALUES
-('Role One', 'collab1', 'collab1@example.com', 'Collaborator One', 'avatar1.png', 1, 1),
-('Role Two', 'collab2', 'collab2@example.com', 'Collaborator Two', 'avatar2.png', 2, 2),
-('Role Three', 'collab3', 'collab3@example.com', 'Collaborator Three', 'avatar3.png', 3, 3),
-('Role Four', 'collab4', 'collab4@example.com', 'Collaborator Four', 'avatar4.png', 4, 4),
-('Role Five', 'collab5', 'collab5@example.com', 'Collaborator Five', 'avatar5.png', 5, 5);
+('Role One', 'collab1', 'collab1@example.com', 'Collaborator One', 'avatar1.png', 2, 1),
+('Role Two', 'collab2', 'collab2@example.com', 'Collaborator Two', 'avatar2.png', 1, 2),
+('Role Three', 'collab3', 'collab3@example.com', 'Collaborator Three', 'avatar3.png', 5, 3),
+('Role Four', 'collab4', 'collab4@example.com', 'Collaborator Four', 'avatar4.png', 3, 4),
+('Role Five', 'collab5', 'collab5@example.com', 'Collaborator Five', 'avatar5.png', 4, 5);
 GO
 
 -- Insert records into Member table
-INSERT INTO [Member] (role, username, email, avatar, fullname, is_enabled, user_id, board_id)
-VALUES
-('Member Role One', 'member1', 'member1@example.com', 'avatar1.png', 'Member One', 1, 1, 1),
-('Member Role Two', 'member2', 'member2@example.com', 'avatar2.png', 'Member Two', 1, 2, 2),
-('Member Role Three', 'member3', 'member3@example.com', 'avatar3.png', 'Member Three', 1, 3, 3),
-('Member Role Four', 'member4', 'member4@example.com', 'avatar4.png', 'Member Four', 1, 4, 4),
-('Member Role Five', 'member5', 'member5@example.com', 'avatar5.png', 'Member Five', 1, 5, 5);
-GO
+-- INSERT INTO [Member] (role, username, email, avatar, fullname, is_enabled, user_id, board_id)
+-- VALUES
+-- ('Member Role One', 'member1', 'member1@example.com', 'avatar1.png', 'Member One', 1, 1, 1),
+-- ('Member Role Two', 'member2', 'member2@example.com', 'avatar2.png', 'Member Two', 1, 2, 2),
+-- ('Member Role Three', 'member3', 'member3@example.com', 'avatar3.png', 'Member Three', 1, 3, 3),
+-- ('Member Role Four', 'member4', 'member4@example.com', 'avatar4.png', 'Member Four', 1, 4, 4),
+-- ('Member Role Five', 'member5', 'member5@example.com', 'avatar5.png', 'Member Five', 1, 5, 5);
+-- GO
 
 -- Insert records into Card_Conductor table
 INSERT INTO [Card_Conductor] (assigned_time, card_id, member_id)

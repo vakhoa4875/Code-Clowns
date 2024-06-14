@@ -88,6 +88,17 @@ public class BoardServiceImpl implements BoardService {
     public BoardE getBoardBySlugUrl(String slugUrl) {
         var board = boardRepository.findBySlugUrl(slugUrl);
         if (board == null) throw new CustomException(CustomCause.BOARD404);
+        var currentUser = authService.getCurrentUser();
+        var isMember = false;
+        for (var mem : board.getMember()) {
+            var user = mem.getUser();
+            System.out.println(">>member: " + user.getUserName() + " >> " + currentUser.getUsername());
+            if (currentUser.getAccountId().equals(user.getId())) {
+                isMember = true;
+                break;
+            }
+        }
+        if (!isMember) throw new CustomException(CustomCause.UNAUTHORIZED_MEMBER);
         board.setList(listRepository.findByBoard(slugUrl));
         var list = board.getList();
         for (ListE listE : list) {
