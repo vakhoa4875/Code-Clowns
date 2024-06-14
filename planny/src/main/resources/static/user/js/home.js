@@ -63,7 +63,10 @@ async function submitForm(event) {
         const result = response.data;
         if (result.status === 'success') {
             Swal.fire("Workspace created successfully!");
-            console.log("Workspace created successfully!")
+            // nghĩa thêm load
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
         } else {
             Swal.fire("Failed to create workspace", result.message);
             console.log("Failed to create workspace")
