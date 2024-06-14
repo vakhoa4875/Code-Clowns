@@ -1,6 +1,5 @@
 package codeclowns.planny.planny.service.impl;
 
-import codeclowns.planny.planny.data.dto.MemberDto;
 import codeclowns.planny.planny.data.entity.MemberE;
 import codeclowns.planny.planny.repository.MemberRepository;
 import codeclowns.planny.planny.service.MemberService;

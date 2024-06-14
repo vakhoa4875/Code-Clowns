@@ -1,14 +1,7 @@
 package codeclowns.planny.planny.data.dto;
 
-import codeclowns.planny.planny.data.entity.Collaborator;
-import codeclowns.planny.planny.data.entity.UserE;
 import codeclowns.planny.planny.data.entity.WorkSpaceE;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import java.util.List;
 
 @Data
 public class WorkSpaceDto {

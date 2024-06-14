@@ -1,6 +1,5 @@
 package codeclowns.planny.planny.data.dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data

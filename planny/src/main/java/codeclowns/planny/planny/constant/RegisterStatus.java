@@ -12,6 +12,6 @@ public enum RegisterStatus {
     ERROR("Phát sinh lỗi"),
     PENDING("Đang chờ xác nhận"),
     VERIFY_SUCCESS("Xác thực thành công");
-    private String stateDescription;
+    private final String stateDescription;
 
 }

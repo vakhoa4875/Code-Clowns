@@ -2,13 +2,11 @@ package codeclowns.planny.planny.api;
 
 import codeclowns.planny.planny.constant.BasicApiConstant;
 import codeclowns.planny.planny.data.dto.CardDTO;
-import codeclowns.planny.planny.data.dto.ListDto;
 import codeclowns.planny.planny.data.mgt.ResponseObject;
 import codeclowns.planny.planny.service.CardService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

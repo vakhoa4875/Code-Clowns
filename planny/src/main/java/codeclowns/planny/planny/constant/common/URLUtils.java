@@ -28,11 +28,4 @@ public class URLUtils {
         // Combine the encoded string and the UUID to form a unique identifier
         return encodedString + "-" + uuid;
     }
-
-//    public static void main(String[] args) {
-//        String originalString = "Team </>";
-//        String uniqueIdentifier = createUniqueIdentifier(originalString);
-//        System.out.println("Original: " + originalString);
-//        System.out.println("Unique Identifier: " + uniqueIdentifier);
-//    }
 }
